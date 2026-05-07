@@ -1,685 +1,535 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>سلمى ❤️ - موقع الحب الكامل</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    :root {
-      --rose: #e8547a;
-      --deep: #c23b5e;
-      --gold: #f9c74f;
-      --bg: #fff8f9;
-      --card: #ffffff;
-      --text: #2d1520;
-      --muted: #9e6070;
-      --border: rgba(232, 84, 122, 0.2);
-      --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-    }
-
-    [data-theme="dark"] {
-      --bg: #1a0a10;
-      --card: #2d1520;
-      --text: #fce4ec;
-      --muted: #d9a7b7;
-      --border: rgba(232, 84, 122, 0.35);
-    }
-
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
-    }
-
-    /* أنيميشن البتلات والنجوم */
-    #petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .petal {
-      position: absolute;
-      animation: fall linear infinite;
-      opacity: 0.8;
-      user-select: none;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-20vh) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .floating-heart {
-      position: fixed;
-      pointer-events: none;
-      font-size: 20px;
-      animation: floatUp 4s ease-out forwards;
-      z-index: 55;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(0.6);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-200px) scale(1.2);
-        opacity: 0;
-      }
-    }
-
-    /* شاشة القفل */
-    #lock {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(145deg, #17060c, #2f0e1b);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: 1s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-
-    #lock.out {
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(1.05);
-    }
-
-    .lock-card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(18px);
-      border-radius: 48px;
-      padding: 32px 24px;
-      width: min(360px, 88vw);
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .lock-card h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 52px;
-      color: #ffb7c5;
-    }
-
-    .lock-card input {
-      width: 100%;
-      padding: 14px;
-      margin: 20px 0;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      border-radius: 60px;
-      color: white;
-      font-size: 22px;
-      text-align: center;
-      letter-spacing: 6px;
-      font-weight: bold;
-    }
-
-    .lock-card button {
-      background: var(--rose);
-      border: none;
-      padding: 14px;
-      width: 100%;
-      border-radius: 60px;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    /* المحتوى الرئيسي */
-    #main {
-      opacity: 0;
-      transition: 1.2s;
-    }
-
-    #main.show {
-      opacity: 1;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      backdrop-filter: blur(12px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      z-index: 200;
-    }
-
-    .logo {
-      font-family: 'Dancing Script', cursive;
-      font-size: 28px;
-      color: var(--rose);
-    }
-
-    .nav-buttons button {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 6px 14px;
-      margin-inline: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      color: var(--text);
-    }
-
-    .menu-panel {
-      position: fixed;
-      top: 75px;
-      left: 20px;
-      right: 20px;
-      background: var(--card);
-      border-radius: 28px;
-      padding: 16px;
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      z-index: 150;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .menu-panel a {
-      padding: 10px 16px;
-      background: var(--bg);
-      border-radius: 40px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .section {
-      display: none;
-      padding: 90px 18px 70px;
-      min-height: 100vh;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .home-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-    }
-
-    .big-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(55px, 18vw, 130px);
-      color: var(--rose);
-    }
-
-    .counter-box {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 30px 0;
-    }
-
-    .counter-card {
-      background: var(--card);
-      border-radius: 28px;
-      padding: 16px 12px;
-      min-width: 80px;
-      text-align: center;
-      border: 1px solid var(--border);
-    }
-
-    .counter-number {
-      font-size: 38px;
-      font-weight: 900;
-      color: var(--rose);
-    }
-
-    /* بطاقات عامة */
-    .card {
-      background: var(--card);
-      border-radius: 32px;
-      padding: 24px;
-      margin: 18px auto;
-      max-width: 780px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px;
-    }
-
-    .love-meter {
-      width: 100%;
-      height: 20px;
-      background: #f0d5dc;
-      border-radius: 40px;
-      overflow: hidden;
-      margin: 10px 0;
-    }
-
-    .meter-fill {
-      width: 98%;
-      height: 100%;
-      background: linear-gradient(90deg, var(--rose), var(--gold));
-      border-radius: 40px;
-    }
-
-    /* لوحة التحكم */
-    .admin-gear {
-      position: fixed;
-      bottom: 24px;
-      right: 20px;
-      background: linear-gradient(135deg, #2c3e66, #1e2a48);
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      cursor: pointer;
-      z-index: 250;
-      box-shadow: 0 6px 14px black;
-      display: none;
-    }
-
-    .admin-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(6px);
-      z-index: 300;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.2s;
-    }
-
-    .admin-modal.open {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .admin-content {
-      background: var(--card);
-      width: 92%;
-      max-width: 560px;
-      max-height: 85vh;
-      overflow-y: auto;
-      border-radius: 36px;
-      padding: 24px;
-    }
-
-    .admin-content input,
-    .admin-content textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 16px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    footer {
-      text-align: center;
-      padding: 28px;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1);}
-      50% { transform: scale(1.05); text-shadow: 0 0 8px var(--rose);}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>سلمى 🌸 | عالم خاص</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+:root {
+  --rose: #e8547a;
+  --deep: #c23b5e;
+  --gold: #f4c542;
+  --bg: #fff8f9;
+  --bg2: #fff0f3;
+  --card: #ffffff;
+  --text: #2d1520;
+  --muted: #9e6070;
+  --border: rgba(232,84,122,0.15);
+  --shadow: rgba(232,84,122,0.1);
+  --nav-bg: rgba(255,248,249,0.92);
+}
+[data-theme="dark"] {
+  --bg: #1a0a10;
+  --bg2: #240d16;
+  --card: #2d1520;
+  --text: #fce4ec;
+  --muted: #c9899a;
+  --border: rgba(232,84,122,0.2);
+  --shadow: rgba(0,0,0,0.3);
+  --nav-bg: rgba(26,10,16,0.95);
+}
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+/* petals & hearts floating */
+#petals, #floatingHearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  opacity: 0;
+  animation: fall linear infinite;
+  user-select: none;
+}
+@keyframes fall {
+  0% { transform: translateY(-40px) rotate(0deg); opacity: 0.7; }
+  100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+.heartFloat {
+  position: absolute;
+  color: #e8547a;
+  font-size: 20px;
+  pointer-events: none;
+  animation: floatUp 4s ease-out forwards;
+  z-index: 15;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.7); opacity: 0.9; }
+  100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
+}
+/* lock screen */
+#lock {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg,#120508 0%,#3d1525 50%,#1a0810 100%);
+  padding: 20px;
+  transition: opacity 1s, transform 1s;
+}
+#lock.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
+.lstars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.st { position: absolute; border-radius: 50%; background: #fff; animation: tw 2s ease-in-out infinite; }
+@keyframes tw { 0%,100%{ opacity: 0.15; } 50%{ opacity: 1; } }
+.ln { font-family: 'Dancing Script', cursive; font-size: clamp(52px,15vw,100px); color:#fff; text-shadow:0 0 40px rgba(232,84,122,.9); margin-bottom:6px; animation:lp 3s ease-in-out infinite; }
+@keyframes lp { 0%,100%{ text-shadow:0 0 40px rgba(232,84,122,.9); } 50%{ text-shadow:0 0 70px rgba(232,84,122,1),0 0 120px rgba(232,84,122,.5); } }
+.ls { color:rgba(255,255,255,.4); font-size:13px; margin-bottom:40px; letter-spacing:3px; }
+.lbox { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:22px; padding:28px; width:min(340px,92vw); text-align:center; backdrop-filter:blur(20px); }
+.linput { width:100%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:12px; padding:14px; color:#fff; font-size:22px; text-align:center; letter-spacing:8px; outline:none; }
+.lbtn { margin-top:18px; width:100%; padding:15px; background:linear-gradient(135deg,#e8547a,#c23b5e); border:none; border-radius:12px; color:#fff; font-weight:700; cursor:pointer; }
+.lbtn:active { transform:scale(0.97); }
+.lerr { color:#ff6b8a; font-size:13px; margin-top:10px; }
+.shake { animation:shake 0.4s; }
+@keyframes shake { 0%,100%{ transform:translateX(0); } 25%{ transform:translateX(-8px); } 75%{ transform:translateX(8px); } }
+/* MAIN */
+#main { opacity:0; transition: opacity 1.2s; min-height:100vh; }
+#main.show { opacity:1; }
+nav { position:fixed; top:0; width:100%; z-index:100; background:var(--nav-bg); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 14px; }
+.nav-logo { font-family:'Dancing Script',cursive; font-size:24px; color:var(--rose); text-decoration:none; }
+.nav-right { display:flex; gap:8px; align-items:center; }
+.tbtn, .mbtn { background:none; border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; color:var(--text); }
+#nm { position:fixed; top:56px; inset-inline:0; background:var(--nav-bg); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:99; display:none; padding:8px 0; }
+#nm.open { display:block; }
+#nm a { display:flex; align-items:center; gap:10px; padding:12px 20px; font-weight:500; color:var(--text); text-decoration:none; }
+#nm a:active, #nm a.act { color:var(--rose); background:rgba(232,84,122,.1); }
+.sec { display:none; min-height:100vh; padding:72px 16px 56px; position:relative; z-index:1; }
+.sec.on { display:block; }
+#home { display:none; flex-direction:column; align-items:center; text-align:center; }
+#home.on { display:flex; }
+.htag { font-size:11px; letter-spacing:4px; color:var(--rose); margin-bottom:16px; }
+.htitle { font-family:'Dancing Script',cursive; font-size:clamp(60px,18vw,120px); line-height:0.9; color:var(--text); }
+.htitle span { color:var(--rose); display:block; }
+.hsub { color:var(--muted); max-width:400px; margin-bottom:34px; }
+.ctr { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:30px; }
+.ci { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px; min-width:68px; }
+.cn { font-size:36px; font-weight:900; color:var(--rose); line-height:1; }
+.cl { font-size:10px; color:var(--muted); }
+.love-meter-wrap { background:var(--card); border-radius:50px; padding:12px 20px; width:260px; margin:20px auto 10px; border:1px solid var(--border); }
+.love-label { font-size:14px; color:var(--muted); letter-spacing:2px; }
+.progress-bar { background:var(--border); border-radius:30px; height:12px; width:100%; margin:8px 0; overflow:hidden; }
+.progress-fill { width:98%; background:linear-gradient(90deg,var(--rose),var(--gold)); height:100%; border-radius:30px; animation: pulseFill 1.8s ease-in-out infinite; }
+@keyframes pulseFill { 0%{ opacity:0.9; } 50%{ opacity:1; background:#f4698a; } 100%{ opacity:0.9; } }
+.beats { display:flex; gap:10px; font-size:28px; margin-top:10px; }
+.beat { animation:hb 1.6s infinite; }
+@keyframes hb { 0%,100%{ transform:scale(1); } 35%{ transform:scale(1.3); } 65%{ transform:scale(1.1); } }
+.sh { text-align:center; margin-bottom:32px; }
+.stag { color:var(--rose); letter-spacing:4px; font-size:11px; }
+.stitle { font-family:'Dancing Script',cursive; font-size:clamp(34px,10vw,62px); color:var(--text); }
+.letter { max-width:680px; margin:auto; background:var(--card); border-radius:20px; padding:clamp(22px,6vw,48px); box-shadow:0 14px 45px var(--shadow); border:1px solid var(--border); }
+.ltxt p { margin-bottom:16px; line-height:1.9; }
+.lsig { margin-top:24px; display:flex; align-items:center; gap:12px; }
+.sname { font-family:'Dancing Script',cursive; font-size:20px; color:var(--rose); }
+.mgrid, .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; max-width:880px; margin:auto; }
+.mc, .pitem { background:var(--card); border-radius:18px; padding:18px; border:1px solid var(--border); transition:0.2s; }
+.rlist { max-width:700px; margin:auto; display:flex; flex-direction:column; gap:11px; }
+.ri { display:flex; gap:13px; background:var(--card); border-radius:14px; padding:16px; border:1px solid var(--border); }
+.rn { width:34px; height:34px; background:linear-gradient(135deg,var(--rose),var(--deep)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; }
+.bcard { background:var(--card); border-radius:24px; padding:26px; text-align:center; }
+.bage { font-size:clamp(65px,18vw,95px); font-weight:900; color:var(--rose); }
+.cbd { background:var(--bg2); padding:22px; border-radius:18px; margin-top:18px; text-align:center; }
+.cbdn { font-size:42px; font-weight:900; color:var(--rose); }
+.gwrap { max-width:780px; margin:auto; }
+.ggrid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:20px; }
+.gi { aspect-ratio:1; border-radius:12px; border:2px solid var(--border); background:var(--bg2); cursor:pointer; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.gi img { width:100%; height:100%; object-fit:cover; }
+.gi.empty { flex-direction:column; font-size:24px; color:var(--muted); cursor:default; }
+.ginfo { background:var(--card); border-radius:16px; padding:22px; text-align:center; border:2px dashed var(--border); }
+#lb { position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:500; display:none; align-items:center; justify-content:center; }
+#lb.open { display:flex; }
+#lb img { max-width:90vw; max-height:90vh; border-radius:16px; }
+#stb { position:fixed; bottom:22px; left:14px; width:42px; height:42px; background:linear-gradient(135deg,var(--rose),var(--deep)); border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:0.3s; z-index:50; }
+#stb.show { opacity:1; transform:translateY(0); }
+.admin-gear { position:fixed; bottom:22px; right:20px; width:48px; height:48px; background:var(--card); border-radius:50%; box-shadow:0 4px 15px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; z-index:200; border:1px solid var(--rose); transition:0.2s; backdrop-filter:blur(8px); }
+.admin-gear:active { transform:scale(0.9); }
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:1000; align-items:center; justify-content:center; backdrop-filter:blur(5px); }
+.modal.open { display:flex; }
+.modal-card { background:var(--card); width:90%; max-width:550px; max-height:85vh; overflow-y:auto; border-radius:32px; padding:22px; color:var(--text); border:1px solid var(--border); }
+.modal-card h3 { margin-bottom:15px; color:var(--rose); }
+.modal-card textarea, .modal-card input { width:100%; margin:8px 0 15px; padding:10px; border-radius:14px; border:1px solid var(--border); background:var(--bg2); color:var(--text); }
+.modal-card button { background:var(--rose); border:none; padding:12px; border-radius:30px; color:white; font-weight:bold; margin-top:10px; width:100%; }
+footer { text-align:center; padding:28px; background:var(--card); border-top:1px solid var(--border); margin-top:20px; }
+</style>
 </head>
 <body>
 <div id="petals"></div>
+<div id="floatingHearts"></div>
+
+<!-- LOCK -->
 <div id="lock">
-  <div class="lock-card">
-    <h1>🌸 سلمى 🌸</h1>
-    <p style="color:#f8d0da; margin:10px 0">مكانك السري</p>
-    <input type="password" id="passInput" placeholder="••••••••">
-    <button id="unlockBtn">✨ افتحي القلب ✨</button>
-    <p id="errMsg" style="color:#ffa5bc; font-size:13px; margin-top:12px"></p>
+  <div class="lstars" id="lstars"></div>
+  <div class="ln">سلمى</div>
+  <p class="ls">✨ مكانك الخاص ✨</p>
+  <div class="lbox">
+    <label>ادخلي كلمة السر</label>
+    <input type="password" class="linput" id="pin" maxlength="12" placeholder="🌸" autocomplete="off">
+    <p class="lhint">تاريخ ميلادك 🎂</p>
+    <button class="lbtn" onclick="tryPass()">دخولي ✨</button>
+    <p class="lerr" id="lerr"></p>
   </div>
 </div>
 
+<!-- MAIN APP -->
 <div id="main">
-  <nav>
-    <div class="logo">سلمى ❤️</div>
-    <div class="nav-buttons">
-      <button id="themeToggle">🌙</button>
-      <button id="menuToggle">☰</button>
-    </div>
-  </nav>
-  <div id="menuPanel" class="menu-panel">
-    <a href="#" onclick="navigateTo('home')">🏠 الرئيسية</a>
-    <a href="#" onclick="navigateTo('letter')">💌 الرسالة</a>
-    <a href="#" onclick="navigateTo('memories')">🌟 ذكرياتنا</a>
-    <a href="#" onclick="navigateTo('reasons')">💖 ليه بحبك</a>
-    <a href="#" onclick="navigateTo('birthday')">🎂 عيد الميلاد</a>
-    <a href="#" onclick="navigateTo('promises')">🤝 وعودي</a>
-    <a href="#" onclick="navigateTo('gallery')">🖼️ ألبوم الصور</a>
-    <a href="#" onclick="navigateTo('extra')">🎵 أغانينا + المستقبل</a>
+<nav>
+  <a class="nav-logo" href="#" onclick="go('home');return false">سلمى 🌸</a>
+  <div class="nav-right">
+    <button class="tbtn" id="tbtn" onclick="toggleTheme()">🌙</button>
+    <button class="mbtn" onclick="toggleMenu()">☰</button>
   </div>
-
-  <!-- الصفحات -->
-  <div id="home" class="section home-section active">
-    <div class="big-title">أنتي <span style="color:var(--rose)">سلمى</span></div>
-    <p style="font-size:18px; margin-top:8px">يا أجمل قصة حب في حياتي</p>
-    <div class="counter-box">
-      <div class="counter-card"><div class="counter-number" id="days">0</div><div>يوم</div></div>
-      <div class="counter-card"><div class="counter-number" id="hours">0</div><div>ساعة</div></div>
-      <div class="counter-card"><div class="counter-number" id="minutes">0</div><div>دقيقة</div></div>
-      <div class="counter-card"><div class="counter-number" id="seconds">0</div><div>ثانية</div></div>
-    </div>
-    <div class="love-meter"><div class="meter-fill"></div></div>
-    <p>❤️ حبي ليكي دايماً في ازدياد ❤️</p>
-    <div style="margin-top:20px; font-size:30px">🌸 💕 🌸</div>
-  </div>
-
-  <div id="letter-section" class="section"><div class="card"><h2>💌 رسالة من القلب</h2><div id="letterContent"></div></div></div>
-  <div id="memories-section" class="section"><h2>🌟 ذكريات لا تنسى</h2><div id="memoriesGrid" class="grid-2"></div></div>
-  <div id="reasons-section" class="section"><h2>❤️ ليه بحبك؟</h2><div id="reasonsList" class="card"></div></div>
-  <div id="birthday-section" class="section"><div class="card"><h2>🎂 عيد ميلاد سلمى</h2><div id="bdayAge"></div><div id="bdayCountdown"></div><div id="bdayExtra" style="margin-top:12px"></div></div></div>
-  <div id="promises-section" class="section"><h2>🤝 وعودي ليكي</h2><div id="promisesGrid" class="grid-2"></div></div>
-  <div id="gallery-section" class="section"><h2>🖼️ ألبوم الصور</h2><div id="galleryGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div><div class="card" style="margin-top:12px;font-size:12px">💡 ضع صورك في مجلد photos باسم 1.jpg , 2.jpg ...</div></div>
-  <div id="extra-section" class="section"><div class="card"><h2>🎵 أغانينا المفضلة</h2><p id="playlistText"></p><hr style="margin:16px 0"><h2>📅 خططنا المستقبلية</h2><p id="futurePlansText"></p></div></div>
-
-  <footer>✨ كل كلمة في هذا الموقع حقيقية وبحبك يا سلمى ✨</footer>
+</nav>
+<div id="nm">
+  <a href="#" onclick="go('home');return false">🏠 الرئيسية</a>
+  <a href="#" onclick="go('letter');return false">💌 الرسالة</a>
+  <a href="#" onclick="go('memories');return false">🌟 ذكريات</a>
+  <a href="#" onclick="go('reasons');return false">❤️ ليه بحبك</a>
+  <a href="#" onclick="go('birthday');return false">🎂 عيد ميلاد</a>
+  <a href="#" onclick="go('gallery');return false">🖼️ صور</a>
+  <a href="#" onclick="go('promise');return false">🤝 وعودي</a>
+  <a href="#" onclick="go('future');return false">🎵 أغانينا + المستقبل</a>
 </div>
 
-<div id="adminGear" class="admin-gear">⚙️</div>
-<div id="adminModal" class="admin-modal">
-  <div class="admin-content">
-    <h3>🛠️ لوحة التحكم الكاملة (أدمن)</h3>
-    <label>📅 تاريخ بداية العلاقة</label><input type="date" id="editStartDate">
-    <label>💬 نص الرسالة</label><textarea id="editLetter" rows="4"></textarea>
-    <label>🎂 تاريخ ميلاد سلمى</label><input type="date" id="editBirthDate">
-    <label>🖼️ عدد الصور</label><input type="number" id="editPhotoCount" value="6">
-    <label>🌟 الذكريات (أيقونة|العنوان|الوصف|تذييل) كل سطر</label><textarea id="editMemories" rows="5"></textarea>
-    <label>❤️ أسباب الحب (كل سبب بسطر)</label><textarea id="editReasons" rows="5"></textarea>
-    <label>🤝 الوعود (أيقونة|النص)</label><textarea id="editPromises" rows="4"></textarea>
-    <label>🎵 قائمة الأغاني (اسم الأغنية - المغني) سطر سطر</label><textarea id="editPlaylist" rows="3"></textarea>
-    <label>📌 خططنا المستقبلية (نص طويل)</label><textarea id="editFuture" rows="3"></textarea>
-    <button id="saveAdminBtn" style="background:var(--rose);color:white;padding:12px;border-radius:40px;margin-top:16px;width:100%">💾 حفظ كل التغييرات</button>
-    <button id="closeAdminBtn" style="margin-top:12px">إغلاق</button>
+<!-- HOME -->
+<section id="home" class="on">
+  <p class="htag">✨ مكانك الخاص على الإنترنت ✨</p>
+  <h1 class="htitle">أنتي<span>سلمى</span></h1>
+  <p class="hsub">يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸</p>
+  <div class="ctr">
+    <div class="ci"><span class="cn" id="cd">0</span><div class="cl">يوم</div></div>
+    <div class="ci"><span class="cn" id="ch">0</span><div class="cl">ساعة</div></div>
+    <div class="ci"><span class="cn" id="cm">0</span><div class="cl">دقيقة</div></div>
+    <div class="ci"><span class="cn" id="cs">0</span><div class="cl">ثانية</div></div>
   </div>
+  <div class="love-meter-wrap"><div class="love-label">❤️ نسبة الحب ❤️</div><div class="progress-bar"><div class="progress-fill"></div></div><div style="font-size:12px">98% حنين و حب</div></div>
+  <div class="beats"><span class="beat">🌸</span><span class="beat">❤️</span><span class="beat">🌸</span></div>
+</section>
+
+<!-- LETTER -->
+<section id="sec-letter" class="sec"><div class="sh"><span class="stag">💌 كلام من القلب</span><h2 class="stitle">رسالتي إليكي</h2></div><div class="letter" id="letterContainer"><div class="ldate">📅 بحبك يا سلمى</div><div class="ltxt" id="letterText"></div><div class="lsig"><div class="sh2">❤️</div><div><div class="sname">حبيبك دايماً</div></div></div></div></section>
+
+<!-- MEMORIES -->
+<section id="sec-memories" class="sec"><div class="sh"><span class="stag">🌟 لحظات لا تُنسى</span><h2 class="stitle">ذكرياتنا</h2></div><div class="mgrid" id="memoriesGrid"></div></section>
+
+<!-- REASONS -->
+<section id="sec-reasons" class="sec"><div class="sh"><span class="stag">❤️ من القلب</span><h2 class="stitle">ليه بحبك</h2></div><div class="rlist" id="reasonsList"></div></section>
+
+<!-- BIRTHDAY -->
+<section id="sec-birthday" class="sec"><div class="sh"><span class="stag">🎂 يوم ميلادك</span><h2 class="stitle">عيد ميلاد سلمى</h2></div><div class="bc"><div class="bcard"><div class="cwrap" id="cwrap"></div><div class="bage" id="bageNum">16</div><p class="btxt" id="birthMeta">🎂 كل سنة وانتي جميلة</p></div><div class="cbd"><div class="cbdl">⏳ الوقت المتبقي لعيد ميلادك الجاي</div><div class="cbdn" id="bdc">---</div><div class="cbds" id="bdcs">يوم</div></div></div></section>
+
+<!-- GALLERY -->
+<section id="sec-gallery" class="sec"><div class="sh"><span class="stag">🖼️ صورنا</span><h2 class="stitle">الألبوم الخاص</h2></div><div class="gwrap"><div class="ggrid" id="ggrid"></div><div class="ginfo">🌸 ألبوم صور ينتظر صورك الجميلة</div></div></section>
+
+<!-- PROMISES -->
+<section id="sec-promise" class="sec"><div class="sh"><span class="stag">🤝 وعد من القلب</span><h2 class="stitle">وعودي ليكي</h2></div><div class="pgrid" id="promisesGrid"></div></section>
+
+<!-- FUTURE SECTION (اغانينا وخطط) -->
+<section id="sec-future" class="sec"><div class="sh"><span class="stag">🎵 أغانينا + المستقبل</span><h2 class="stitle">لحن قلوبنا</h2></div><div class="pcent" style="max-width:780px;margin:auto"><div class="pcard" style="background:var(--card);border-radius:24px;padding:24px;margin-bottom:22px;"><div class="pbig" style="font-size:28px">🎧 أغانينا المفضلة</div><ul id="songsList" style="list-style:none;margin-top:15px;text-align:right;"></ul></div><div class="pcard" style="background:var(--card);border-radius:24px;padding:24px;"><div class="pbig" style="font-size:28px">🌍 خططنا المستقبلية</div><p id="futurePlanText" class="psub" style="margin-top:12px;"></p></div></div></section>
+
+<footer><p>صُنع بـ ❤️ من أجل <span class="fn">سلمى</span></p></footer>
 </div>
+
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="adminGear" class="admin-gear" style="display:none;" onclick="openAdminPanel()">⚙️</div>
+
+<!-- ADMIN MODAL -->
+<div id="adminModal" class="modal"><div class="modal-card"><h3>⚙️ لوحة تحكم سلمى (إدارة المحتوى)</h3>
+<label>تاريخ بداية العلاقة:</label><input type="date" id="adminStartDate">
+<label>تاريخ ميلاد سلمى:</label><input type="date" id="adminBirthDate">
+<label>عدد الصور في الألبوم:</label><input type="number" id="adminPhotoCount" min="1" max="30">
+<label>نص الرسالة (كامل):</label><textarea id="adminLetter" rows="5"></textarea>
+<label>الذكريات (icon|title|desc|footer) كل سطر:</label><textarea id="adminMemories" rows="4" placeholder="🌟|أول كلام|وصف حلو|✨ بداية"></textarea>
+<label>أسباب الحب (كل سبب بسطر):</label><textarea id="adminReasons" rows="4"></textarea>
+<label>الوعود (icon|text):</label><textarea id="adminPromises" rows="4" placeholder="💪|هكون جنبك"></textarea>
+<label>قائمة الأغاني (كل أغنية بسطر):</label><textarea id="adminSongs" rows="3"></textarea>
+<label>خططنا المستقبلية (نص طويل):</label><textarea id="adminFuturePlan" rows="3"></textarea>
+<button onclick="saveAdminChanges()">💾 حفظ التغييرات</button><button onclick="closeAdminPanel()" style="margin-top:8px;background:#aaa;">إغلاق</button>
+</div></div>
 
 <script>
-  // --------------------------------------------------------------
-  // كلمات السر
-  const USER_PASS = "27122009";
-  const ADMIN_PASS = "13854672";
-  let isAdminLogged = false;
+// ======================= CONFIG & DEFAULTS =======================
+const DEFAULT_CONFIG = {
+  startDate: "2024-01-01",
+  birthDate: "2009-12-27",
+  photoCount: 6,
+  letterText: "سلمى الغالية،\nمش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.\nانتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم.\nعملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.\nبحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸",
+  memories: [
+    "💬|أول كلام بيننا|اللحظة دي هي بداية كل حاجة جميلة.|✨ البداية",
+    "😂|الضحكة اللي ما بتخلصش|بنضحك على حاجات صغيرة وما نقدرش نوقف.|✨ لحظة خاصة",
+    "🌙|محادثة نص الليل|لما بنتكلم وعيوننا تقيل وما حد ينام.|✨ كل ليلة",
+    "🎵|أغنيتنا|أغنية لما بتشتغل بفكر فيكي.|✨ دايماً",
+    "🤗|كلمة حلوة|كلمة قلتهالي سلمى وضلت في دماغي أيام.|✨ أثر جميل"
+  ],
+  reasons: [
+    "لأن ضحكتك بتنور أي مكان تيجي فيه",
+    "لأنك بتفهميني من غير ما أكمل الجملة",
+    "لأن قلبك كبير بتحبي الناس بجد",
+    "لأنك صادقة وما تعرفيش تكدبي",
+    "لأن الدنيا أحسن لما انتي فيها",
+    "لأن في عينيكي قصة كتير نفسي أعرفها",
+    "لأن اسمك سلمى بقوله بنبرة مختلفة",
+    "لأنك انتي — مجموع كل حاجة فيكي بيعمل شخص بحبه جداً"
+  ],
+  promises: [
+    "💪|هكون جنبك في كل وقت — في الفرح والصعب",
+    "🎧|هسمعك دايماً — مش بس أسمع، هفهم وأحس بيكي",
+    "🛡️|مش هحكي حاجة انتي وثقتي فيا بيها لأي حد",
+    "😊|هحاول دايماً أرجع لك ابتسامتك",
+    "🌱|هدعمك في أحلامك وهفرح بنجاحاتك",
+    "❤️|هحبك بصدق من غير مسرحية"
+  ],
+  songs: ["🎵 أغنية: قصة حبنا - لـ سلمى وحبيبها", "🎶 أغنية: أنتِ كل شيء", "🎧 أغنية: أجمل ضحكة", "💖 تتر: حكايتنا الجميلة"],
+  futurePlan: "سلمى،未來 plans: نكمل مع بعض كل الطريق، نروح أماكن جديدة، نحقق أحلامنا سوا، ونفضل دايماً سند لبعض. كل سنة وانتي أجمل حاجة في مستقبلي 🌸✨"
+};
 
-  // الداتا الافتراضية الكبيرة
-  let siteData = {
-    startDate: "2024-01-01",
-    letterHtml: "<p>سلمى حبيبتي، أنتِ نور حياتي وسبب سعادتي. كل يوم بحس إن حبنا أكبر من الكلام، ولهذا خلقت هذا العالم الصغير لأجلك وحدك. ❤️</p>",
-    birthDate: "2009-12-27",
-    photoCount: 6,
-    memories: [
-      { icon: "💬", title: "أول رسالة", desc: "كانت رسالة غيرت حياتي للأبد", meta: "✨ 2024" },
-      { icon: "😂", title: "ضحكتك التي لا تُنسى", desc: "بضحكتك بتغيري مود الدنيا", meta: "💕 يوميًا" },
-      { icon: "🌙", title: "أحلى سهرة", desc: "تكلمنا لساعات بدون ملل", meta: "⭐ ذكرى خاصة" },
-      { icon: "🎁", title: "أول هدية", desc: "هدية بسيطة لكنها بحب كبير", meta: "🎀 لا تنسى" }
-    ],
-    reasons: [
-      "لأن ضحكتك بتدخل السعادة لقلبي",
-      "لأنك صادقة وطيبة القلب",
-      "لأنك بتفهميني حتى بدون كلام",
-      "لأن وجودك يخليني شخص أحسن",
-      "لأنك أنتي سلمى بدون أي سبب آخر"
-    ],
-    promises: [
-      { icon: "💪", text: "هكون سندك في كل الظروف" },
-      { icon: "🎧", text: "هسمعك وأحس بمشاعرك دايماً" },
-      { icon: "❤️", text: "حب حقيقي من القلب" }
-    ],
-    playlist: ["أنتي الحياة - تامر حسني", "بنت الجيران - وائل جسار", "بحبك و أنا كمان - فضل شاكر"],
-    futurePlans: "إن شاء الله نسافر سوا، نبني بيت صغير، ونحقق كل أحلامك اللي قلتِها لي."
+let isAdmin = false;
+let currentStartDate = new Date(DEFAULT_CONFIG.startDate);
+let birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
+let photoCount = DEFAULT_CONFIG.photoCount;
+
+// Helper : load from localStorage or default
+function loadConfigFromStorage() {
+  const stored = localStorage.getItem("salma_site_config");
+  if(stored) {
+    const cfg = JSON.parse(stored);
+    Object.assign(DEFAULT_CONFIG, cfg);
+  }
+  currentStartDate = new Date(DEFAULT_CONFIG.startDate);
+  birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
+  photoCount = DEFAULT_CONFIG.photoCount;
+}
+function saveConfigToStorage() {
+  const toStore = {
+    startDate: DEFAULT_CONFIG.startDate,
+    birthDate: DEFAULT_CONFIG.birthDate,
+    photoCount: DEFAULT_CONFIG.photoCount,
+    letterText: DEFAULT_CONFIG.letterText,
+    memories: DEFAULT_CONFIG.memories,
+    reasons: DEFAULT_CONFIG.reasons,
+    promises: DEFAULT_CONFIG.promises,
+    songs: DEFAULT_CONFIG.songs,
+    futurePlan: DEFAULT_CONFIG.futurePlan
   };
-
-  function loadFromStorage() {
-    let saved = localStorage.getItem("fullLoveSite");
-    if (saved) {
-      try {
-        let parsed = JSON.parse(saved);
-        siteData = { ...siteData, ...parsed };
-      } catch(e) {}
-    }
-    renderEverything();
+  localStorage.setItem("salma_site_config", JSON.stringify(toStore));
+}
+// Render all
+function renderLetter() { document.getElementById("letterText").innerHTML = DEFAULT_CONFIG.letterText.replace(/\n/g,"<br>"); }
+function renderMemories() {
+  const grid = document.getElementById("memoriesGrid");
+  grid.innerHTML = DEFAULT_CONFIG.memories.map(m => {
+    let [icon, title, desc, footer] = m.split("|");
+    return `<div class="mc"><span class="me">${icon||"🌸"}</span><div class="mt">${title||"ذكرى"}</div><p class="mm">${desc||""}</p><div class="md">${footer||"✨"}</div></div>`;
+  }).join("");
+}
+function renderReasons() {
+  const list = document.getElementById("reasonsList");
+  list.innerHTML = DEFAULT_CONFIG.reasons.map((r,i) => `<div class="ri"><div class="rn">${i+1}</div><p class="rtxt">${r}</p></div>`).join("");
+}
+function renderPromises() {
+  const grid = document.getElementById("promisesGrid");
+  grid.innerHTML = DEFAULT_CONFIG.promises.map(p => {
+    let [icon, text] = p.split("|");
+    return `<div class="pitem"><span class="pico">${icon||"❤️"}</span><p class="ptxt">${text||"وعد"}</p></div>`;
+  }).join("");
+}
+function renderFuture() {
+  const songsUl = document.getElementById("songsList");
+  songsUl.innerHTML = DEFAULT_CONFIG.songs.map(s => `<li style="margin-bottom:10px;font-size:15px;">🎼 ${s}</li>`).join("");
+  document.getElementById("futurePlanText").innerHTML = DEFAULT_CONFIG.futurePlan;
+}
+function renderGallery() {
+  const grid = document.getElementById("ggrid");
+  grid.innerHTML = "";
+  for(let i=1;i<=photoCount;i++) {
+    const div = document.createElement("div"); div.className = "gi";
+    const img = new Image(); img.src = `photos/${i}.jpg`; img.alt=`صورة ${i}`; img.style.width="100%"; img.style.height="100%"; img.style.objectFit="cover";
+    img.onerror = () => { div.classList.add("empty"); div.innerHTML = `<span>🌸</span><span>صورة ${i}</span>`; };
+    img.onload = () => { div.appendChild(img); };
+    div.appendChild(img);
+    div.onclick = () => { if(img.src && !div.classList.contains("empty")) openLb(img.src); };
+    grid.appendChild(div);
   }
-  function saveToStorage() {
-    localStorage.setItem("fullLoveSite", JSON.stringify(siteData));
+}
+function updateBirthdayInfo() {
+  const now = new Date();
+  let age = now.getFullYear() - birthDateObj.getFullYear();
+  const hasBirthdayThisYear = (now.getMonth() > birthDateObj.getMonth() || (now.getMonth()===birthDateObj.getMonth() && now.getDate()>=birthDateObj.getDate()));
+  if(!hasBirthdayThisYear) age--;
+  document.getElementById("bageNum").innerText = age;
+  let nextBirth = new Date(now.getFullYear(), birthDateObj.getMonth(), birthDateObj.getDate());
+  if(now > nextBirth) nextBirth.setFullYear(now.getFullYear()+1);
+  const daysLeft = Math.ceil((nextBirth - now)/86400000);
+  if(daysLeft===0) { document.getElementById("bdc").innerHTML="🎉 اليوم!"; document.getElementById("bdcs").innerHTML="عيد ميلاد سعيد يا قمر"; }
+  else { document.getElementById("bdc").innerHTML=daysLeft; document.getElementById("bdcs").innerHTML="يوم متبقي لعيد ميلادك"; }
+  document.getElementById("birthMeta").innerHTML=`🎂 ${birthDateObj.getFullYear()} - ${birthDateObj.getDate()}/${birthDateObj.getMonth()+1}<br> كل سنة وانتي جميلة`;
+}
+let timerInterval;
+function startCounterFromDate(start) {
+  if(timerInterval) clearInterval(timerInterval);
+  function update() {
+    const now = Date.now();
+    const diff = now - start.getTime();
+    if(diff<0) return;
+    document.getElementById("cd").innerText = Math.floor(diff/86400000);
+    document.getElementById("ch").innerText = Math.floor((diff%86400000)/3600000);
+    document.getElementById("cm").innerText = Math.floor((diff%3600000)/60000);
+    document.getElementById("cs").innerText = Math.floor((diff%60000)/1000);
   }
+  update();
+  timerInterval = setInterval(update,1000);
+}
+function refreshCounter() { startCounterFromDate(currentStartDate); }
+function refreshAllUI() {
+  renderLetter(); renderMemories(); renderReasons(); renderPromises(); renderFuture(); renderGallery();
+  updateBirthdayInfo(); refreshCounter();
+}
+// Admin save
+function saveAdminChanges() {
+  DEFAULT_CONFIG.startDate = document.getElementById("adminStartDate").value;
+  DEFAULT_CONFIG.birthDate = document.getElementById("adminBirthDate").value;
+  DEFAULT_CONFIG.photoCount = parseInt(document.getElementById("adminPhotoCount").value);
+  DEFAULT_CONFIG.letterText = document.getElementById("adminLetter").value;
+  const memoriesRaw = document.getElementById("adminMemories").value.split("\n").filter(l=>l.trim());
+  if(memoriesRaw.length) DEFAULT_CONFIG.memories = memoriesRaw;
+  const reasonsRaw = document.getElementById("adminReasons").value.split("\n").filter(l=>l.trim());
+  if(reasonsRaw.length) DEFAULT_CONFIG.reasons = reasonsRaw;
+  const promisesRaw = document.getElementById("adminPromises").value.split("\n").filter(l=>l.trim());
+  if(promisesRaw.length) DEFAULT_CONFIG.promises = promisesRaw;
+  const songsRaw = document.getElementById("adminSongs").value.split("\n").filter(l=>l.trim());
+  if(songsRaw.length) DEFAULT_CONFIG.songs = songsRaw;
+  DEFAULT_CONFIG.futurePlan = document.getElementById("adminFuturePlan").value;
+  currentStartDate = new Date(DEFAULT_CONFIG.startDate);
+  birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
+  photoCount = DEFAULT_CONFIG.photoCount;
+  saveConfigToStorage();
+  refreshAllUI();
+  closeAdminPanel();
+}
+function openAdminPanel() {
+  document.getElementById("adminStartDate").value = DEFAULT_CONFIG.startDate;
+  document.getElementById("adminBirthDate").value = DEFAULT_CONFIG.birthDate;
+  document.getElementById("adminPhotoCount").value = DEFAULT_CONFIG.photoCount;
+  document.getElementById("adminLetter").value = DEFAULT_CONFIG.letterText;
+  document.getElementById("adminMemories").value = DEFAULT_CONFIG.memories.join("\n");
+  document.getElementById("adminReasons").value = DEFAULT_CONFIG.reasons.join("\n");
+  document.getElementById("adminPromises").value = DEFAULT_CONFIG.promises.join("\n");
+  document.getElementById("adminSongs").value = DEFAULT_CONFIG.songs.join("\n");
+  document.getElementById("adminFuturePlan").value = DEFAULT_CONFIG.futurePlan;
+  document.getElementById("adminModal").classList.add("open");
+}
+function closeAdminPanel() { document.getElementById("adminModal").classList.remove("open"); }
 
-  function renderEverything() {
-    // تحديث العداد
-    updateMainCounter();
-    setInterval(updateMainCounter, 1000);
-    document.getElementById("letterContent").innerHTML = siteData.letterHtml;
-    // الذكريات
-    let memHtml = siteData.memories.map(m => `<div class="card"><div style="font-size:32px">${m.icon}</div><h3>${m.title}</h3><p>${m.desc}</p><small>${m.meta}</small></div>`).join("");
-    document.getElementById("memoriesGrid").innerHTML = memHtml;
-    // أسباب الحب
-    let reasonsHtml = `<ul style="list-style:none; padding-right:0">` + siteData.reasons.map(r => `<li style="margin-bottom:12px">❤️ ${r}</li>`).join("") + `</ul>`;
-    document.getElementById("reasonsList").innerHTML = reasonsHtml;
-    // الوعود
-    let promHtml = siteData.promises.map(p => `<div class="card"><span style="font-size:28px">${p.icon}</span><p>${p.text}</p></div>`).join("");
-    document.getElementById("promisesGrid").innerHTML = promHtml;
-    // عيد الميلاد
-    let birthObj = new Date(siteData.birthDate);
-    let today = new Date();
-    let age = today.getFullYear() - birthObj.getFullYear();
-    if (today < new Date(today.getFullYear(), birthObj.getMonth(), birthObj.getDate())) age--;
-    document.getElementById("bdayAge").innerHTML = `🎂 عمرك الآن ${age} سنة 🎂`;
-    let nextB = new Date(today.getFullYear(), birthObj.getMonth(), birthObj.getDate());
-    if (today >= nextB) nextB.setFullYear(today.getFullYear() + 1);
-    let daysLeft = Math.ceil((nextB - today) / 86400000);
-    document.getElementById("bdayCountdown").innerHTML = daysLeft === 0 ? "🎉 اليوم عيد ميلادك يا أحلى حاجة 🎉" : `⏳ متبقي ${daysLeft} يوم على ميلادك الجاي`;
-    document.getElementById("bdayExtra").innerHTML = `🌟 كل سنة وانتي بخير يا سلمى 🌟`;
-    // جاليري
-    loadGallery();
-    // صفحة extra
-    document.getElementById("playlistText").innerHTML = siteData.playlist.map(song => `🎵 ${song}`).join("<br>");
-    document.getElementById("futurePlansText").innerHTML = siteData.futurePlans;
+// UNLOCK
+const PWD_NORMAL = "27122009";
+const PWD_ADMIN = "13854672";
+function tryPass() {
+  const val = document.getElementById("pin").value.trim();
+  if(val === PWD_NORMAL || val === PWD_ADMIN) {
+    if(val === PWD_ADMIN) isAdmin = true;
+    unlock();
+  } else {
+    document.getElementById("lerr").innerText = "كلمة السر غلط، حاولي تاني 🙈";
+    document.querySelector(".lbox").classList.add("shake");
+    setTimeout(()=> document.querySelector(".lbox").classList.remove("shake"), 500);
+    document.getElementById("pin").value="";
   }
-
-  function updateMainCounter() {
-    let start = new Date(siteData.startDate);
-    let now = new Date();
-    let diff = now - start;
-    if (diff > 0) {
-      document.getElementById("days").innerText = Math.floor(diff / 86400000);
-      document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
-      document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000);
-      document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
-    }
+}
+function unlock() {
+  document.getElementById("lock").classList.add("out");
+  setTimeout(() => {
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("main").classList.add("show");
+    if(isAdmin) document.getElementById("adminGear").style.display = "flex";
+    loadConfigFromStorage();
+    refreshAllUI();
+    startFloatingHearts();
+    generatePetals();
+    confettiBirth();
+  }, 1000);
+}
+// floating Hearts
+let heartInterval;
+function startFloatingHearts() {
+  if(heartInterval) clearInterval(heartInterval);
+  heartInterval = setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heartFloat";
+    heart.innerHTML = Math.random() > 0.6 ? "🌸" : "❤️";
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = (16 + Math.random() * 24) + "px";
+    heart.style.position = "fixed";
+    document.getElementById("floatingHearts").appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }, 2200);
+}
+function generatePetals() {
+  const petalContainer = document.getElementById("petals");
+  petalContainer.innerHTML = "";
+  const symbols = ["🌸","❤️","🌺","💕","✨"];
+  for(let i=0;i<26;i++) {
+    const p = document.createElement("div"); p.className = "petal";
+    p.textContent = symbols[i%symbols.length];
+    p.style.left = Math.random()*100+"%";
+    p.style.fontSize = (12+Math.random()*16)+"px";
+    p.style.animationDuration = (6+Math.random()*10)+"s";
+    p.style.animationDelay = (Math.random()*8)+"s";
+    petalContainer.appendChild(p);
   }
+}
+function confettiBirth() {
+  const cwrap = document.getElementById("cwrap");
+  if(!cwrap) return;
+  for(let i=0;i<12;i++){ let d=document.createElement("div"); d.className="cp"; d.style.cssText=`left:${Math.random()*100}%;background:#e8547a;animation-duration:${2+Math.random()*4}s`; cwrap.appendChild(d);}
+}
+function openLb(src){ const lb=document.getElementById("lb"); document.getElementById("lbi").src=src; lb.classList.add("open");}
+function closeLb(){ document.getElementById("lb").classList.remove("open");}
+document.getElementById("lb").onclick = closeLb;
 
-  function loadGallery() {
-    let container = document.getElementById("galleryGrid");
-    container.innerHTML = "";
-    for (let i = 1; i <= siteData.photoCount; i++) {
-      let div = document.createElement("div");
-      div.className = "card";
-      div.style.padding = "6px";
-      let img = document.createElement("img");
-      img.src = `photos/${i}.jpg`;
-      img.style.width = "100%";
-      img.style.aspectRatio = "1/1";
-      img.style.objectFit = "cover";
-      img.style.borderRadius = "24px";
-      img.onerror = () => { div.innerHTML = `<div style="text-align:center">🌸 صورة ${i}<br><span style="font-size:10px">ضع الصورة</span></div>`; };
-      div.appendChild(img);
-      container.appendChild(div);
-    }
-  }
+// nav, theme, menu
+let darkMode = false;
+function toggleTheme() { darkMode = !darkMode; document.documentElement.setAttribute("data-theme", darkMode ? "dark" : ""); document.getElementById("tbtn").innerText = darkMode ? "☀️" : "🌙"; localStorage.setItem("salma_theme", darkMode?"dark":"light"); }
+function toggleMenu(){ document.getElementById("nm").classList.toggle("open"); }
+function go(id){
+  document.getElementById("nm").classList.remove("open");
+  document.getElementById("home").classList.remove("on");
+  document.querySelectorAll(".sec").forEach(s=>s.classList.remove("on"));
+  if(id==="home") document.getElementById("home").classList.add("on");
+  else document.getElementById("sec-"+id).classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.addEventListener("click",(e)=>{
+  const nav=document.querySelector("nav"), nm=document.getElementById("nm");
+  if(!nav.contains(e.target) && !nm.contains(e.target)) nm.classList.remove("open");
+});
+window.addEventListener("scroll",()=>{ document.getElementById("stb").classList.toggle("show", window.scrollY>250); });
+const savedTheme = localStorage.getItem("salma_theme");
+if(savedTheme === "dark") { darkMode=true; document.documentElement.setAttribute("data-theme","dark"); document.getElementById("tbtn").innerText="☀️"; }
 
-  // فتح القفل
-  function unlock(adminMode) {
-    isAdminLogged = adminMode;
-    let lock = document.getElementById("lock");
-    lock.classList.add("out");
-    setTimeout(() => {
-      lock.style.display = "none";
-      document.getElementById("main").classList.add("show");
-      if (isAdminLogged) {
-        document.getElementById("adminGear").style.display = "flex";
-        fillAdminForm();
-      } else {
-        document.getElementById("adminGear").style.display = "none";
-      }
-      loadFromStorage();
-      startFloatingHearts();
-    }, 900);
-  }
-
-  function fillAdminForm() {
-    document.getElementById("editStartDate").value = siteData.startDate;
-    document.getElementById("editLetter").value = siteData.letterHtml;
-    document.getElementById("editBirthDate").value = siteData.birthDate;
-    document.getElementById("editPhotoCount").value = siteData.photoCount;
-    document.getElementById("editMemories").value = siteData.memories.map(m => `${m.icon}|${m.title}|${m.desc}|${m.meta}`).join("\n");
-    document.getElementById("editReasons").value = siteData.reasons.join("\n");
-    document.getElementById("editPromises").value = siteData.promises.map(p => `${p.icon}|${p.text}`).join("\n");
-    document.getElementById("editPlaylist").value = siteData.playlist.join("\n");
-    document.getElementById("editFuture").value = siteData.futurePlans;
-  }
-
-  function saveAdminChanges() {
-    siteData.startDate = document.getElementById("editStartDate").value;
-    siteData.letterHtml = document.getElementById("editLetter").value;
-    siteData.birthDate = document.getElementById("editBirthDate").value;
-    siteData.photoCount = parseInt(document.getElementById("editPhotoCount").value);
-    let memRaw = document.getElementById("editMemories").value.split("\n").filter(l => l.trim());
-    siteData.memories = memRaw.map(line => {
-      let parts = line.split("|");
-      return { icon: parts[0] || "🌸", title: parts[1] || "ذكرى", desc: parts[2] || "وصف", meta: parts[3] || "✨" };
-    });
-    siteData.reasons = document.getElementById("editReasons").value.split("\n").filter(l => l.trim());
-    let promRaw = document.getElementById("editPromises").value.split("\n").filter(l => l.trim());
-    siteData.promises = promRaw.map(line => {
-      let parts = line.split("|");
-      return { icon: parts[0] || "❤️", text: parts[1] || "وعد" };
-    });
-    siteData.playlist = document.getElementById("editPlaylist").value.split("\n").filter(l => l.trim());
-    siteData.futurePlans = document.getElementById("editFuture").value;
-    saveToStorage();
-    renderEverything();
-    document.getElementById("adminModal").classList.remove("open");
-    alert("✅ تم حفظ جميع التغييرات بنجاح!");
-  }
-
-  // أنيميشن عائم
-  function startFloatingHearts() {
-    setInterval(() => {
-      let heart = document.createElement("div");
-      heart.className = "floating-heart";
-      heart.innerHTML = ["❤️", "🌸", "💕", "✨", "💖"][Math.floor(Math.random() * 5)];
-      heart.style.left = Math.random() * 90 + "%";
-      heart.style.bottom = "0px";
-      heart.style.fontSize = 18 + Math.random() * 24 + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }, 1200);
-  }
-
-  // بتلات متساقطة
-  function createPetals() {
-    let container = document.getElementById("petals");
-    let arr = ["🌸", "❤️", "🌺", "💮", "🌼", "✨"];
-    for (let i = 0; i < 45; i++) {
-      let p = document.createElement("div");
-      p.className = "petal";
-      p.textContent = arr[Math.floor(Math.random() * arr.length)];
-      p.style.left = Math.random() * 100 + "%";
-      p.style.fontSize = 12 + Math.random() * 24 + "px";
-      p.style.animationDuration = 4 + Math.random() * 12 + "s";
-      p.style.animationDelay = Math.random() * 10 + "s";
-      container.appendChild(p);
-    }
-  }
-  createPetals();
-
-  // التنقل بين الأقسام
-  window.navigateTo = function(sectionId) {
-    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
-    if (sectionId === "home") document.getElementById("home").classList.add("active");
-    else if (sectionId === "letter") document.getElementById("letter-section").classList.add("active");
-    else if (sectionId === "memories") document.getElementById("memories-section").classList.add("active");
-    else if (sectionId === "reasons") document.getElementById("reasons-section").classList.add("active");
-    else if (sectionId === "birthday") document.getElementById("birthday-section").classList.add("active");
-    else if (sectionId === "promises") document.getElementById("promises-section").classList.add("active");
-    else if (sectionId === "gallery") document.getElementById("gallery-section").classList.add("active");
-    else if (sectionId === "extra") document.getElementById("extra-section").classList.add("active");
-    document.getElementById("menuPanel").style.display = "none";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // الأحداث
-  document.getElementById("unlockBtn").onclick = () => {
-    let pwd = document.getElementById("passInput").value.trim();
-    if (pwd === ADMIN_PASS) unlock(true);
-    else if (pwd === USER_PASS) unlock(false);
-    else {
-      document.getElementById("errMsg").innerText = "كلمة سر خطأ يا جميلة 🌸";
-      setTimeout(() => document.getElementById("errMsg").innerText = "", 1600);
-    }
-  };
-  document.getElementById("passInput").addEventListener("keypress", (e) => { if (e.key === "Enter") document.getElementById("unlockBtn").click(); });
-  document.getElementById("themeToggle").onclick = () => {
-    let dark = document.documentElement.getAttribute("data-theme") === "dark";
-    document.documentElement.setAttribute("data-theme", dark ? "" : "dark");
-    document.getElementById("themeToggle").innerText = dark ? "🌙" : "☀️";
-  };
-  document.getElementById("menuToggle").onclick = () => {
-    let panel = document.getElementById("menuPanel");
-    panel.style.display = panel.style.display === "none" ? "flex" : "none";
-  };
-  document.getElementById("adminGear").onclick = () => document.getElementById("adminModal").classList.add("open");
-  document.getElementById("saveAdminBtn").onclick = saveAdminChanges;
-  document.getElementById("closeAdminBtn").onclick = () => document.getElementById("adminModal").classList.remove("open");
-
-  // بداية أولية (لن يتم عرض المحتوى قبل القفل)
-  console.log("جاهز للحب 💖");
+// stars animation for lock
+(function createStars(){
+  const c=document.getElementById("lstars");
+  for(let i=0;i<70;i++){ let s=document.createElement("div"); s.className="st"; s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*3}px;height:${1+Math.random()*3}px;animation-duration:${1+Math.random()*3}s`; c.appendChild(s); }
+})();
+// Start with default config load
+loadConfigFromStorage();
 </script>
 </body>
 </html>
