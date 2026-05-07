@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>سلمى 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:#e8547a;--deep:#c23b5e;--gold:#f4c542;
+  --bg:#fff8f9;--bg2:#fff0f3;--card:#ffffff;
+  --text:#2d1520;--muted:#9e6070;--border:rgba(232,84,122,0.15);
+  --shadow:rgba(232,84,122,0.1);--nav-bg:rgba(255,248,249,0.92);
+}
+[data-theme="dark"]{
+  --bg:#1a0a10;--bg2:#240d16;--card:#2d1520;
+  --text:#fce4ec;--muted:#c9899a;--border:rgba(232,84,122,0.2);
+  --shadow:rgba(0,0,0,0.3);--nav-bg:rgba(26,10,16,0.95);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .3s,color .3s;min-height:100vh}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;opacity:0;animation:fall linear infinite;user-select:none}
+@keyframes fall{0%{transform:translateY(-40px) rotate(0deg);opacity:.7}100%{transform:translateY(105vh) rotate(540deg);opacity:0}}
+
+/* LOCK */
+#lock{position:fixed;inset:0;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#120508 0%,#3d1525 50%,#1a0810 100%);padding:20px;transition:opacity 1s,transform 1s}
+#lock.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.lstars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.st{position:absolute;border-radius:50%;background:#fff;animation:tw 2s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:1}}
+.ln{font-family:'Dancing Script',cursive;font-size:clamp(52px,15vw,100px);color:#fff;text-shadow:0 0 40px rgba(232,84,122,.9);margin-bottom:6px;text-align:center;animation:lp 3s ease-in-out infinite}
+@keyframes lp{0%,100%{text-shadow:0 0 40px rgba(232,84,122,.9)}50%{text-shadow:0 0 70px rgba(232,84,122,1),0 0 120px rgba(232,84,122,.5)}}
+.ls{color:rgba(255,255,255,.4);font-size:13px;margin-bottom:40px;letter-spacing:3px}
+.lbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:28px;width:min(340px,92vw);text-align:center;backdrop-filter:blur(20px)}
+.lbox label{display:block;color:rgba(255,255,255,.6);font-size:12px;letter-spacing:3px;margin-bottom:12px}
+.linput{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px;color:#fff;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Tajawal',sans-serif;outline:none;transition:.3s;-webkit-appearance:none}
+.linput:focus{border-color:var(--rose);box-shadow:0 0 20px rgba(232,84,122,.3)}
+.lhint{color:rgba(255,255,255,.3);font-size:12px;margin-top:8px}
+.lbtn{margin-top:18px;width:100%;padding:15px;background:linear-gradient(135deg,#e8547a,#c23b5e);border:none;border-radius:12px;color:#fff;font-size:16px;font-family:'Tajawal',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 8px 25px rgba(232,84,122,.4);transition:.2s;touch-action:manipulation}
+.lbtn:active{transform:scale(.97)}
+.lerr{color:#ff6b8a;font-size:13px;margin-top:10px;min-height:18px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.shake{animation:shake .4s}
+
+/* MAIN */
+#main{opacity:0;transition:opacity 1.2s;min-height:100vh}
+#main.show{opacity:1}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:8px;transition:background .3s}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:24px;color:var(--rose);text-decoration:none;white-space:nowrap;flex-shrink:0}
+.nav-right{display:flex;align-items:center;gap:6px}
+.tbtn{background:none;border:1px solid var(--border);border-radius:20px;padding:5px 10px;cursor:pointer;font-size:16px;color:var(--text);transition:.2s;flex-shrink:0}
+.mbtn{background:none;border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer;font-size:18px;color:var(--text);display:flex;align-items:center;flex-shrink:0}
+.tbtn:active,.mbtn:active{background:var(--border)}
+
+/* MENU */
+#nm{position:fixed;top:56px;inset-inline:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:99;display:none;padding:8px 0 14px;transition:background .3s}
+#nm.open{display:block}
+#nm a{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:.15s}
+#nm a:active,#nm a.act{color:var(--rose);background:rgba(232,84,122,.07)}
+
+/* SECTIONS */
+.sec{display:none;min-height:100vh;padding:72px 16px 56px;position:relative;z-index:1}
+.sec.on{display:block}
+#home{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100vh;padding:72px 16px 56px;position:relative;z-index:1}
+#home.on{display:flex}
+
+/* HOME */
+.htag{font-size:11px;letter-spacing:4px;color:var(--rose);text-transform:uppercase;font-weight:500;margin-bottom:16px;animation:fu .8s .1s both}
+.htitle{font-family:'Dancing Script',cursive;font-size:clamp(60px,18vw,120px);color:var(--text);line-height:.9;margin-bottom:14px;animation:fu .8s .3s both}
+.htitle span{color:var(--rose);display:block}
+.hsub{font-size:clamp(14px,4vw,17px);color:var(--muted);font-weight:300;max-width:400px;line-height:1.9;margin-bottom:34px;animation:fu .8s .5s both}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.ctr{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;animation:fu .8s .7s both}
+.ci{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;text-align:center;min-width:68px;flex:1;max-width:85px;transition:background .3s,border .3s}
+.cn{font-size:clamp(26px,8vw,36px);font-weight:900;color:var(--rose);display:block;line-height:1}
+.cl{font-size:10px;color:var(--muted);letter-spacing:.5px;margin-top:4px}
+.beats{display:flex;gap:8px;font-size:22px;animation:fu .8s .9s both}
+.beat{animation:hb 1.6s ease-in-out infinite}
+.beat:nth-child(2){animation-delay:.3s}
+.beat:nth-child(3){animation-delay:.6s}
+@keyframes hb{0%,100%{transform:scale(1)}35%{transform:scale(1.3)}65%{transform:scale(1.1)}}
+
+/* HEADERS */
+.sh{text-align:center;margin-bottom:32px}
+.stag{font-size:11px;letter-spacing:4px;color:var(--rose);text-transform:uppercase;font-weight:500;display:block;margin-bottom:8px}
+.stitle{font-family:'Dancing Script',cursive;font-size:clamp(34px,10vw,62px);color:var(--text)}
+
+/* LETTER */
+.letter{max-width:680px;margin:0 auto;background:var(--card);border-radius:20px;padding:clamp(22px,6vw,48px);box-shadow:0 14px 45px var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;transition:background .3s,border .3s}
+.letter::before{content:'❝';position:absolute;top:10px;right:18px;font-size:90px;color:rgba(232,84,122,.05);font-family:serif;line-height:1;pointer-events:none}
+.ldate{color:var(--muted);font-size:12px;margin-bottom:20px;font-weight:300;letter-spacing:1px}
+.ltxt{font-size:clamp(14px,4vw,16px);line-height:2;color:var(--text)}
+.ltxt p{margin-bottom:16px}
+.lsig{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.sh2{width:36px;height:36px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sname{font-family:'Dancing Script',cursive;font-size:20px;color:var(--rose)}
+
+/* MEMORIES */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px;max-width:880px;margin:0 auto}
+.mc{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--border);box-shadow:0 4px 16px var(--shadow);transition:transform .25s,box-shadow .25s,background .3s;position:relative;overflow:hidden}
+.mc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.mc:hover{transform:translateY(-4px);box-shadow:0 10px 30px var(--shadow)}
+.mc:hover::after,.mc:active::after{transform:scaleX(1)}
+.me{font-size:30px;margin-bottom:10px;display:block}
+.mt{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.mm{font-size:13px;color:var(--muted);line-height:1.7}
+.md{font-size:11px;color:var(--rose);margin-top:10px;letter-spacing:1px;font-weight:500}
+
+/* REASONS */
+.rlist{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px}
+.ri{display:flex;align-items:flex-start;gap:13px;background:var(--card);border-radius:14px;padding:16px 18px;border:1px solid var(--border);box-shadow:0 3px 12px var(--shadow);transition:transform .2s,border .2s,background .3s}
+.ri:hover,.ri:active{transform:translateX(-4px);border-color:rgba(232,84,122,.3)}
+.rn{width:34px;height:34px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;margin-top:2px}
+.rtxt{font-size:clamp(13px,3.5vw,15px);color:var(--text);line-height:1.8}
+
+/* BIRTHDAY */
+.bc{max-width:660px;margin:0 auto;text-align:center}
+.bcard{background:var(--card);border-radius:24px;padding:clamp(26px,7vw,52px);box-shadow:0 18px 55px var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;margin-bottom:18px;transition:background .3s,border .3s}
+.bage{font-size:clamp(65px,18vw,95px);font-weight:900;color:var(--rose);line-height:1;margin-bottom:4px}
+.btxt{font-size:clamp(13px,3.5vw,15px);color:var(--muted);line-height:1.9;margin:14px 0}
+.cbd{background:var(--bg2);border-radius:18px;padding:24px;border:1px solid var(--border);transition:background .3s,border .3s}
+.cbdl{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.cbdn{font-size:clamp(38px,12vw,58px);font-weight:900;color:var(--rose);line-height:1}
+.cbds{font-size:13px;color:var(--muted);margin-top:4px}
+.cwrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cp{position:absolute;width:7px;height:7px;border-radius:2px;animation:cf linear infinite;opacity:.3}
+@keyframes cf{0%{transform:translateY(-20px) rotate(0deg);opacity:.3}100%{transform:translateY(120%) rotate(360deg);opacity:0}}
+
+/* GALLERY */
+.gwrap{max-width:780px;margin:0 auto}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+@media(max-width:380px){.ggrid{grid-template-columns:repeat(2,1fr)}}
+.gi{aspect-ratio:1;border-radius:12px;overflow:hidden;border:2px solid var(--border);background:var(--bg2);cursor:pointer;transition:transform .2s,border-color .2s}
+.gi:hover,.gi:active{transform:scale(1.03);border-color:var(--rose)}
+.gi img{width:100%;height:100%;object-fit:cover;display:block}
+.gi.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:24px;cursor:default}
+.gi.empty span{font-size:11px;color:var(--muted)}
+.ginfo{background:var(--card);border-radius:16px;padding:22px;border:2px dashed var(--border);text-align:center;color:var(--muted);font-size:13px;line-height:2;transition:background .3s,border .3s}
+.ginfo .gbig{font-size:28px;margin-bottom:6px}
+.ginfo strong{color:var(--rose)}
+
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+#lb.open{display:flex}
+#lb img{max-width:100%;max-height:90vh;border-radius:10px;object-fit:contain}
+#lbc{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#lbc:active{background:rgba(255,255,255,.2)}
+
+/* PROMISE */
+.pcent{max-width:780px;margin:0 auto}
+.pcard{background:linear-gradient(135deg,var(--card),var(--bg2));border-radius:24px;padding:clamp(26px,7vw,48px);box-shadow:0 18px 55px var(--shadow);border:1px solid var(--border);text-align:center;margin-bottom:22px;transition:background .3s,border .3s}
+.pbig{font-family:'Dancing Script',cursive;font-size:clamp(36px,10vw,66px);color:var(--rose);line-height:1.1;margin-bottom:18px}
+.psub{font-size:clamp(13px,3.5vw,15px);color:var(--muted);line-height:1.9}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,285px),1fr));gap:12px}
+.pitem{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:14px;padding:16px;border:1px solid var(--border);transition:.2s,background .3s}
+.pitem:hover,.pitem:active{border-color:rgba(232,84,122,.3);transform:translateY(-2px)}
+.pico{font-size:22px;flex-shrink:0;margin-top:2px}
+.ptxt{font-size:clamp(13px,3.5vw,14px);color:var(--text);line-height:1.8}
+
+/* SCROLL TOP */
+#stb{position:fixed;bottom:22px;left:14px;width:42px;height:42px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;border:none;color:#fff;font-size:17px;cursor:pointer;box-shadow:0 5px 18px rgba(232,84,122,.4);z-index:50;opacity:0;transform:translateY(14px);transition:.3s;display:flex;align-items:center;justify-content:center}
+#stb.show{opacity:1;transform:translateY(0)}
+
+footer{text-align:center;padding:28px 20px;background:var(--card);border-top:1px solid var(--border);position:relative;z-index:1;transition:background .3s,border .3s}
+footer p{font-size:13px;color:var(--muted)}
+.fn{font-family:'Dancing Script',cursive;font-size:20px;color:var(--rose)}
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
+<!-- LOCK -->
+<div id="lock">
+  <div class="lstars" id="lstars"></div>
+  <div class="ln">سلمى</div>
+  <p class="ls">✨ مكانك الخاص ✨</p>
+  <div class="lbox" id="lbox">
+    <label>ادخلي كلمة السر</label>
+    <input type="password" class="linput" id="pin" placeholder="🌸 🌸 🌸" maxlength="12" autocomplete="off" inputmode="numeric">
+    <p class="lhint">كلمة السر هي تاريخ ميلادك 🎂</p>
+    <button class="lbtn" onclick="tryPass()">دخولي ✨</button>
+    <p class="lerr" id="lerr"></p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<nav>
+  <a class="nav-logo" href="#" onclick="go('home');return false">سلمى 🌸</a>
+  <div class="nav-right">
+    <button class="tbtn" id="tbtn" onclick="toggleTheme()">🌙</button>
+    <button class="mbtn" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<div id="nm">
+  <a href="#" onclick="go('home');return false" id="mn-home">🏠 الرئيسية</a>
+  <a href="#" onclick="go('letter');return false" id="mn-letter">💌 الرسالة</a>
+  <a href="#" onclick="go('memories');return false" id="mn-memories">🌟 ذكريات</a>
+  <a href="#" onclick="go('reasons');return false" id="mn-reasons">❤️ ليه بحبك</a>
+  <a href="#" onclick="go('birthday');return false" id="mn-birthday">🎂 عيد ميلاد</a>
+  <a href="#" onclick="go('gallery');return false" id="mn-gallery">🖼️ صور</a>
+  <a href="#" onclick="go('promise');return false" id="mn-promise">🤝 وعودي</a>
+</div>
+
+<!-- HOME -->
+<section id="home" class="on">
+  <p class="htag">✨ مكانك الخاص على الإنترنت ✨</p>
+  <h1 class="htitle">أنتي<span>سلمى</span></h1>
+  <p class="hsub">يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸</p>
+  <div class="ctr">
+    <div class="ci"><span class="cn" id="cd">0</span><div class="cl">يوم</div></div>
+    <div class="ci"><span class="cn" id="ch">0</span><div class="cl">ساعة</div></div>
+    <div class="ci"><span class="cn" id="cm">0</span><div class="cl">دقيقة</div></div>
+    <div class="ci"><span class="cn" id="cs">0</span><div class="cl">ثانية</div></div>
+  </div>
+  <div class="beats">
+    <span class="beat">🌸</span><span class="beat">❤️</span><span class="beat">🌸</span>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section id="sec-letter" class="sec">
+  <div class="sh"><span class="stag">💌 كلام من القلب</span><h2 class="stitle">رسالتي إليكي</h2></div>
+  <div class="letter">
+    <div class="ldate">📅 كتبتها بحب — من قلبي لقلبك</div>
+    <div class="ltxt">
+      <p>سلمى الغالية،</p>
+      <p>مش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.</p>
+      <p>انتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم. لما بشوفك بشوش، يومي بيبقى مليان. ولما تيجي مضايقة، كل اللي بفكر فيه إزاي أرجعلك ابتسامتك.</p>
+      <p>عملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.</p>
+      <p>بحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸</p>
+    </div>
+    <div class="lsig">
+      <div class="sh2">❤️</div>
+      <div><div class="sname">حبيبك دايماً</div><div style="font-size:12px;color:var(--muted)">بكتبها بحب كتير</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+<section id="sec-memories" class="sec">
+  <div class="sh"><span class="stag">🌟 لحظات لا تُنسى</span><h2 class="stitle">ذكرياتنا</h2></div>
+  <div class="mgrid">
+    <div class="mc"><span class="me">💬</span><div class="mt">أول كلام بيننا</div><p class="mm">اللحظة دي هي بداية كل حاجة جميلة. مش ناسي كل كلمة قلتيها وأنا مبتسم.</p><div class="md">✨ البداية</div></div>
+    <div class="mc"><span class="me">😂</span><div class="mt">الضحكة اللي ما بتخلصش</div><p class="mm">في مرات بنضحك على حاجة صغيرة جداً وما نقدرش نوقف. ده اللي بيخليني عارف إن في حاجة بيننا مختلفة.</p><div class="md">✨ لحظة خاصة</div></div>
+    <div class="mc"><span class="me">🌙</span><div class="mt">محادثة نص الليل</div><p class="mm">لما بنبقى بنتكلم وعيوننا تقيل من النوم بس ما حد منا يقدر يقول "تصبحي على خير".</p><div class="md">✨ كل ليلة</div></div>
+    <div class="mc"><span class="me">🎵</span><div class="mt">أغنيتنا</div><p class="mm">في أغنية لما بتشتغل بفكر فيكي في التو. عارفاها انتي كمان؟ 🎶</p><div class="md">✨ دايماً</div></div>
+    <div class="mc"><span class="me">🤗</span><div class="mt">لما قلتيلي كلمة حلوة</div><p class="mm">في كلمة قالتهالي سلمى وضلت في دماغي أيام. كلامك بيأثر فيا من غير ما تحسي.</p><div class="md">✨ حفظتها</div></div>
+    <div class="mc"><span class="me">💭</span><div class="mt">كل يوم جديد معاكي</div><p class="mm">كل يوم بيجي هيكون ذكرى. وأنا متشوق لكل اللي جاي وانتي جنبي. ✨</p><div class="md">✨ المستقبل</div></div>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section id="sec-reasons" class="sec">
+  <div class="sh"><span class="stag">❤️ من القلب</span><h2 class="stitle">ليه بحبك</h2></div>
+  <div class="rlist">
+    <div class="ri"><div class="rn">١</div><p class="rtxt">لأن ضحكتك بتنور أي مكان تيجي فيه — حتى لو كنتي بس بتبعتيلي ستيكر 😂</p></div>
+    <div class="ri"><div class="rn">٢</div><p class="rtxt">لأنك بتفهميني من غير ما أكمل الجملة. دي موهبة نادرة وانتي عندها.</p></div>
+    <div class="ri"><div class="rn">٣</div><p class="rtxt">لأن قلبك كبير — بتحبي الناس وبتهتمي بيهم بجد، وده بيخليكي شخص نادر.</p></div>
+    <div class="ri"><div class="rn">٤</div><p class="rtxt">لأنك صادقة — ما بتعرفيش تكدبي ووجهك بيقول كل حاجة، وده من أجمل حاجة فيكي.</p></div>
+    <div class="ri"><div class="rn">٥</div><p class="rtxt">لأنك بتخليني أحس إن الدنيا أحسن لما انتي فيها. جنبك كل حاجة بتبقى أجمل.</p></div>
+    <div class="ri"><div class="rn">٦</div><p class="rtxt">لأن في حاجة في عينيكي بتقول إن في قصة كتير — وأنا عايز أعرف كل تفصيلة فيها.</p></div>
+    <div class="ri"><div class="rn">٧</div><p class="rtxt">لأن اسمك "سلمى" لما بقوله بيطلع بنبرة مختلفة — حتى في دماغي لما بفكر فيكي.</p></div>
+    <div class="ri"><div class="rn">٨</div><p class="rtxt">لأنك انتي — مش لسبب واحد محدد، لكن لأن مجموع كل حاجة فيكي بيعملوا شخص أنا بحبه جداً. 🌸</p></div>
+  </div>
+</section>
+
+<!-- BIRTHDAY -->
+<section id="sec-birthday" class="sec">
+  <div class="sh"><span class="stag">🎂 يوم ميلادك</span><h2 class="stitle">عيد ميلاد سلمى</h2></div>
+  <div class="bc">
+    <div class="bcard">
+      <div class="cwrap" id="cwrap"></div>
+      <div class="bage" id="bageNum">16</div>
+      <p class="btxt">سنة ميلادك: <strong>٢٧ ديسمبر ٢٠٠٩</strong> 🌸<br>كل سنة وانتي أحلى وأجمل. ربنا يديكي كل الصحة والسعادة ويحقق كل أحلامك يا قمر. 🎂</p>
+    </div>
+    <div class="cbd">
+      <div class="cbdl">⏳ الوقت المتبقي لعيد ميلادك الجاي</div>
+      <div class="cbdn" id="bdc">---</div>
+      <div class="cbds" id="bdcs">يوم</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="sec-gallery" class="sec">
+  <div class="sh"><span class="stag">🖼️ صورنا</span><h2 class="stitle">الألبوم الخاص</h2></div>
+  <div class="gwrap">
+    <div class="ggrid" id="ggrid"></div>
+    <div class="ginfo" id="ginfo">
+      <div class="gbig">📁</div>
+      <p>عشان تضيف صورك:<br>
+      ١. اعمل فولدر اسمه <strong>photos</strong> جنب ملف index.html<br>
+      ٢. حط فيه صورك وسمّيهم <strong>1.jpg&nbsp;،&nbsp;2.jpg&nbsp;،&nbsp;3.jpg</strong> ... إلخ<br>
+      ٣. ارفعهم مع الموقع على GitHub — هيظهروا هنا تلقائي 🌸
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lb" onclick="closeLb()">
+  <button id="lbc" onclick="closeLb()">✕</button>
+  <img id="lbi" src="" alt="صورة">
+</div>
+
+<!-- PROMISE -->
+<section id="sec-promise" class="sec">
+  <div class="sh"><span class="stag">🤝 وعد من القلب</span><h2 class="stitle">وعودي ليكي</h2></div>
+  <div class="pcent">
+    <div class="pcard"><div class="pbig">وعود لا هتتكسر</div><p class="psub">سلمى، الوعود دي مش كلام في الهوا — دي التزامات بكتبها عشان انتي تعرفي إنها حقيقية. 🌸</p></div>
+    <div class="pgrid">
+      <div class="pitem"><span class="pico">💪</span><p class="ptxt">هكون جنبك في كل وقت — في الفرح وفي الصعب.</p></div>
+      <div class="pitem"><span class="pico">🎧</span><p class="ptxt">هسمعك دايماً — مش بس أسمع، هفهم وأحس بيكي.</p></div>
+      <div class="pitem"><span class="pico">🛡️</span><p class="ptxt">مش هحكي حاجة انتي وثقتي فيا بيها لأي حد.</p></div>
+      <div class="pitem"><span class="pico">😊</span><p class="ptxt">هحاول دايماً أرجعلك ابتسامتك لو حسيتك مضايقة.</p></div>
+      <div class="pitem"><span class="pico">🌱</span><p class="ptxt">هدعمك في أحلامك وهفرح بنجاحاتك أكتر من نجاحاتي.</p></div>
+      <div class="pitem"><span class="pico">❤️</span><p class="ptxt">هحبك بصدق — من غير مسرحية ومن غير كدب.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>صُنع بـ ❤️ من أجل <span class="fn">سلمى</span></p>
+  <p style="margin-top:6px;font-size:11px">✨ كل كلمة هنا حقيقية ✨</p>
+</footer>
+
+</div>
+
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// PASSWORD
+const PWD="27122009";
+document.getElementById('pin').addEventListener('keypress',e=>{if(e.key==='Enter')tryPass();});
+function tryPass(){
+  if(document.getElementById('pin').value.trim()===PWD){unlock();}
+  else{
+    const b=document.getElementById('lbox');
+    b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
+    document.getElementById('lerr').textContent='كلمة السر غلط، حاولي تاني 🙈';
+    document.getElementById('pin').value='';
+    setTimeout(()=>document.getElementById('lerr').textContent='',2500);
+  }
+}
+function unlock(){
+  document.getElementById('lock').classList.add('out');
+  setTimeout(()=>{
+    document.getElementById('lock').style.display='none';
+    document.getElementById('main').classList.add('show');
+    startCounter();bdayInit();confetti();loadGallery();
+  },1000);
+}
+
+// THEME
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('tbtn').textContent=dark?'☀️':'🌙';
+}
+
+// MENU
+function toggleMenu(){document.getElementById('nm').classList.toggle('open');}
+document.addEventListener('click',e=>{
+  const nav=document.querySelector('nav'),nm=document.getElementById('nm');
+  if(!nav.contains(e.target)&&!nm.contains(e.target))nm.classList.remove('open');
+});
+
+// NAV
+function go(id){
+  document.getElementById('nm').classList.remove('open');
+  document.getElementById('home').classList.remove('on');
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('#nm a').forEach(a=>a.classList.remove('act'));
+  if(id==='home')document.getElementById('home').classList.add('on');
+  else document.getElementById('sec-'+id).classList.add('on');
+  document.getElementById('mn-'+id).classList.add('act');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// COUNTER — غير التاريخ لتاريخ ارتباطكوا
+const START=new Date('2024-01-01T00:00:00');
+function startCounter(){
+  function upd(){
+    const d=Date.now()-START;if(d<0)return;
+    document.getElementById('cd').textContent=Math.floor(d/86400000).toLocaleString('ar-EG');
+    document.getElementById('ch').textContent=Math.floor((d%86400000)/3600000);
+    document.getElementById('cm').textContent=Math.floor((d%3600000)/60000);
+    document.getElementById('cs').textContent=Math.floor((d%60000)/1000);
+  }
+  upd();setInterval(upd,1000);
+}
+
+// BIRTHDAY
+function bdayInit(){
+  const now=new Date(),yr=now.getFullYear();
+  let next=new Date(yr,11,27);
+  if(now>=next)next=new Date(yr+1,11,27);
+  const days=Math.ceil((next-now)/86400000);
+  const age=yr-2009-(now<new Date(yr,11,27)?1:0);
+  document.getElementById('bageNum').textContent=age;
+  if(days===0){document.getElementById('bdc').textContent='🎉 اليوم!';document.getElementById('bdcs').textContent='عيد ميلاد سعيد يا سلمى 🎂';}
+  else{document.getElementById('bdc').textContent=days.toLocaleString('ar-EG');document.getElementById('bdcs').textContent='يوم متبقي على عيد ميلادك يا قمر 🎂';}
+}
+
+// CONFETTI
+function confetti(){
+  const c=document.getElementById('cwrap');if(!c)return;
+  const cols=['#e8547a','#f4c542','#a855f7','#22c55e','#3b82f6'];
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');p.className='cp';
+    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*20}%;background:${cols[i%cols.length]};animation-duration:${4+Math.random()*5}s;animation-delay:${Math.random()*4}s;transform:rotate(${Math.random()*360}deg)`;
+    c.appendChild(p);
+  }
+}
+
+// GALLERY
+// غير الرقم ده لعدد صورك (اسمّيهم 1.jpg, 2.jpg ...)
+const PHOTOS=6;
+function loadGallery(){
+  const grid=document.getElementById('ggrid'),info=document.getElementById('ginfo');
+  grid.innerHTML='';let found=0;
+  for(let i=1;i<=PHOTOS;i++){
+    const div=document.createElement('div');div.className='gi';
+    const img=new Image();img.alt=`صورة ${i}`;
+    const src=`photos/${i}.jpg`;
+    img.onload=()=>{img.style.display='block';div.appendChild(img);found++;if(found>0)info.style.display='none';};
+    img.onerror=()=>{div.classList.add('empty');div.innerHTML=`<span>🌸</span><span>صورة ${i}</span>`;};
+    img.style.cssText='width:100%;height:100%;object-fit:cover;display:none';
+    img.onclick=()=>openLb(src);
+    img.src=src;
+    if(!div.classList.contains('empty'))div.onclick=()=>openLb(src);
+    grid.appendChild(div);
+  }
+}
+
+// LIGHTBOX
+function openLb(s){document.getElementById('lbi').src=s;document.getElementById('lb').classList.add('open');}
+function closeLb(){document.getElementById('lb').classList.remove('open');}
+
+// PETALS
+(()=>{
+  const c=document.getElementById('petals'),s=['🌸','❤️','🌺','💕','✨'];
+  for(let i=0;i<14;i++){
+    const p=document.createElement('div');p.className='petal';
+    p.textContent=s[i%s.length];
+    p.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*12}px;animation-duration:${7+Math.random()*9}s;animation-delay:${Math.random()*9}s`;
+    c.appendChild(p);
+  }
+})();
+
+// STARS
+(()=>{
+  const c=document.getElementById('lstars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');s.className='st';
+    const z=1+Math.random()*3;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*2}s;animation-duration:${1.5+Math.random()*2}s`;
+    c.appendChild(s);
+  }
+})();
+
+// SCROLL TOP
+window.addEventListener('scroll',()=>{document.getElementById('stb').classList.toggle('show',window.scrollY>250);});
+</script>
+</body>
+</html>
