@@ -2,534 +2,1206 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>سلمى 🌸 | عالم خاص</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>سلمى 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
 :root {
-  --rose: #e8547a;
-  --deep: #c23b5e;
-  --gold: #f4c542;
-  --bg: #fff8f9;
-  --bg2: #fff0f3;
-  --card: #ffffff;
-  --text: #2d1520;
-  --muted: #9e6070;
-  --border: rgba(232,84,122,0.15);
-  --shadow: rgba(232,84,122,0.1);
-  --nav-bg: rgba(255,248,249,0.92);
+  --rose:#e8547a;--deep:#c23b5e;--gold:#f4c542;
+  --bg:#fff8f9;--bg2:#fff0f3;--card:#ffffff;
+  --text:#2d1520;--muted:#9e6070;--border:rgba(232,84,122,0.15);
+  --shadow:rgba(232,84,122,0.1);--nav-bg:rgba(255,248,249,0.92);
 }
-[data-theme="dark"] {
-  --bg: #1a0a10;
-  --bg2: #240d16;
-  --card: #2d1520;
-  --text: #fce4ec;
-  --muted: #c9899a;
-  --border: rgba(232,84,122,0.2);
-  --shadow: rgba(0,0,0,0.3);
-  --nav-bg: rgba(26,10,16,0.95);
+[data-theme="dark"]{
+  --bg:#1a0a10;--bg2:#240d16;--card:#2d1520;
+  --text:#fce4ec;--muted:#c9899a;--border:rgba(232,84,122,0.2);
+  --shadow:rgba(0,0,0,0.3);--nav-bg:rgba(26,10,16,0.95);
 }
-body {
-  font-family: 'Tajawal', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  transition: background 0.3s, color 0.3s;
-  min-height: 100vh;
-}
-/* petals & hearts floating */
-#petals, #floatingHearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.petal {
-  position: absolute;
-  opacity: 0;
-  animation: fall linear infinite;
-  user-select: none;
-}
-@keyframes fall {
-  0% { transform: translateY(-40px) rotate(0deg); opacity: 0.7; }
-  100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
-}
-.heartFloat {
-  position: absolute;
-  color: #e8547a;
-  font-size: 20px;
-  pointer-events: none;
-  animation: floatUp 4s ease-out forwards;
-  z-index: 15;
-}
-@keyframes floatUp {
-  0% { transform: translateY(0) scale(0.7); opacity: 0.9; }
-  100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
-}
-/* lock screen */
-#lock {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(160deg,#120508 0%,#3d1525 50%,#1a0810 100%);
-  padding: 20px;
-  transition: opacity 1s, transform 1s;
-}
-#lock.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
-.lstars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.st { position: absolute; border-radius: 50%; background: #fff; animation: tw 2s ease-in-out infinite; }
-@keyframes tw { 0%,100%{ opacity: 0.15; } 50%{ opacity: 1; } }
-.ln { font-family: 'Dancing Script', cursive; font-size: clamp(52px,15vw,100px); color:#fff; text-shadow:0 0 40px rgba(232,84,122,.9); margin-bottom:6px; animation:lp 3s ease-in-out infinite; }
-@keyframes lp { 0%,100%{ text-shadow:0 0 40px rgba(232,84,122,.9); } 50%{ text-shadow:0 0 70px rgba(232,84,122,1),0 0 120px rgba(232,84,122,.5); } }
-.ls { color:rgba(255,255,255,.4); font-size:13px; margin-bottom:40px; letter-spacing:3px; }
-.lbox { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:22px; padding:28px; width:min(340px,92vw); text-align:center; backdrop-filter:blur(20px); }
-.linput { width:100%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:12px; padding:14px; color:#fff; font-size:22px; text-align:center; letter-spacing:8px; outline:none; }
-.lbtn { margin-top:18px; width:100%; padding:15px; background:linear-gradient(135deg,#e8547a,#c23b5e); border:none; border-radius:12px; color:#fff; font-weight:700; cursor:pointer; }
-.lbtn:active { transform:scale(0.97); }
-.lerr { color:#ff6b8a; font-size:13px; margin-top:10px; }
-.shake { animation:shake 0.4s; }
-@keyframes shake { 0%,100%{ transform:translateX(0); } 25%{ transform:translateX(-8px); } 75%{ transform:translateX(8px); } }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .3s,color .3s;min-height:100vh}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;opacity:0;animation:fall linear infinite;user-select:none}
+@keyframes fall{0%{transform:translateY(-40px) rotate(0deg);opacity:.7}100%{transform:translateY(105vh) rotate(540deg);opacity:0}}
+
+/* LOCK */
+#lock{position:fixed;inset:0;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#120508 0%,#3d1525 50%,#1a0810 100%);padding:20px;transition:opacity 1s,transform 1s}
+#lock.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.lstars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.st{position:absolute;border-radius:50%;background:#fff;animation:tw 2s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:1}}
+.ln{font-family:'Dancing Script',cursive;font-size:clamp(52px,15vw,100px);color:#fff;text-shadow:0 0 40px rgba(232,84,122,.9);margin-bottom:6px;text-align:center;animation:lp 3s ease-in-out infinite}
+@keyframes lp{0%,100%{text-shadow:0 0 40px rgba(232,84,122,.9)}50%{text-shadow:0 0 70px rgba(232,84,122,1),0 0 120px rgba(232,84,122,.5)}}
+.ls{color:rgba(255,255,255,.4);font-size:13px;margin-bottom:40px;letter-spacing:3px}
+.lbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:28px;width:min(340px,92vw);text-align:center;backdrop-filter:blur(20px)}
+.lbox label{display:block;color:rgba(255,255,255,.6);font-size:12px;letter-spacing:3px;margin-bottom:12px}
+.linput{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px;color:#fff;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Tajawal',sans-serif;outline:none;transition:.3s;-webkit-appearance:none}
+.linput:focus{border-color:var(--rose);box-shadow:0 0 20px rgba(232,84,122,.3)}
+.lhint{color:rgba(255,255,255,.3);font-size:12px;margin-top:8px}
+.lbtn{margin-top:18px;width:100%;padding:15px;background:linear-gradient(135deg,#e8547a,#c23b5e);border:none;border-radius:12px;color:#fff;font-size:16px;font-family:'Tajawal',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 8px 25px rgba(232,84,122,.4);transition:.2s;touch-action:manipulation}
+.lbtn:active{transform:scale(.97)}
+.lerr{color:#ff6b8a;font-size:13px;margin-top:10px;min-height:18px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.shake{animation:shake .4s}
+
+/* ADMIN PANEL */
+#admin{position:fixed;inset:0;z-index:998;background:var(--bg);display:none;overflow-y:auto;padding:72px 16px 56px}
+#admin.show{display:block}
+.admin-header{text-align:center;margin-bottom:32px;animation:slideDown .5s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.admin-header h1{font-family:'Dancing Script',cursive;font-size:clamp(32px,10vw,52px);color:var(--rose);margin-bottom:8px}
+.admin-badge{background:linear-gradient(135deg,var(--rose),var(--deep));color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;display:inline-block}
+.admin-section{background:var(--card);border-radius:20px;padding:24px;margin-bottom:16px;border:1px solid var(--border);box-shadow:0 8px 30px var(--shadow);transition:background .3s;animation:fadeInUp .5s ease;animation-fill-mode:both}
+.admin-section:nth-child(2){animation-delay:.1s}
+.admin-section:nth-child(3){animation-delay:.2s}
+.admin-section:nth-child(4){animation-delay:.3s}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.admin-section h3{font-size:16px;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.admin-section h3 span{font-size:22px}
+.admin-field{margin-bottom:14px}
+.admin-field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:1px}
+.admin-field input,.admin-field textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;color:var(--text);font-size:14px;font-family:'Tajawal',sans-serif;transition:.3s}
+.admin-field input:focus,.admin-field textarea:focus{border-color:var(--rose);box-shadow:0 0 15px rgba(232,84,122,.2);outline:none}
+.admin-field textarea{resize:vertical;min-height:100px}
+.admin-save{width:100%;padding:14px;background:linear-gradient(135deg,var(--rose),var(--deep));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:.3s}
+.admin-save:hover{transform:scale(1.02);box-shadow:0 8px 25px rgba(232,84,122,.3)}
+.admin-save:active{transform:scale(.98)}
+.admin-close{position:fixed;top:70px;left:16px;width:40px;height:40px;background:var(--card);border:1px solid var(--border);border-radius:50%;cursor:pointer;font-size:18px;z-index:999}
+
 /* MAIN */
-#main { opacity:0; transition: opacity 1.2s; min-height:100vh; }
-#main.show { opacity:1; }
-nav { position:fixed; top:0; width:100%; z-index:100; background:var(--nav-bg); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 14px; }
-.nav-logo { font-family:'Dancing Script',cursive; font-size:24px; color:var(--rose); text-decoration:none; }
-.nav-right { display:flex; gap:8px; align-items:center; }
-.tbtn, .mbtn { background:none; border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer; color:var(--text); }
-#nm { position:fixed; top:56px; inset-inline:0; background:var(--nav-bg); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:99; display:none; padding:8px 0; }
-#nm.open { display:block; }
-#nm a { display:flex; align-items:center; gap:10px; padding:12px 20px; font-weight:500; color:var(--text); text-decoration:none; }
-#nm a:active, #nm a.act { color:var(--rose); background:rgba(232,84,122,.1); }
-.sec { display:none; min-height:100vh; padding:72px 16px 56px; position:relative; z-index:1; }
-.sec.on { display:block; }
-#home { display:none; flex-direction:column; align-items:center; text-align:center; }
-#home.on { display:flex; }
-.htag { font-size:11px; letter-spacing:4px; color:var(--rose); margin-bottom:16px; }
-.htitle { font-family:'Dancing Script',cursive; font-size:clamp(60px,18vw,120px); line-height:0.9; color:var(--text); }
-.htitle span { color:var(--rose); display:block; }
-.hsub { color:var(--muted); max-width:400px; margin-bottom:34px; }
-.ctr { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:30px; }
-.ci { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px; min-width:68px; }
-.cn { font-size:36px; font-weight:900; color:var(--rose); line-height:1; }
-.cl { font-size:10px; color:var(--muted); }
-.love-meter-wrap { background:var(--card); border-radius:50px; padding:12px 20px; width:260px; margin:20px auto 10px; border:1px solid var(--border); }
-.love-label { font-size:14px; color:var(--muted); letter-spacing:2px; }
-.progress-bar { background:var(--border); border-radius:30px; height:12px; width:100%; margin:8px 0; overflow:hidden; }
-.progress-fill { width:98%; background:linear-gradient(90deg,var(--rose),var(--gold)); height:100%; border-radius:30px; animation: pulseFill 1.8s ease-in-out infinite; }
-@keyframes pulseFill { 0%{ opacity:0.9; } 50%{ opacity:1; background:#f4698a; } 100%{ opacity:0.9; } }
-.beats { display:flex; gap:10px; font-size:28px; margin-top:10px; }
-.beat { animation:hb 1.6s infinite; }
-@keyframes hb { 0%,100%{ transform:scale(1); } 35%{ transform:scale(1.3); } 65%{ transform:scale(1.1); } }
-.sh { text-align:center; margin-bottom:32px; }
-.stag { color:var(--rose); letter-spacing:4px; font-size:11px; }
-.stitle { font-family:'Dancing Script',cursive; font-size:clamp(34px,10vw,62px); color:var(--text); }
-.letter { max-width:680px; margin:auto; background:var(--card); border-radius:20px; padding:clamp(22px,6vw,48px); box-shadow:0 14px 45px var(--shadow); border:1px solid var(--border); }
-.ltxt p { margin-bottom:16px; line-height:1.9; }
-.lsig { margin-top:24px; display:flex; align-items:center; gap:12px; }
-.sname { font-family:'Dancing Script',cursive; font-size:20px; color:var(--rose); }
-.mgrid, .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; max-width:880px; margin:auto; }
-.mc, .pitem { background:var(--card); border-radius:18px; padding:18px; border:1px solid var(--border); transition:0.2s; }
-.rlist { max-width:700px; margin:auto; display:flex; flex-direction:column; gap:11px; }
-.ri { display:flex; gap:13px; background:var(--card); border-radius:14px; padding:16px; border:1px solid var(--border); }
-.rn { width:34px; height:34px; background:linear-gradient(135deg,var(--rose),var(--deep)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; }
-.bcard { background:var(--card); border-radius:24px; padding:26px; text-align:center; }
-.bage { font-size:clamp(65px,18vw,95px); font-weight:900; color:var(--rose); }
-.cbd { background:var(--bg2); padding:22px; border-radius:18px; margin-top:18px; text-align:center; }
-.cbdn { font-size:42px; font-weight:900; color:var(--rose); }
-.gwrap { max-width:780px; margin:auto; }
-.ggrid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:20px; }
-.gi { aspect-ratio:1; border-radius:12px; border:2px solid var(--border); background:var(--bg2); cursor:pointer; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.gi img { width:100%; height:100%; object-fit:cover; }
-.gi.empty { flex-direction:column; font-size:24px; color:var(--muted); cursor:default; }
-.ginfo { background:var(--card); border-radius:16px; padding:22px; text-align:center; border:2px dashed var(--border); }
-#lb { position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:500; display:none; align-items:center; justify-content:center; }
-#lb.open { display:flex; }
-#lb img { max-width:90vw; max-height:90vh; border-radius:16px; }
-#stb { position:fixed; bottom:22px; left:14px; width:42px; height:42px; background:linear-gradient(135deg,var(--rose),var(--deep)); border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:0.3s; z-index:50; }
-#stb.show { opacity:1; transform:translateY(0); }
-.admin-gear { position:fixed; bottom:22px; right:20px; width:48px; height:48px; background:var(--card); border-radius:50%; box-shadow:0 4px 15px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; z-index:200; border:1px solid var(--rose); transition:0.2s; backdrop-filter:blur(8px); }
-.admin-gear:active { transform:scale(0.9); }
-.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:1000; align-items:center; justify-content:center; backdrop-filter:blur(5px); }
-.modal.open { display:flex; }
-.modal-card { background:var(--card); width:90%; max-width:550px; max-height:85vh; overflow-y:auto; border-radius:32px; padding:22px; color:var(--text); border:1px solid var(--border); }
-.modal-card h3 { margin-bottom:15px; color:var(--rose); }
-.modal-card textarea, .modal-card input { width:100%; margin:8px 0 15px; padding:10px; border-radius:14px; border:1px solid var(--border); background:var(--bg2); color:var(--text); }
-.modal-card button { background:var(--rose); border:none; padding:12px; border-radius:30px; color:white; font-weight:bold; margin-top:10px; width:100%; }
-footer { text-align:center; padding:28px; background:var(--card); border-top:1px solid var(--border); margin-top:20px; }
+#main{opacity:0;transition:opacity 1.2s;min-height:100vh}
+#main.show{opacity:1}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:8px;transition:background .3s}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:24px;color:var(--rose);text-decoration:none;white-space:nowrap;flex-shrink:0}
+.nav-right{display:flex;align-items:center;gap:6px}
+.tbtn{background:none;border:1px solid var(--border);border-radius:20px;padding:5px 10px;cursor:pointer;font-size:16px;color:var(--text);transition:.2s;flex-shrink:0}
+.mbtn{background:none;border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer;font-size:18px;color:var(--text);display:flex;align-items:center;flex-shrink:0}
+.admin-btn{background:linear-gradient(135deg,var(--rose),var(--deep));border:none;border-radius:20px;padding:5px 12px;cursor:pointer;font-size:14px;color:#fff;font-weight:700}
+.tbtn:active,.mbtn:active,.admin-btn:active{transform:scale(.95)}
+.admin-btn:active{transform:scale(.95)}
+
+/* MENU */
+#nm{position:fixed;top:56px;inset-inline:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:99;display:none;padding:8px 0 14px;transition:background .3s}
+#nm.open{display:block}
+#nm a{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:.15s}
+#nm a:active,#nm a.act{color:var(--rose);background:rgba(232,84,122,.07)}
+
+/* SECTIONS */
+.sec{display:none;min-height:100vh;padding:72px 16px 56px;position:relative;z-index:1;animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sec.on{display:block}
+#home{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100vh;padding:72px 16px 56px;position:relative;z-index:1}
+#home.on{display:flex}
+
+/* HOME */
+.htag{font-size:11px;letter-spacing:4px;color:var(--rose);text-transform:uppercase;font-weight:500;margin-bottom:16px;animation:fu .8s .1s both}
+.htitle{font-family:'Dancing Script',cursive;font-size:clamp(60px,18vw,120px);color:var(--text);line-height:.9;margin-bottom:14px;animation:fu .8s .3s both}
+.htitle span{color:var(--rose);display:block}
+.hsub{font-size:clamp(14px,4vw,17px);color:var(--muted);font-weight:300;max-width:400px;line-height:1.9;margin-bottom:34px;animation:fu .8s .5s both}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.ctr{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;animation:fu .8s .7s both}
+.ci{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;text-align:center;min-width:68px;flex:1;max-width:85px;transition:background .3s,border .3s;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.ci:nth-child(1){animation-delay:0s}
+.ci:nth-child(2){animation-delay:.2s}
+.ci:nth-child(3){animation-delay:.4s}
+.ci:nth-child(4){animation-delay:.6s}
+.cn{font-size:clamp(26px,8vw,36px);font-weight:900;color:var(--rose);display:block;line-height:1}
+.cl{font-size:10px;color:var(--muted);letter-spacing:.5px;margin-top:4px}
+.beats{display:flex;gap:8px;font-size:22px;animation:fu .8s .9s both}
+.beat{animation:hb 1.6s ease-in-out infinite}
+.beat:nth-child(2){animation-delay:.3s}
+.beat:nth-child(3){animation-delay:.6s}
+@keyframes hb{0%,100%{transform:scale(1)}35%{transform:scale(1.3)}65%{transform:scale(1.1)}}
+
+/* HEADERS */
+.sh{text-align:center;margin-bottom:32px;animation:slideUp .6s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.stag{font-size:11px;letter-spacing:4px;color:var(--rose);text-transform:uppercase;font-weight:500;display:block;margin-bottom:8px}
+.stitle{font-family:'Dancing Script',cursive;font-size:clamp(34px,10vw,62px);color:var(--text)}
+
+/* LETTER */
+.letter{max-width:680px;margin:0 auto;background:var(--card);border-radius:20px;padding:clamp(22px,6vw,48px);box-shadow:0 14px 45px var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;transition:background .3s,border .3s;animation:cardEnter .6s ease}
+@keyframes cardEnter{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.letter::before{content:'❝';position:absolute;top:10px;right:18px;font-size:90px;color:rgba(232,84,122,.05);font-family:serif;line-height:1;pointer-events:none}
+.ldate{color:var(--muted);font-size:12px;margin-bottom:20px;font-weight:300;letter-spacing:1px}
+.ltxt{font-size:clamp(14px,4vw,16px);line-height:2;color:var(--text)}
+.ltxt p{margin-bottom:16px;animation:fadeInText .5s ease;animation-fill-mode:both}
+.ltxt p:nth-child(1){animation-delay:.1s}
+.ltxt p:nth-child(2){animation-delay:.2s}
+.ltxt p:nth-child(3){animation-delay:.3s}
+.ltxt p:nth-child(4){animation-delay:.4s}
+.ltxt p:nth-child(5){animation-delay:.5s}
+@keyframes fadeInText{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.lsig{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.sh2{width:36px;height:36px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sname{font-family:'Dancing Script',cursive;font-size:20px;color:var(--rose)}
+
+/* MEMORIES */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px;max-width:880px;margin:0 auto}
+.mc{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--border);box-shadow:0 4px 16px var(--shadow);transition:transform .25s,box-shadow .25s,background .3s;position:relative;overflow:hidden;animation:cardFloat .6s ease;animation-fill-mode:both}
+.mc:nth-child(1){animation-delay:.1s}
+.mc:nth-child(2){animation-delay:.2s}
+.mc:nth-child(3){animation-delay:.3s}
+.mc:nth-child(4){animation-delay:.4s}
+.mc:nth-child(5){animation-delay:.5s}
+.mc:nth-child(6){animation-delay:.6s}
+@keyframes cardFloat{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.mc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.mc:hover{transform:translateY(-4px);box-shadow:0 10px 30px var(--shadow)}
+.mc:hover::after,.mc:active::after{transform:scaleX(1)}
+.me{font-size:30px;margin-bottom:10px;display:block;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.mt{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.mm{font-size:13px;color:var(--muted);line-height:1.7}
+.md{font-size:11px;color:var(--rose);margin-top:10px;letter-spacing:1px;font-weight:500}
+
+/* REASONS */
+.rlist{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:11px}
+.ri{display:flex;align-items:flex-start;gap:13px;background:var(--card);border-radius:14px;padding:16px 18px;border:1px solid var(--border);box-shadow:0 3px 12px var(--shadow);transition:transform .2s,border .2s,background .3s;animation:slideRight .5s ease;animation-fill-mode:both}
+.ri:nth-child(1){animation-delay:.1s}
+.ri:nth-child(2){animation-delay:.15s}
+.ri:nth-child(3){animation-delay:.2s}
+.ri:nth-child(4){animation-delay:.25s}
+.ri:nth-child(5){animation-delay:.3s}
+.ri:nth-child(6){animation-delay:.35s}
+.ri:nth-child(7){animation-delay:.4s}
+.ri:nth-child(8){animation-delay:.45s}
+@keyframes slideRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.ri:hover,.ri:active{transform:translateX(-4px);border-color:rgba(232,84,122,.3)}
+.rn{width:34px;height:34px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;margin-top:2px}
+.rtxt{font-size:clamp(13px,3.5vw,15px);color:var(--text);line-height:1.8}
+
+/* BIRTHDAY */
+.bc{max-width:660px;margin:0 auto;text-align:center}
+.bcard{background:var(--card);border-radius:24px;padding:clamp(26px,7vw,52px);box-shadow:0 18px 55px var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;margin-bottom:18px;transition:background .3s,border .3s;animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 18px 55px var(--shadow)}50%{box-shadow:0 18px 55px rgba(232,84,122,.3)}}
+.bage{font-size:clamp(65px,18vw,95px);font-weight:900;color:var(--rose);line-height:1;margin-bottom:4px;animation:countUp 1s ease}
+@keyframes countUp{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.btxt{font-size:clamp(13px,3.5vw,15px);color:var(--muted);line-height:1.9;margin:14px 0}
+.cbd{background:var(--bg2);border-radius:18px;padding:24px;border:1px solid var(--border);transition:background .3s,border .3s;animation:slideUp .6s ease}
+.cbdl{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.cbdn{font-size:clamp(38px,12vw,58px);font-weight:900;color:var(--rose);line-height:1;animation:pulse 1.5s ease-in-out infinite}
+.cbds{font-size:13px;color:var(--muted);margin-top:4px}
+.cwrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cp{position:absolute;width:7px;height:7px;border-radius:2px;animation:cf linear infinite;opacity:.3}
+@keyframes cf{0%{transform:translateY(-20px) rotate(0deg);opacity:.3}100%{transform:translateY(120%) rotate(360deg);opacity:0}}
+
+/* GALLERY */
+.gwrap{max-width:780px;margin:0 auto}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+@media(max-width:380px){.ggrid{grid-template-columns:repeat(2,1fr)}}
+.gi{aspect-ratio:1;border-radius:12px;overflow:hidden;border:2px solid var(--border);background:var(--bg2);cursor:pointer;transition:transform .2s,border-color .2s;animation:galleryFade .5s ease;animation-fill-mode:both}
+.gi:nth-child(1){animation-delay:.1s}
+.gi:nth-child(2){animation-delay:.15s}
+.gi:nth-child(3){animation-delay:.2s}
+.gi:nth-child(4){animation-delay:.25s}
+.gi:nth-child(5){animation-delay:.3s}
+.gi:nth-child(6){animation-delay:.35s}
+@keyframes galleryFade{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.gi:hover,.gi:active{transform:scale(1.03);border-color:var(--rose)}
+.gi img{width:100%;height:100%;object-fit:cover;display:block}
+.gi.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:24px;cursor:default}
+.gi.empty span{font-size:11px;color:var(--muted)}
+.ginfo{background:var(--card);border-radius:16px;padding:22px;border:2px dashed var(--border);text-align:center;color:var(--muted);font-size:13px;line-height:2;transition:background .3s,border .3s}
+.ginfo .gbig{font-size:28px;margin-bottom:6px}
+.ginfo strong{color:var(--rose)}
+
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+#lb.open{display:flex;animation:fadeIn .3s ease}
+#lb img{max-width:100%;max-height:90vh;border-radius:10px;object-fit:contain;animation:zoomIn .3s ease}
+@keyframes zoomIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+#lbc{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#lbc:active{background:rgba(255,255,255,.2)}
+
+/* PROMISE */
+.pcent{max-width:780px;margin:0 auto}
+.pcard{background:linear-gradient(135deg,var(--card),var(--bg2));border-radius:24px;padding:clamp(26px,7vw,48px);box-shadow:0 18px 55px var(--shadow);border:1px solid var(--border);text-align:center;margin-bottom:22px;transition:background .3s,border .3s;animation:cardEnter .6s ease}
+.pbig{font-family:'Dancing Script',cursive;font-size:clamp(36px,10vw,66px);color:var(--rose);line-height:1.1;margin-bottom:18px}
+.psub{font-size:clamp(13px,3.5vw,15px);color:var(--muted);line-height:1.9}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,285px),1fr));gap:12px}
+.pitem{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:14px;padding:16px;border:1px solid var(--border);transition:.2s,background .3s;animation:fadeInUp .5s ease;animation-fill-mode:both}
+.pitem:nth-child(1){animation-delay:.1s}
+.pitem:nth-child(2){animation-delay:.15s}
+.pitem:nth-child(3){animation-delay:.2s}
+.pitem:nth-child(4){animation-delay:.25s}
+.pitem:nth-child(5){animation-delay:.3s}
+.pitem:nth-child(6){animation-delay:.35s}
+.pitem:hover,.pitem:active{border-color:rgba(232,84,122,.3);transform:translateY(-2px)}
+.pico{font-size:22px;flex-shrink:0;margin-top:2px}
+.ptxt{font-size:clamp(13px,3.5vw,14px);color:var(--text);line-height:1.8}
+
+/* SCROLL TOP */
+#stb{position:fixed;bottom:22px;left:14px;width:42px;height:42px;background:linear-gradient(135deg,var(--rose),var(--deep));border-radius:50%;border:none;color:#fff;font-size:17px;cursor:pointer;box-shadow:0 5px 18px rgba(232,84,122,.4);z-index:50;opacity:0;transform:translateY(14px);transition:.3s;display:flex;align-items:center;justify-content:center}
+#stb.show{opacity:1;transform:translateY(0)}
+
+footer{text-align:center;padding:28px 20px;background:var(--card);border-top:1px solid var(--border);position:relative;z-index:1;transition:background .3s,border .3s}
+footer p{font-size:13px;color:var(--muted)}
+.fn{font-family:'Dancing Script',cursive;font-size:20px;color:var(--rose)}
+
+/* TOAST */
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:var(--bg);padding:14px 24px;border-radius:12px;font-size:14px;z-index:999;opacity:0;transition:.4s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
+
 <div id="petals"></div>
-<div id="floatingHearts"></div>
 
 <!-- LOCK -->
 <div id="lock">
   <div class="lstars" id="lstars"></div>
   <div class="ln">سلمى</div>
   <p class="ls">✨ مكانك الخاص ✨</p>
-  <div class="lbox">
+  <div class="lbox" id="lbox">
     <label>ادخلي كلمة السر</label>
-    <input type="password" class="linput" id="pin" maxlength="12" placeholder="🌸" autocomplete="off">
-    <p class="lhint">تاريخ ميلادك 🎂</p>
+    <input type="password" class="linput" id="pin" placeholder="🌸 🌸 🌸" maxlength="12" autocomplete="off" inputmode="numeric">
+    <p class="lhint">كلمة السر خاصية سلمى 🎂</p>
     <button class="lbtn" onclick="tryPass()">دخولي ✨</button>
     <p class="lerr" id="lerr"></p>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- ADMIN PANEL -->
+<div id="admin">
+  <button class="admin-close" onclick="closeAdmin()">✕</button>
+  <div class="admin-header">
+    <h1>⚙️ لوحة التحكم</h1>
+    <span class="admin-badge">🔐 وضع المطور</span>
+  </div>
+
+  <div class="admin-section">
+    <h3><span>📅</span> تاريخ البداية</h3>
+    <div class="admin-field">
+      <label>تاريخ بداية العلاقة</label>
+      <input type="date" id="adminStartDate">
+    </div>
+    <div class="admin-field">
+      <label>وقت البداية</label>
+      <input type="time" id="adminStartTime">
+    </div>
+    <button class="admin-save" onclick="saveStart()">💾 حفظ التاريخ</button>
+  </div>
+
+  <div class="admin-section">
+    <h3><span>🎂</span> تاريخ الميلاد</h3>
+    <div class="admin-field">
+      <label>تاريخ ميلاد سلمى</label>
+      <input type="date" id="adminBday">
+    </div>
+    <div class="admin-field">
+      <label>سنة الميلاد</label>
+      <input type="number" id="adminBYear" placeholder="2009">
+    </div>
+    <button class="admin-save" onclick="saveBday()">💾 حفظ الميلاد</button>
+  </div>
+
+  <div class="admin-section">
+    <h3><span>💌</span> الرسالة</h3>
+    <div class="admin-field">
+      <label>تاريخ الرسالة</label>
+      <input type="text" id="adminLetterDate" placeholder="📅 كتبتها بحب — من قلبي لقلبك">
+    </div>
+    <div class="admin-field">
+      <label>نص الرسالة</label>
+      <textarea id="adminLetterText" placeholder="اكتب الرسالة هنا..."></textarea>
+    </div>
+    <button class="admin-save" onclick="saveLetter()">💾 حفظ الرسالة</button>
+  </div>
+
+  <div class="admin-section">
+    <h3><span>🏠</span> الصفحة الرئيسية</h3>
+    <div class="admin-field">
+      <label>العنوان الفرعي</label>
+      <input type="text" id="adminHsub" placeholder="يا أجمل حاجة في حياتي...">
+    </div>
+    <div class="admin-field">
+      <label>اسم الشخصية</label>
+      <input type="text" id="adminName" placeholder="سلمى">
+    </div>
+    <button class="admin-save" onclick="saveHome()">💾 حفظ التغييرات</button>
+  </div>
+
+  <div class="admin-section">
+    <h3><span>🖼️</span> عدد الصور</h3>
+    <div class="admin-field">
+      <label>عدد الصور في الألبوم</label>
+      <input type="number" id="adminPhotoCount" placeholder="6">
+    </div>
+    <button class="admin-save" onclick="savePhotos()">💾 حفظ</button>
+  </div>
+</div>
+
+<!-- MAIN -->
 <div id="main">
+
 <nav>
   <a class="nav-logo" href="#" onclick="go('home');return false">سلمى 🌸</a>
   <div class="nav-right">
     <button class="tbtn" id="tbtn" onclick="toggleTheme()">🌙</button>
+    <button class="admin-btn" id="adminBtn" onclick="showAdmin()" style="display:none">⚙️</button>
     <button class="mbtn" onclick="toggleMenu()">☰</button>
   </div>
 </nav>
+
 <div id="nm">
-  <a href="#" onclick="go('home');return false">🏠 الرئيسية</a>
-  <a href="#" onclick="go('letter');return false">💌 الرسالة</a>
-  <a href="#" onclick="go('memories');return false">🌟 ذكريات</a>
-  <a href="#" onclick="go('reasons');return false">❤️ ليه بحبك</a>
-  <a href="#" onclick="go('birthday');return false">🎂 عيد ميلاد</a>
-  <a href="#" onclick="go('gallery');return false">🖼️ صور</a>
-  <a href="#" onclick="go('promise');return false">🤝 وعودي</a>
-  <a href="#" onclick="go('future');return false">🎵 أغانينا + المستقبل</a>
+  <a href="#" onclick="go('home');return false" id="mn-home">🏠 الرئيسية</a>
+  <a href="#" onclick="go('letter');return false" id="mn-letter">💌 الرسالة</a>
+  <a href="#" onclick="go('memories');return false" id="mn-memories">🌟 ذكريات</a>
+  <a href="#" onclick="go('reasons');return false" id="mn-reasons">❤️ ليه بحبك</a>
+  <a href="#" onclick="go('birthday');return false" id="mn-birthday">🎂 عيد ميلاد</a>
+  <a href="#" onclick="go('gallery');return false" id="mn-gallery">🖼️ صور</a>
+  <a href="#" onclick="go('promise');return false" id="mn-promise">🤝 وعودي</a>
 </div>
 
 <!-- HOME -->
 <section id="home" class="on">
   <p class="htag">✨ مكانك الخاص على الإنترنت ✨</p>
-  <h1 class="htitle">أنتي<span>سلمى</span></h1>
-  <p class="hsub">يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸</p>
+  <h1 class="htitle">أنتي<span id="homeName">سلمى</span></h1>
+  <p class="hsub" id="homeSub">يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸</p>
   <div class="ctr">
     <div class="ci"><span class="cn" id="cd">0</span><div class="cl">يوم</div></div>
     <div class="ci"><span class="cn" id="ch">0</span><div class="cl">ساعة</div></div>
     <div class="ci"><span class="cn" id="cm">0</span><div class="cl">دقيقة</div></div>
     <div class="ci"><span class="cn" id="cs">0</span><div class="cl">ثانية</div></div>
   </div>
-  <div class="love-meter-wrap"><div class="love-label">❤️ نسبة الحب ❤️</div><div class="progress-bar"><div class="progress-fill"></div></div><div style="font-size:12px">98% حنين و حب</div></div>
-  <div class="beats"><span class="beat">🌸</span><span class="beat">❤️</span><span class="beat">🌸</span></div>
+  <div class="beats">
+    <span class="beat">🌸</span><span class="beat">❤️</span><span class="beat">🌸</span>
+  </div>
 </section>
 
 <!-- LETTER -->
-<section id="sec-letter" class="sec"><div class="sh"><span class="stag">💌 كلام من القلب</span><h2 class="stitle">رسالتي إليكي</h2></div><div class="letter" id="letterContainer"><div class="ldate">📅 بحبك يا سلمى</div><div class="ltxt" id="letterText"></div><div class="lsig"><div class="sh2">❤️</div><div><div class="sname">حبيبك دايماً</div></div></div></div></section>
+<section id="sec-letter" class="sec">
+  <div class="sh"><span class="stag">💌 كلام من القلب</span><h2 class="stitle">رسالتي إليكي</h2></div>
+  <div class="letter">
+    <div class="ldate" id="letterDate">📅 كتبتها بحب — من قلبي لقلبك</div>
+    <div class="ltxt" id="letterText">
+      <p>سلمى الغالية،</p>
+      <p>مش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.</p>
+      <p>انتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم. لما بشوفك بشوش، يومي بيبقى مليان. ولما تيجي مضايقة، كل اللي بفكر فيه إزاي أرجعلك ابتسامتك.</p>
+      <p>عملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.</p>
+      <p>بحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸</p>
+    </div>
+    <div class="lsig">
+      <div class="sh2">❤️</div>
+      <div><div class="sname">حبيبك دايماً</div><div style="font-size:12px;color:var(--muted)">بكتبها بحب كتير</div></div>
+    </div>
+  </div>
+</section>
 
 <!-- MEMORIES -->
-<section id="sec-memories" class="sec"><div class="sh"><span class="stag">🌟 لحظات لا تُنسى</span><h2 class="stitle">ذكرياتنا</h2></div><div class="mgrid" id="memoriesGrid"></div></section>
+<section id="sec-memories" class="sec">
+  <div class="sh"><span class="stag">🌟 لحظات لا تُنسى</span><h2 class="stitle">ذكرياتنا</h2></div>
+  <div class="mgrid" id="memoriesGrid">
+    <div class="mc"><span class="me">💬</span><div class="mt">أول كلام بيننا</div><p class="mm">اللحظة دي هي بداية كل حاجة جميلة. مش ناسي كل كلمة قلتيها وأنا مبتسم.</p><div class="md">✨ البداية</div></div>
+    <div class="mc"><span class="me">😂</span><div class="mt">الضحكة اللي ما بتخلصش</div><p class="mm">في مرات بنضحك على حاجة صغيرة جداً وما نقدرش نوقف. ده اللي بيخليني عارف إن في حاجة بيننا مختلفة.</p><div class="md">✨ لحظة خاصة</div></div>
+    <div class="mc"><span class="me">🌙</span><div class="mt">محادثة نص الليل</div><p class="mm">لما بنبقى بنتكلم وعيوننا تقيل من النوم بس ما حد منا يقدر يقول "تصبحي على خير".</p><div class="md">✨ كل ليلة</div></div>
+    <div class="mc"><span class="me">🎵</span><div class="mt">أغنيتنا</div><p class="mm">في أغنية لما بتشتغل بفكر فيكي في التو. عارفاها انتي كمان؟ 🎶</p><div class="md">✨ دايماً</div></div>
+    <div class="mc"><span class="me">🤗</span><div class="mt">لما قلتيلي كلمة حلوة</div><p class="mm">في كلمة قالتهالي سلمى وضلت في دماغي أيام. كلامك بيأثر فيا من غير ما تحسي.</p><div class="md">✨ حفظتها</div></div>
+    <div class="mc"><span class="me">💭</span><div class="mt">كل يوم جديد معاكي</div><p class="mm">كل يوم بيجي هيكون ذكرى. وأنا متشوق لكل اللي جاي وانتي جنبي. ✨</p><div class="md">✨ المستقبل</div></div>
+  </div>
+</section>
 
 <!-- REASONS -->
-<section id="sec-reasons" class="sec"><div class="sh"><span class="stag">❤️ من القلب</span><h2 class="stitle">ليه بحبك</h2></div><div class="rlist" id="reasonsList"></div></section>
+<section id="sec-reasons" class="sec">
+  <div class="sh"><span class="stag">❤️ من القلب</span><h2 class="stitle">ليه بحبك</h2></div>
+  <div class="rlist" id="reasonsList">
+    <div class="ri"><div class="rn">١</div><p class="rtxt">لأن ضحكتك بتنور أي مكان تيجي فيه — حتى لو كنتي بس بتبعتيلي ستيكر 😂</p></div>
+    <div class="ri"><div class="rn">٢</div><p class="rtxt">لأنك بتفهميني من غير ما أكمل الجملة. دي موهبة نادرة وانتي عندها.</p></div>
+    <div class="ri"><div class="rn">٣</div><p class="rtxt">لأن قلبك كبير — بتحبي الناس وبتهتمي بيهم بجد، وده بيخليكي شخص نادر.</p></div>
+    <div class="ri"><div class="rn">٤</div><p class="rtxt">لأنك صادقة — ما بتعرفيش تكدبي ووجهك بيقول كل حاجة، وده من أجمل حاجة فيكي.</p></div>
+    <div class="ri"><div class="rn">٥</div><p class="rtxt">لأنك بتخليني أحس إن الدنيا أحسن لما انتي فيها. جنبك كل حاجة بتبقى أجمل.</p></div>
+    <div class="ri"><div class="rn">٦</div><p class="rtxt">لأن في حاجة في عينيكي بتقول إن في قصة كتير — وأنا عايز أعرف كل تفصيلة فيها.</p></div>
+    <div class="ri"><div class="rn">٧</div><p class="rtxt">لأن اسمك "سلمى" لما بقوله بيطلع بنبرة مختلفة — حتى في دماغي لما بفكر فيكي.</p></div>
+    <div class="ri"><div class="rn">٨</div><p class="rtxt">لأنك انتي — مش لسبب واحد محدد، لكن لأن مجموع كل حاجة فيكي بيعملوا شخص أنا بحبه جداً. 🌸</p></div>
+  </div>
+</section>
 
 <!-- BIRTHDAY -->
-<section id="sec-birthday" class="sec"><div class="sh"><span class="stag">🎂 يوم ميلادك</span><h2 class="stitle">عيد ميلاد سلمى</h2></div><div class="bc"><div class="bcard"><div class="cwrap" id="cwrap"></div><div class="bage" id="bageNum">16</div><p class="btxt" id="birthMeta">🎂 كل سنة وانتي جميلة</p></div><div class="cbd"><div class="cbdl">⏳ الوقت المتبقي لعيد ميلادك الجاي</div><div class="cbdn" id="bdc">---</div><div class="cbds" id="bdcs">يوم</div></div></div></section>
+<section id="sec-birthday" class="sec">
+  <div class="sh"><span class="stag">🎂 يوم ميلادك</span><h2 class="stitle">عيد ميلاد سلمى</h2></div>
+  <div class="bc">
+    <div class="bcard">
+      <div class="cwrap" id="cwrap"></div>
+      <div class="bage" id="bageNum">16</div>
+      <p class="btxt" id="bdayText">سنة ميلادك: <strong>٢٧ ديسمبر ٢٠٠٩</strong> 🌸<br>كل سنة وانتي أحلى وأجمل. ربنا يديكي كل الصحة والسعادة ويحقق كل أحلامك يا قمر. 🎂</p>
+    </div>
+    <div class="cbd">
+      <div class="cbdl">⏳ الوقت المتبقي لعيد ميلادك الجاي</div>
+      <div class="cbdn" id="bdc">---</div>
+      <div class="cbds" id="bdcs">يوم</div>
+    </div>
+  </div>
+</section>
 
 <!-- GALLERY -->
-<section id="sec-gallery" class="sec"><div class="sh"><span class="stag">🖼️ صورنا</span><h2 class="stitle">الألبوم الخاص</h2></div><div class="gwrap"><div class="ggrid" id="ggrid"></div><div class="ginfo">🌸 ألبوم صور ينتظر صورك الجميلة</div></div></section>
+<section id="sec-gallery" class="sec">
+  <div class="sh"><span class="stag">🖼️ صورنا</span><h2 class="stitle">الألبوم الخاص</h2></div>
+  <div class="gwrap">
+    <div class="ggrid" id="ggrid"></div>
+    <div class="ginfo" id="ginfo">
+      <div class="gbig">📁</div>
+      <p>عشان تضيف صورك:<br>
+      ١. اعمل فولدر اسمه <strong>photos</strong> جنب ملف index.html<br>
+      ٢. حط فيه صورك وسمّيهم <strong>1.jpg&nbsp;،&nbsp;2.jpg&nbsp;،&nbsp;3.jpg</strong> ... إلخ<br>
+      ٣. ارفعهم مع الموقع على GitHub — هيظهروا هنا تلقائي 🌸
+      </p>
+    </div>
+  </div>
+</section>
 
-<!-- PROMISES -->
-<section id="sec-promise" class="sec"><div class="sh"><span class="stag">🤝 وعد من القلب</span><h2 class="stitle">وعودي ليكي</h2></div><div class="pgrid" id="promisesGrid"></div></section>
+<!-- LIGHTBOX -->
+<div id="lb" onclick="closeLb()">
+  <button id="lbc" onclick="closeLb()">✕</button>
+  <img id="lbi" src="" alt="صورة">
+</div>
 
-<!-- FUTURE SECTION (اغانينا وخطط) -->
-<section id="sec-future" class="sec"><div class="sh"><span class="stag">🎵 أغانينا + المستقبل</span><h2 class="stitle">لحن قلوبنا</h2></div><div class="pcent" style="max-width:780px;margin:auto"><div class="pcard" style="background:var(--card);border-radius:24px;padding:24px;margin-bottom:22px;"><div class="pbig" style="font-size:28px">🎧 أغانينا المفضلة</div><ul id="songsList" style="list-style:none;margin-top:15px;text-align:right;"></ul></div><div class="pcard" style="background:var(--card);border-radius:24px;padding:24px;"><div class="pbig" style="font-size:28px">🌍 خططنا المستقبلية</div><p id="futurePlanText" class="psub" style="margin-top:12px;"></p></div></div></section>
+<!-- PROMISE -->
+<section id="sec-promise" class="sec">
+  <div class="sh"><span class="stag">🤝 وعد من القلب</span><h2 class="stitle">وعودي ليكي</h2></div>
+  <div class="pcent">
+    <div class="pcard"><div class="pbig">وعود لا هتتكسر</div><p class="psub">سلمى، الوعود دي مش كلام في الهوا — دي التزامات بكتبها عشان انتي تعرفي إنها حقيقية. 🌸</p></div>
+    <div class="pgrid">
+      <div class="pitem"><span class="pico">💪</span><p class="ptxt">هكون جنبك في كل وقت — في الفرح وفي الصعب.</p></div>
+      <div class="pitem"><span class="pico">🎧</span><p class="ptxt">هسمعك دايماً — مش بس أسمع، هفهم وأحس بيكي.</p></div>
+      <div class="pitem"><span class="pico">🛡️</span><p class="ptxt">مش هحكي حاجة انتي وثقتي فيا بيها لأي حد.</p></div>
+      <div class="pitem"><span class="pico">😊</span><p class="ptxt">هحاول دايماً أرجعلك ابتسامتك لو حسيتك مضايقة.</p></div>
+      <div class="pitem"><span class="pico">🌱</span><p class="ptxt">هدعمك في أحلامك وهفرح بنجاحاتك أكتر من نجاحاتي.</p></div>
+      <div class="pitem"><span class="pico">❤️</span><p class="ptxt">هحبك بصدق — من غير مسرحية ومن غير كدب.</p></div>
+    </div>
+  </div>
+</section>
 
-<footer><p>صُنع بـ ❤️ من أجل <span class="fn">سلمى</span></p></footer>
+<footer>
+  <p>صُنع بـ ❤️ من أجل <span class="fn">سلمى</span></p>
+  <p style="margin-top:6px;font-size:11px">✨ كل كلمة هنا حقيقية ✨</p>
+</footer>
+
 </div>
 
 <button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div id="adminGear" class="admin-gear" style="display:none;" onclick="openAdminPanel()">⚙️</div>
-
-<!-- ADMIN MODAL -->
-<div id="adminModal" class="modal"><div class="modal-card"><h3>⚙️ لوحة تحكم سلمى (إدارة المحتوى)</h3>
-<label>تاريخ بداية العلاقة:</label><input type="date" id="adminStartDate">
-<label>تاريخ ميلاد سلمى:</label><input type="date" id="adminBirthDate">
-<label>عدد الصور في الألبوم:</label><input type="number" id="adminPhotoCount" min="1" max="30">
-<label>نص الرسالة (كامل):</label><textarea id="adminLetter" rows="5"></textarea>
-<label>الذكريات (icon|title|desc|footer) كل سطر:</label><textarea id="adminMemories" rows="4" placeholder="🌟|أول كلام|وصف حلو|✨ بداية"></textarea>
-<label>أسباب الحب (كل سبب بسطر):</label><textarea id="adminReasons" rows="4"></textarea>
-<label>الوعود (icon|text):</label><textarea id="adminPromises" rows="4" placeholder="💪|هكون جنبك"></textarea>
-<label>قائمة الأغاني (كل أغنية بسطر):</label><textarea id="adminSongs" rows="3"></textarea>
-<label>خططنا المستقبلية (نص طويل):</label><textarea id="adminFuturePlan" rows="3"></textarea>
-<button onclick="saveAdminChanges()">💾 حفظ التغييرات</button><button onclick="closeAdminPanel()" style="margin-top:8px;background:#aaa;">إغلاق</button>
-</div></div>
+<div id="toast"></div>
 
 <script>
-// ======================= CONFIG & DEFAULTS =======================
-const DEFAULT_CONFIG = {
-  startDate: "2024-01-01",
-  birthDate: "2009-12-27",
-  photoCount: 6,
-  letterText: "سلمى الغالية،\nمش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.\nانتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم.\nعملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.\nبحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸",
-  memories: [
-    "💬|أول كلام بيننا|اللحظة دي هي بداية كل حاجة جميلة.|✨ البداية",
-    "😂|الضحكة اللي ما بتخلصش|بنضحك على حاجات صغيرة وما نقدرش نوقف.|✨ لحظة خاصة",
-    "🌙|محادثة نص الليل|لما بنتكلم وعيوننا تقيل وما حد ينام.|✨ كل ليلة",
-    "🎵|أغنيتنا|أغنية لما بتشتغل بفكر فيكي.|✨ دايماً",
-    "🤗|كلمة حلوة|كلمة قلتهالي سلمى وضلت في دماغي أيام.|✨ أثر جميل"
-  ],
-  reasons: [
-    "لأن ضحكتك بتنور أي مكان تيجي فيه",
-    "لأنك بتفهميني من غير ما أكمل الجملة",
-    "لأن قلبك كبير بتحبي الناس بجد",
-    "لأنك صادقة وما تعرفيش تكدبي",
-    "لأن الدنيا أحسن لما انتي فيها",
-    "لأن في عينيكي قصة كتير نفسي أعرفها",
-    "لأن اسمك سلمى بقوله بنبرة مختلفة",
-    "لأنك انتي — مجموع كل حاجة فيكي بيعمل شخص بحبه جداً"
-  ],
-  promises: [
-    "💪|هكون جنبك في كل وقت — في الفرح والصعب",
-    "🎧|هسمعك دايماً — مش بس أسمع، هفهم وأحس بيكي",
-    "🛡️|مش هحكي حاجة انتي وثقتي فيا بيها لأي حد",
-    "😊|هحاول دايماً أرجع لك ابتسامتك",
-    "🌱|هدعمك في أحلامك وهفرح بنجاحاتك",
-    "❤️|هحبك بصدق من غير مسرحية"
-  ],
-  songs: ["🎵 أغنية: قصة حبنا - لـ سلمى وحبيبها", "🎶 أغنية: أنتِ كل شيء", "🎧 أغنية: أجمل ضحكة", "💖 تتر: حكايتنا الجميلة"],
-  futurePlan: "سلمى،未來 plans: نكمل مع بعض كل الطريق، نروح أماكن جديدة، نحقق أحلامنا سوا، ونفضل دايماً سند لبعض. كل سنة وانتي أجمل حاجة في مستقبلي 🌸✨"
-};
+// PASSWORDS
+const SALMA_PWD="27122009";
+const ADMIN_PWD="13854672";
+let isAdmin=false;
 
-let isAdmin = false;
-let currentStartDate = new Date(DEFAULT_CONFIG.startDate);
-let birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
-let photoCount = DEFAULT_CONFIG.photoCount;
-
-// Helper : load from localStorage or default
-function loadConfigFromStorage() {
-  const stored = localStorage.getItem("salma_site_config");
-  if(stored) {
-    const cfg = JSON.parse(stored);
-    Object.assign(DEFAULT_CONFIG, cfg);
+document.getElementById('pin').addEventListener('keypress',e=>{if(e.key==='Enter')tryPass();});
+function tryPass(){
+  const val=document.getElementById('pin').value.trim();
+  if(val===SALMA_PWD||val===ADMIN_PWD){
+    if(val===ADMIN_PWD)isAdmin=true;
+    unlock();
+  }else{
+    const b=document.getElementById('lbox');
+    b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
+    document.getElementById('lerr').textContent='كلمة السر غلط، حاولي تاني 🙈';
+    document.getElementById('pin').value='';
+    setTimeout(()=>document.getElementById('lerr').textContent='',2500);
   }
-  currentStartDate = new Date(DEFAULT_CONFIG.startDate);
-  birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
-  photoCount = DEFAULT_CONFIG.photoCount;
 }
-function saveConfigToStorage() {
-  const toStore = {
-    startDate: DEFAULT_CONFIG.startDate,
-    birthDate: DEFAULT_CONFIG.birthDate,
-    photoCount: DEFAULT_CONFIG.photoCount,
-    letterText: DEFAULT_CONFIG.letterText,
-    memories: DEFAULT_CONFIG.memories,
-    reasons: DEFAULT_CONFIG.reasons,
-    promises: DEFAULT_CONFIG.promises,
-    songs: DEFAULT_CONFIG.songs,
-    futurePlan: DEFAULT_CONFIG.futurePlan
-  };
-  localStorage.setItem("salma_site_config", JSON.stringify(toStore));
+function unlock(){
+  document.getElementById('lock').classList.add('out');
+  setTimeout(()=>{
+    document.getElementById('lock').style.display='none';
+    document.getElementById('main').classList.add('show');
+    if(isAdmin)document.getElementById('adminBtn').style.display='block';
+    loadFromStorage();
+    startCounter();bdayInit();confetti();loadGallery();
+  },1000);
 }
-// Render all
-function renderLetter() { document.getElementById("letterText").innerHTML = DEFAULT_CONFIG.letterText.replace(/\n/g,"<br>"); }
-function renderMemories() {
-  const grid = document.getElementById("memoriesGrid");
-  grid.innerHTML = DEFAULT_CONFIG.memories.map(m => {
-    let [icon, title, desc, footer] = m.split("|");
-    return `<div class="mc"><span class="me">${icon||"🌸"}</span><div class="mt">${title||"ذكرى"}</div><p class="mm">${desc||""}</p><div class="md">${footer||"✨"}</div></div>`;
-  }).join("");
+
+// ADMIN
+function showAdmin(){
+  document.getElementById('admin').classList.add('show');
+  loadAdminFields();
 }
-function renderReasons() {
-  const list = document.getElementById("reasonsList");
-  list.innerHTML = DEFAULT_CONFIG.reasons.map((r,i) => `<div class="ri"><div class="rn">${i+1}</div><p class="rtxt">${r}</p></div>`).join("");
+function closeAdmin(){
+  document.getElementById('admin').classList.remove('show');
 }
-function renderPromises() {
-  const grid = document.getElementById("promisesGrid");
-  grid.innerHTML = DEFAULT_CONFIG.promises.map(p => {
-    let [icon, text] = p.split("|");
-    return `<div class="pitem"><span class="pico">${icon||"❤️"}</span><p class="ptxt">${text||"وعد"}</p></div>`;
-  }).join("");
+function loadAdminFields(){
+  const start=new Date(localStorage.getItem('salmaStart')||'2024-01-01T00:00:00');
+  const bday=localStorage.getItem('salmaBday')||'2009-12-27';
+  const byear=localStorage.getItem('salmaBYear')||'2009';
+  document.getElementById('adminStartDate').value=start.toISOString().split('T')[0];
+  document.getElementById('adminStartTime').value='00:00';
+  document.getElementById('adminBday').value=bday;
+  document.getElementById('adminBYear').value=byear;
+  document.getElementById('adminLetterDate').value=localStorage.getItem('salmaLetterDate')||'📅 كتبتها بحب — من قلبي لقلبك';
+  document.getElementById('adminLetterText').value=localStorage.getItem('salmaLetterText')||getDefaultLetterText();
+  document.getElementById('adminHsub').value=localStorage.getItem('salmaHsub')||'يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸';
+  document.getElementById('adminName').value=localStorage.getItem('salmaName')||'سلمى';
+  document.getElementById('adminPhotoCount').value=localStorage.getItem('salmaPhotoCount')||'6';
 }
-function renderFuture() {
-  const songsUl = document.getElementById("songsList");
-  songsUl.innerHTML = DEFAULT_CONFIG.songs.map(s => `<li style="margin-bottom:10px;font-size:15px;">🎼 ${s}</li>`).join("");
-  document.getElementById("futurePlanText").innerHTML = DEFAULT_CONFIG.futurePlan;
+function getDefaultLetterText(){
+  return `سلمى الغالية،
+
+مش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.
+
+انتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم. لما بشوفك بشوش، يومي بيبقى مليان. ولما تيجي مضايقة، كل اللي بفكر فيه إزاي أرجعلك ابتسامتك.
+
+عملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.
+
+بحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸`;
 }
-function renderGallery() {
-  const grid = document.getElementById("ggrid");
-  grid.innerHTML = "";
-  for(let i=1;i<=photoCount;i++) {
-    const div = document.createElement("div"); div.className = "gi";
-    const img = new Image(); img.src = `photos/${i}.jpg`; img.alt=`صورة ${i}`; img.style.width="100%"; img.style.height="100%"; img.style.objectFit="cover";
-    img.onerror = () => { div.classList.add("empty"); div.innerHTML = `<span>🌸</span><span>صورة ${i}</span>`; };
-    img.onload = () => { div.appendChild(img); };
-    div.appendChild(img);
-    div.onclick = () => { if(img.src && !div.classList.contains("empty")) openLb(img.src); };
+function saveStart(){
+  const d=document.getElementById('adminStartDate').value;
+  const t=document.getElementById('adminStartTime').value||'00:00';
+  localStorage.setItem('salmaStart',d+'T'+t+':00');
+  showToast('✅ تم حفظ تاريخ البداية');
+  startCounter();
+}
+function saveBday(){
+  localStorage.setItem('salmaBday',document.getElementById('adminBday').value);
+  localStorage.setItem('salmaBYear',document.getElementById('adminBYear').value);
+  showToast('✅ تم حفظ تاريخ الميلاد');
+  bdayInit();
+}
+function saveLetter(){
+  localStorage.setItem('salmaLetterDate',document.getElementById('adminLetterDate').value);
+  localStorage.setItem('salmaLetterText',document.getElementById('adminLetterText').value);
+  showToast('✅ تم حفظ الرسالة');
+  updateLetter();
+}
+function saveHome(){
+  localStorage.setItem('salmaHsub',document.getElementById('adminHsub').value);
+  localStorage.setItem('salmaName',document.getElementById('adminName').value);
+  showToast('✅ تم حفظ الصفحة الرئيسية');
+  updateHome();
+}
+function savePhotos(){
+  localStorage.setItem('salmaPhotoCount',document.getElementById('adminPhotoCount').value);
+  showToast('✅ تم حفظ عدد الصور');
+  loadGallery();
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+function updateHome(){
+  document.getElementById('homeSub').textContent=localStorage.getItem('salmaHsub')||'يا أجمل حاجة في حياتي...';
+  const nm=localStorage.getItem('salmaName')||'سلمى';
+  document.getElementById('homeName').textContent=nm;
+  document.querySelector('.nav-logo').innerHTML=nm+' 🌸';
+}
+function updateLetter(){
+  document.getElementById('letterDate').textContent=localStorage.getItem('salmaLetterDate')||'📅 كتبتها بحب';
+  const txt=localStorage.getItem('salmaLetterText')||getDefaultLetterText();
+  const lines=txt.split('\n').filter(l=>l.trim());
+  let html='<p>سلمى الغالية،</p>';
+  lines.forEach((l,i)=>{if(i>0)html+='<p>'+l+'</p>';});
+  document.getElementById('letterText').innerHTML=html;
+}
+function loadFromStorage(){
+  updateHome();
+  updateLetter();
+}
+
+// THEME
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('tbtn').textContent=dark?'☀️':'🌙';
+}
+
+// MENU
+function toggleMenu(){document.getElementById('nm').classList.toggle('open');}
+document.addEventListener('click',e=>{
+  const nav=document.querySelector('nav'),nm=document.getElementById('nm');
+  if(!nav.contains(e.target)&&!nm.contains(e.target))nm.classList.remove('open');
+});
+
+// NAV
+function go(id){
+  document.getElementById('nm').classList.remove('open');
+  document.getElementById('home').classList.remove('on');
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('#nm a').forEach(a=>a.classList.remove('act'));
+  if(id==='home')document.getElementById('home').classList.add('on');
+  else document.getElementById('sec-'+id).classList.add('on');
+  document.getElementById('mn-'+id).classList.add('act');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// COUNTER
+function startCounter(){
+  const stored=localStorage.getItem('salmaStart')||'2024-01-01T00:00:00';
+  window.START=new Date(stored);
+  function upd(){
+    const d=Date.now()-window.START;if(d<0)return;
+    document.getElementById('cd').textContent=Math.floor(d/86400000).toLocaleString('ar-EG');
+    document.getElementById('ch').textContent=Math.floor((d%86400000)/3600000);
+    document.getElementById('cm').textContent=Math.floor((d%3600000)/60000);
+    document.getElementById('cs').textContent=Math.floor((d%60000)/1000);
+  }
+  upd();setInterval(upd,1000);
+}
+
+// BIRTHDAY
+function bdayInit(){
+  const bdayStr=localStorage.getItem('salmaBday')||'2009-12-27';
+  const parts=bdayStr.split('-');
+  const byear=localStorage.getItem('salmaBYear')||parts[0];
+  const bmonth=parseInt(parts[1])-1;
+  const bday=parseInt(parts[2]);
+  const now=new Date(),yr=now.getFullYear();
+  let next=new Date(yr,bmonth,bday);
+  if(now>=next)next=new Date(yr+1,bmonth,bday);
+  const days=Math.ceil((next-now)/86400000);
+  const age=yr-parseInt(byear)-(now<new Date(yr,bmonth,bday)?1:0);
+  document.getElementById('bageNum').textContent=age;
+  const arNums=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  const formatAr=n=>n.toString().split('').map(d=>arNums[parseInt(d)]||d).join('');
+  document.getElementById('bdayText').innerHTML='سنة ميلادك: <strong>'+formatAr(bday)+' '+getMonthName(bmonth)+' '+formatAr(byear)+'</strong> 🌸<br>كل سنة وانتي أحلى وأجمل. ربنا يديكي كل الصحة والسعادة ويحقق كل أحلامك يا قمر. 🎂';
+  if(days===0){document.getElementById('bdc').textContent='🎉 اليوم!';document.getElementById('bdcs').textContent='عيد ميلاد سعيد يا سلمى 🎂';}
+  else{document.getElementById('bdc').textContent=days.toLocaleString('ar-EG');document.getElementById('bdcs').textContent='يوم متبقي على عيد ميلادك يا قمر 🎂';}
+}
+function getMonthName(m){
+  const months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  return months[m];
+}
+
+// CONFETTI
+function confetti(){
+  const c=document.getElementById('cwrap');if(!c)return;
+  const cols=['#e8547a','#f4c542','#a855f7','#22c55e','#3b82f6'];
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');p.className='cp';
+    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*20}%;background:${cols[i%cols.length]};animation-duration:${4+Math.random()*5}s;animation-delay:${Math.random()*4}s;transform:rotate(${Math.random()*360}deg)`;
+    c.appendChild(p);
+  }
+}
+
+// GALLERY
+function loadGallery(){
+  const grid=document.getElementById('ggrid'),info=document.getElementById('ginfo');
+  const count=parseInt(localStorage.getItem('salmaPhotoCount'))||6;
+  grid.innerHTML='';let found=0;
+  for(let i=1;i<=count;i++){
+    const div=document.createElement('div');div.className='gi';
+    const img=new Image();img.alt=`صورة ${i}`;
+    const src=`photos/${i}.jpg`;
+    img.onload=()=>{img.style.display='block';div.appendChild(img);found++;if(found>0)info.style.display='none';};
+    img.onerror=()=>{div.classList.add('empty');div.innerHTML=`<span>🌸</span><span>صورة ${i}</span>`;};
+    img.style.cssText='width:100%;height:100%;object-fit:cover;display:none';
+    img.onclick=()=>openLb(src);
+    img.src=src;
+    if(!div.classList.contains('empty'))div.onclick=()=>openLb(src);
     grid.appendChild(div);
   }
 }
-function updateBirthdayInfo() {
-  const now = new Date();
-  let age = now.getFullYear() - birthDateObj.getFullYear();
-  const hasBirthdayThisYear = (now.getMonth() > birthDateObj.getMonth() || (now.getMonth()===birthDateObj.getMonth() && now.getDate()>=birthDateObj.getDate()));
-  if(!hasBirthdayThisYear) age--;
-  document.getElementById("bageNum").innerText = age;
-  let nextBirth = new Date(now.getFullYear(), birthDateObj.getMonth(), birthDateObj.getDate());
-  if(now > nextBirth) nextBirth.setFullYear(now.getFullYear()+1);
-  const daysLeft = Math.ceil((nextBirth - now)/86400000);
-  if(daysLeft===0) { document.getElementById("bdc").innerHTML="🎉 اليوم!"; document.getElementById("bdcs").innerHTML="عيد ميلاد سعيد يا قمر"; }
-  else { document.getElementById("bdc").innerHTML=daysLeft; document.getElementById("bdcs").innerHTML="يوم متبقي لعيد ميلادك"; }
-  document.getElementById("birthMeta").innerHTML=`🎂 ${birthDateObj.getFullYear()} - ${birthDateObj.getDate()}/${birthDateObj.getMonth()+1}<br> كل سنة وانتي جميلة`;
-}
-let timerInterval;
-function startCounterFromDate(start) {
-  if(timerInterval) clearInterval(timerInterval);
-  function update() {
-    const now = Date.now();
-    const diff = now - start.getTime();
-    if(diff<0) return;
-    document.getElementById("cd").innerText = Math.floor(diff/86400000);
-    document.getElementById("ch").innerText = Math.floor((diff%86400000)/3600000);
-    document.getElementById("cm").innerText = Math.floor((diff%3600000)/60000);
-    document.getElementById("cs").innerText = Math.floor((diff%60000)/1000);
-  }
-  update();
-  timerInterval = setInterval(update,1000);
-}
-function refreshCounter() { startCounterFromDate(currentStartDate); }
-function refreshAllUI() {
-  renderLetter(); renderMemories(); renderReasons(); renderPromises(); renderFuture(); renderGallery();
-  updateBirthdayInfo(); refreshCounter();
-}
-// Admin save
-function saveAdminChanges() {
-  DEFAULT_CONFIG.startDate = document.getElementById("adminStartDate").value;
-  DEFAULT_CONFIG.birthDate = document.getElementById("adminBirthDate").value;
-  DEFAULT_CONFIG.photoCount = parseInt(document.getElementById("adminPhotoCount").value);
-  DEFAULT_CONFIG.letterText = document.getElementById("adminLetter").value;
-  const memoriesRaw = document.getElementById("adminMemories").value.split("\n").filter(l=>l.trim());
-  if(memoriesRaw.length) DEFAULT_CONFIG.memories = memoriesRaw;
-  const reasonsRaw = document.getElementById("adminReasons").value.split("\n").filter(l=>l.trim());
-  if(reasonsRaw.length) DEFAULT_CONFIG.reasons = reasonsRaw;
-  const promisesRaw = document.getElementById("adminPromises").value.split("\n").filter(l=>l.trim());
-  if(promisesRaw.length) DEFAULT_CONFIG.promises = promisesRaw;
-  const songsRaw = document.getElementById("adminSongs").value.split("\n").filter(l=>l.trim());
-  if(songsRaw.length) DEFAULT_CONFIG.songs = songsRaw;
-  DEFAULT_CONFIG.futurePlan = document.getElementById("adminFuturePlan").value;
-  currentStartDate = new Date(DEFAULT_CONFIG.startDate);
-  birthDateObj = new Date(DEFAULT_CONFIG.birthDate);
-  photoCount = DEFAULT_CONFIG.photoCount;
-  saveConfigToStorage();
-  refreshAllUI();
-  closeAdminPanel();
-}
-function openAdminPanel() {
-  document.getElementById("adminStartDate").value = DEFAULT_CONFIG.startDate;
-  document.getElementById("adminBirthDate").value = DEFAULT_CONFIG.birthDate;
-  document.getElementById("adminPhotoCount").value = DEFAULT_CONFIG.photoCount;
-  document.getElementById("adminLetter").value = DEFAULT_CONFIG.letterText;
-  document.getElementById("adminMemories").value = DEFAULT_CONFIG.memories.join("\n");
-  document.getElementById("adminReasons").value = DEFAULT_CONFIG.reasons.join("\n");
-  document.getElementById("adminPromises").value = DEFAULT_CONFIG.promises.join("\n");
-  document.getElementById("adminSongs").value = DEFAULT_CONFIG.songs.join("\n");
-  document.getElementById("adminFuturePlan").value = DEFAULT_CONFIG.futurePlan;
-  document.getElementById("adminModal").classList.add("open");
-}
-function closeAdminPanel() { document.getElementById("adminModal").classList.remove("open"); }
 
-// UNLOCK
-const PWD_NORMAL = "27122009";
-const PWD_ADMIN = "13854672";
-function tryPass() {
-  const val = document.getElementById("pin").value.trim();
-  if(val === PWD_NORMAL || val === PWD_ADMIN) {
-    if(val === PWD_ADMIN) isAdmin = true;
-    unlock();
-  } else {
-    document.getElementById("lerr").innerText = "كلمة السر غلط، حاولي تاني 🙈";
-    document.querySelector(".lbox").classList.add("shake");
-    setTimeout(()=> document.querySelector(".lbox").classList.remove("shake"), 500);
-    document.getElementById("pin").value="";
-  }
-}
-function unlock() {
-  document.getElementById("lock").classList.add("out");
-  setTimeout(() => {
-    document.getElementById("lock").style.display = "none";
-    document.getElementById("main").classList.add("show");
-    if(isAdmin) document.getElementById("adminGear").style.display = "flex";
-    loadConfigFromStorage();
-    refreshAllUI();
-    startFloatingHearts();
-    generatePetals();
-    confettiBirth();
-  }, 1000);
-}
-// floating Hearts
-let heartInterval;
-function startFloatingHearts() {
-  if(heartInterval) clearInterval(heartInterval);
-  heartInterval = setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heartFloat";
-    heart.innerHTML = Math.random() > 0.6 ? "🌸" : "❤️";
-    heart.style.left = Math.random() * 100 + "%";
-    heart.style.bottom = "-20px";
-    heart.style.fontSize = (16 + Math.random() * 24) + "px";
-    heart.style.position = "fixed";
-    document.getElementById("floatingHearts").appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
-  }, 2200);
-}
-function generatePetals() {
-  const petalContainer = document.getElementById("petals");
-  petalContainer.innerHTML = "";
-  const symbols = ["🌸","❤️","🌺","💕","✨"];
-  for(let i=0;i<26;i++) {
-    const p = document.createElement("div"); p.className = "petal";
-    p.textContent = symbols[i%symbols.length];
-    p.style.left = Math.random()*100+"%";
-    p.style.fontSize = (12+Math.random()*16)+"px";
-    p.style.animationDuration = (6+Math.random()*10)+"s";
-    p.style.animationDelay = (Math.random()*8)+"s";
-    petalContainer.appendChild(p);
-  }
-}
-function confettiBirth() {
-  const cwrap = document.getElementById("cwrap");
-  if(!cwrap) return;
-  for(let i=0;i<12;i++){ let d=document.createElement("div"); d.className="cp"; d.style.cssText=`left:${Math.random()*100}%;background:#e8547a;animation-duration:${2+Math.random()*4}s`; cwrap.appendChild(d);}
-}
-function openLb(src){ const lb=document.getElementById("lb"); document.getElementById("lbi").src=src; lb.classList.add("open");}
-function closeLb(){ document.getElementById("lb").classList.remove("open");}
-document.getElementById("lb").onclick = closeLb;
+// LIGHTBOX
+function openLb(s){document.getElementById('lbi').src=s;document.getElementById('lb').classList.add('open');}
+function closeLb(){document.getElementById('lb').classList.remove('open');}
 
-// nav, theme, menu
-let darkMode = false;
-function toggleTheme() { darkMode = !darkMode; document.documentElement.setAttribute("data-theme", darkMode ? "dark" : ""); document.getElementById("tbtn").innerText = darkMode ? "☀️" : "🌙"; localStorage.setItem("salma_theme", darkMode?"dark":"light"); }
-function toggleMenu(){ document.getElementById("nm").classList.toggle("open"); }
-function go(id){
-  document.getElementById("nm").classList.remove("open");
-  document.getElementById("home").classList.remove("on");
-  document.querySelectorAll(".sec").forEach(s=>s.classList.remove("on"));
-  if(id==="home") document.getElementById("home").classList.add("on");
-  else document.getElementById("sec-"+id).classList.add("on");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-document.addEventListener("click",(e)=>{
-  const nav=document.querySelector("nav"), nm=document.getElementById("nm");
-  if(!nav.contains(e.target) && !nm.contains(e.target)) nm.classList.remove("open");
-});
-window.addEventListener("scroll",()=>{ document.getElementById("stb").classList.toggle("show", window.scrollY>250); });
-const savedTheme = localStorage.getItem("salma_theme");
-if(savedTheme === "dark") { darkMode=true; document.documentElement.setAttribute("data-theme","dark"); document.getElementById("tbtn").innerText="☀️"; }
-
-// stars animation for lock
-(function createStars(){
-  const c=document.getElementById("lstars");
-  for(let i=0;i<70;i++){ let s=document.createElement("div"); s.className="st"; s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*3}px;height:${1+Math.random()*3}px;animation-duration:${1+Math.random()*3}s`; c.appendChild(s); }
+// PETALS
+(()=>{
+  const c=document.getElementById('petals'),s=['🌸','❤️','🌺','💕','✨'];
+  for(let i=0;i<14;i++){
+    const p=document.createElement('div');p.className='petal';
+    p.textContent=s[i%s.length];
+    p.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*12}px;animation-duration:${7+Math.random()*9}s;animation-delay:${Math.random()*9}s`;
+    c.appendChild(p);
+  }
 })();
-// Start with default config load
-loadConfigFromStorage();
+
+// STARS
+(()=>{
+  const c=document.getElementById('lstars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');s.className='st';
+    const z=1+Math.random()*3;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*2}s;animation-duration:${1.5+Math.random()*2}s`;
+    c.appendChild(s);
+  }
+})();
+
+// SCROLL TOP
+window.addEventListener('scroll',()=>{document.getElementById('stb').classList.toggle('show',window.scrollY>250);});
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
 </script>
 </body>
 </html>
