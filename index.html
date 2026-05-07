@@ -1,426 +1,685 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>سلمى 🌸 | لوحة الحب</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>سلمى ❤️ - موقع الحب الكامل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-:root {
-  --rose: #e8547a;
-  --deep: #c23b5e;
-  --gold: #f4c542;
-  --bg: #fff8f9;
-  --bg2: #fff0f3;
-  --card: #ffffff;
-  --text: #2d1520;
-  --muted: #9e6070;
-  --border: rgba(232, 84, 122, 0.15);
-  --shadow: rgba(232, 84, 122, 0.1);
-  --nav-bg: rgba(255, 248, 249, 0.92);
-  --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
+    :root {
+      --rose: #e8547a;
+      --deep: #c23b5e;
+      --gold: #f9c74f;
+      --bg: #fff8f9;
+      --card: #ffffff;
+      --text: #2d1520;
+      --muted: #9e6070;
+      --border: rgba(232, 84, 122, 0.2);
+      --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+    }
 
-[data-theme="dark"] {
-  --bg: #1a0a10;
-  --bg2: #240d16;
-  --card: #2d1520;
-  --text: #fce4ec;
-  --muted: #c9899a;
-  --border: rgba(232, 84, 122, 0.25);
-  --shadow: rgba(0, 0, 0, 0.4);
-  --nav-bg: rgba(26, 10, 16, 0.96);
-}
+    [data-theme="dark"] {
+      --bg: #1a0a10;
+      --card: #2d1520;
+      --text: #fce4ec;
+      --muted: #d9a7b7;
+      --border: rgba(232, 84, 122, 0.35);
+    }
 
-body {
-  font-family: 'Tajawal', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  transition: var(--transition);
-  min-height: 100vh;
-}
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
 
-/* ---- animated elements everywhere ---- */
-@keyframes fadeSlideUp {
-  0% { opacity: 0; transform: translateY(28px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+    /* أنيميشن البتلات والنجوم */
+    #petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
 
-@keyframes gentlePulse {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.02); opacity: 1; }
-}
+    .petal {
+      position: absolute;
+      animation: fall linear infinite;
+      opacity: 0.8;
+      user-select: none;
+    }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
+    @keyframes fall {
+      0% {
+        transform: translateY(-20vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
 
-@keyframes floatHeart {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-  100% { transform: translateY(-70px) rotate(15deg); opacity: 0; }
-}
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      animation: floatUp 4s ease-out forwards;
+      z-index: 55;
+    }
 
-.sec, #home, .letter, .mc, .ri, .pitem, .bcard, .cbd, .ginfo, .ci {
-  animation: fadeSlideUp 0.7s ease-out both;
-}
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.2);
+        opacity: 0;
+      }
+    }
 
-.mc, .ri, .pitem {
-  transition: var(--transition);
-}
+    /* شاشة القفل */
+    #lock {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(145deg, #17060c, #2f0e1b);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: 1s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
 
-.mc:hover, .ri:hover, .pitem:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 35px var(--shadow);
-  border-color: var(--rose);
-}
+    #lock.out {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.05);
+    }
 
-.ci {
-  transition: var(--transition);
-}
+    .lock-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      border-radius: 48px;
+      padding: 32px 24px;
+      width: min(360px, 88vw);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
 
-.ci:hover {
-  transform: translateY(-5px);
-  background: linear-gradient(145deg, var(--card), var(--bg2));
-}
+    .lock-card h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      color: #ffb7c5;
+    }
 
-.beats span {
-  display: inline-block;
-  animation: floatHeart 2.4s infinite ease-in-out;
-  filter: drop-shadow(0 4px 8px rgba(232,84,122,0.3));
-}
+    .lock-card input {
+      width: 100%;
+      padding: 14px;
+      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 60px;
+      color: white;
+      font-size: 22px;
+      text-align: center;
+      letter-spacing: 6px;
+      font-weight: bold;
+    }
 
-.beats span:nth-child(2) { animation-delay: 0.4s; }
-.beats span:nth-child(3) { animation-delay: 0.8s; }
+    .lock-card button {
+      background: var(--rose);
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 60px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.petal {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-  animation: fall linear infinite;
-}
+    /* المحتوى الرئيسي */
+    #main {
+      opacity: 0;
+      transition: 1.2s;
+    }
 
-@keyframes fall {
-  0% { transform: translateY(-40px) rotate(0deg); opacity: 0.8; }
-  100% { transform: translateY(110vh) rotate(420deg); opacity: 0; }
-}
+    #main.show {
+      opacity: 1;
+    }
 
-.st {
-  animation: twinkle 2.2s ease-in-out infinite;
-}
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      z-index: 200;
+    }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: var(--rose);
+    }
 
-.cp {
-  animation: confettiRain linear infinite;
-}
+    .nav-buttons button {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 14px;
+      margin-inline: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--text);
+    }
 
-@keyframes confettiRain {
-  0% { transform: translateY(-20px) rotate(0deg); opacity: 0.8; }
-  100% { transform: translateY(120%) rotate(360deg); opacity: 0; }
-}
+    .menu-panel {
+      position: fixed;
+      top: 75px;
+      left: 20px;
+      right: 20px;
+      background: var(--card);
+      border-radius: 28px;
+      padding: 16px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 150;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
 
-/* lock animation extra */
-#lock {
-  transition: opacity 1s ease, transform 0.8s ease;
-}
+    .menu-panel a {
+      padding: 10px 16px;
+      background: var(--bg);
+      border-radius: 40px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+    }
 
-/* admin icon pulse */
-.admin-gear {
-  animation: gentlePulse 2s infinite;
-}
+    .section {
+      display: none;
+      padding: 90px 18px 70px;
+      min-height: 100vh;
+    }
 
-/* floating glow for titles */
-.stitle, .htitle {
-  text-shadow: 0 2px 5px rgba(232,84,122,0.15);
-  transition: var(--transition);
-}
+    .section.active {
+      display: block;
+    }
 
-.stitle:hover, .htitle:hover {
-  text-shadow: 0 6px 18px rgba(232,84,122,0.3);
-  transform: scale(1.01);
-}
+    .home-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
 
-/* button ripple effect */
-.lbtn, .tbtn, .mbtn, .admin-btn {
-  position: relative;
-  overflow: hidden;
-  transition: 0.2s;
-}
+    .big-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(55px, 18vw, 130px);
+      color: var(--rose);
+    }
 
-.lbtn:active, .tbtn:active, .mbtn:active, .admin-btn:active {
-  transform: scale(0.96);
-}
+    .counter-box {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
 
-/* rest of original styles kept + intensive animations */
-#petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-#lock { position: fixed; inset: 0; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(160deg,#120508 0%,#3d1525 50%,#1a0810 100%); padding: 20px; }
-#lock.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
-.lstars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.ln { font-family: 'Dancing Script', cursive; font-size: clamp(52px, 15vw, 100px); color: #fff; text-shadow: 0 0 40px rgba(232,84,122,.9); margin-bottom: 6px; text-align: center; animation: lp 3s ease-in-out infinite; }
-@keyframes lp { 0%,100% { text-shadow: 0 0 40px rgba(232,84,122,.9); } 50% { text-shadow: 0 0 70px rgba(232,84,122,1); } }
-.lbox { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 22px; padding: 28px; width: min(340px,92vw); text-align: center; backdrop-filter: blur(20px); }
-.linput { width: 100%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 14px; color: #fff; font-size: 22px; text-align: center; letter-spacing: 8px; outline: none; }
-.lbtn { margin-top: 18px; width: 100%; padding: 15px; background: linear-gradient(135deg,#e8547a,#c23b5e); border: none; border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; box-shadow: 0 8px 25px rgba(232,84,122,.4); }
-.shake { animation: shake 0.4s; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+    .counter-card {
+      background: var(--card);
+      border-radius: 28px;
+      padding: 16px 12px;
+      min-width: 80px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
 
-#main { opacity: 0; transition: opacity 1.2s; }
-#main.show { opacity: 1; }
-nav { position: fixed; top:0; width:100%; z-index:100; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom:1px solid var(--border); height:56px; display: flex; align-items: center; justify-content: space-between; padding:0 14px; }
-.nav-logo { font-family:'Dancing Script',cursive; font-size:24px; color:var(--rose); text-decoration:none; }
-.nav-right { display: flex; gap: 8px; align-items: center; }
-.tbtn, .mbtn, .admin-gear-btn { background: none; border:1px solid var(--border); border-radius: 30px; padding: 5px 12px; cursor: pointer; color: var(--text); transition: 0.2s; }
-#nm { position:fixed; top:56px; inset-inline:0; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom:1px solid var(--border); z-index:99; display:none; padding: 8px 0; }
-#nm.open { display: block; }
-#nm a { display: flex; gap: 10px; padding: 12px 20px; color: var(--text); text-decoration: none; transition: 0.2s; }
-#nm a:active, #nm a.act { color: var(--rose); background: rgba(232,84,122,.1); }
-.sec { display: none; min-height: 100vh; padding: 72px 16px 56px; z-index: 1; }
-.sec.on { display: block; }
-#home { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 100vh; }
-#home.on { display: flex; }
-.htag, .stag { font-size: 11px; letter-spacing: 4px; color: var(--rose); text-transform: uppercase; margin-bottom: 12px; }
-.htitle { font-family: 'Dancing Script', cursive; font-size: clamp(60px,18vw,120px); line-height: 0.9; }
-.hsub { color: var(--muted); max-width: 400px; margin-bottom: 34px; }
-.ctr { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
-.ci { background: var(--card); border-radius: 18px; padding: 14px 16px; min-width: 70px; text-align: center; border: 1px solid var(--border); box-shadow: 0 5px 12px var(--shadow); transition: 0.2s; }
-.cn { font-size: 36px; font-weight: 900; color: var(--rose); line-height: 1; }
-.cl { font-size: 10px; color: var(--muted); margin-top: 6px; }
-.letter, .mgrid, .rlist, .pgrid, .bc, .gwrap { max-width: 780px; margin: 0 auto; }
-.mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 18px; }
-.mc, .ri, .pitem { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); box-shadow: 0 5px 14px var(--shadow); transition: 0.2s; }
-.me { font-size: 32px; margin-bottom: 10px; display: block; }
-.rlist { display: flex; flex-direction: column; gap: 12px; }
-.ri { display: flex; gap: 16px; align-items: flex-start; }
-.rn { width: 34px; height: 34px; background: linear-gradient(135deg, var(--rose), var(--deep)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-shrink: 0; }
-.btxt { margin: 12px 0; }
-.bcard { background: var(--card); border-radius: 28px; padding: 30px; text-align: center; position: relative; overflow: hidden; }
-.bage { font-size: 80px; font-weight: 900; color: var(--rose); }
-.cbd { background: var(--bg2); border-radius: 20px; padding: 24px; margin-top: 18px; text-align: center; }
-.cbdn { font-size: 48px; font-weight: 900; color: var(--rose); }
-.ggrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
-.gi { aspect-ratio: 1; border-radius: 16px; background: var(--bg2); border: 2px solid var(--border); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.gi img { width: 100%; height: 100%; object-fit: cover; }
-.gi.empty { font-size: 28px; flex-direction: column; gap: 6px; background: var(--card); }
-#lb { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 500; display: none; align-items: center; justify-content: center; }
-#lb.open { display: flex; }
-#lb img { max-width: 90vw; max-height: 90vh; border-radius: 16px; }
-#stb { position: fixed; bottom: 22px; left: 14px; width: 44px; height: 44px; background: linear-gradient(135deg, var(--rose), var(--deep)); border-radius: 50%; color: white; border: none; cursor: pointer; opacity: 0; transform: translateY(15px); transition: 0.3s; display: flex; align-items: center; justify-content: center; z-index: 50; }
-#stb.show { opacity: 1; transform: translateY(0); }
-footer { text-align: center; padding: 30px 20px; background: var(--card); border-top: 1px solid var(--border); margin-top: 20px; }
-.admin-panel { position: fixed; bottom: 80px; right: 12px; width: 320px; max-width: calc(100vw - 24px); background: var(--card); border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--rose); z-index: 200; padding: 20px; backdrop-filter: blur(16px); transition: 0.2s; display: none; flex-direction: column; gap: 12px; max-height: 70vh; overflow-y: auto; }
-.admin-panel.open { display: flex; }
-.admin-panel h4 { color: var(--rose); font-size: 18px; margin-bottom: 5px; }
-.admin-panel input, .admin-panel textarea, .admin-panel select { width: 100%; padding: 8px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; color: var(--text); margin-top: 4px; }
-.admin-panel button { background: linear-gradient(135deg, var(--rose), var(--deep)); border: none; padding: 8px 12px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer; }
-.edit-btn { margin-top: 6px; }
-.toast-msg { position: fixed; bottom: 30px; right: 20px; background: var(--rose); color: white; padding: 8px 20px; border-radius: 40px; z-index: 300; font-size: 13px; animation: fadeSlideUp 0.3s; }
-</style>
+    .counter-number {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--rose);
+    }
+
+    /* بطاقات عامة */
+    .card {
+      background: var(--card);
+      border-radius: 32px;
+      padding: 24px;
+      margin: 18px auto;
+      max-width: 780px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .love-meter {
+      width: 100%;
+      height: 20px;
+      background: #f0d5dc;
+      border-radius: 40px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .meter-fill {
+      width: 98%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+      border-radius: 40px;
+    }
+
+    /* لوحة التحكم */
+    .admin-gear {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: linear-gradient(135deg, #2c3e66, #1e2a48);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 250;
+      box-shadow: 0 6px 14px black;
+      display: none;
+    }
+
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .admin-modal.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .admin-content {
+      background: var(--card);
+      width: 92%;
+      max-width: 560px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 36px;
+      padding: 24px;
+    }
+
+    .admin-content input,
+    .admin-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1);}
+      50% { transform: scale(1.05); text-shadow: 0 0 8px var(--rose);}
+    }
+  </style>
 </head>
 <body>
 <div id="petals"></div>
 <div id="lock">
-  <div class="lstars" id="lstars"></div>
-  <div class="ln">سلمى</div>
-  <p class="ls">✨ مكانك الخاص ✨</p>
-  <div class="lbox"><label>ادخلي كلمة السر</label>
-    <input type="password" class="linput" id="pin" placeholder="🌸 🌸 🌸" maxlength="12" autocomplete="off">
-    <p class="lhint">كلمة السر هي تاريخ ميلادك 🎂</p>
-    <button class="lbtn" onclick="tryPass()">دخولي ✨</button>
-    <p class="lerr" id="lerr"></p>
+  <div class="lock-card">
+    <h1>🌸 سلمى 🌸</h1>
+    <p style="color:#f8d0da; margin:10px 0">مكانك السري</p>
+    <input type="password" id="passInput" placeholder="••••••••">
+    <button id="unlockBtn">✨ افتحي القلب ✨</button>
+    <p id="errMsg" style="color:#ffa5bc; font-size:13px; margin-top:12px"></p>
   </div>
 </div>
+
 <div id="main">
-<nav>
-  <a class="nav-logo" href="#" onclick="go('home');return false">سلمى 🌸</a>
-  <div class="nav-right">
-    <button class="tbtn" id="tbtn" onclick="toggleTheme()">🌙</button>
-    <button class="admin-gear-btn" id="adminGearBtn" style="font-size:18px;">⚙️</button>
-    <button class="mbtn" onclick="toggleMenu()">☰</button>
+  <nav>
+    <div class="logo">سلمى ❤️</div>
+    <div class="nav-buttons">
+      <button id="themeToggle">🌙</button>
+      <button id="menuToggle">☰</button>
+    </div>
+  </nav>
+  <div id="menuPanel" class="menu-panel">
+    <a href="#" onclick="navigateTo('home')">🏠 الرئيسية</a>
+    <a href="#" onclick="navigateTo('letter')">💌 الرسالة</a>
+    <a href="#" onclick="navigateTo('memories')">🌟 ذكرياتنا</a>
+    <a href="#" onclick="navigateTo('reasons')">💖 ليه بحبك</a>
+    <a href="#" onclick="navigateTo('birthday')">🎂 عيد الميلاد</a>
+    <a href="#" onclick="navigateTo('promises')">🤝 وعودي</a>
+    <a href="#" onclick="navigateTo('gallery')">🖼️ ألبوم الصور</a>
+    <a href="#" onclick="navigateTo('extra')">🎵 أغانينا + المستقبل</a>
   </div>
-</nav>
-<div id="nm"><a href="#" onclick="go('home');return false">🏠 الرئيسية</a><a href="#" onclick="go('letter');return false">💌 الرسالة</a><a href="#" onclick="go('memories');return false">🌟 ذكريات</a><a href="#" onclick="go('reasons');return false">❤️ ليه بحبك</a><a href="#" onclick="go('birthday');return false">🎂 عيد ميلاد</a><a href="#" onclick="go('gallery');return false">🖼️ صور</a><a href="#" onclick="go('promise');return false">🤝 وعودي</a></div>
 
-<section id="home" class="on"><p class="htag">✨ مكانك الخاص على الإنترنت ✨</p><h1 class="htitle">أنتي<span>سلمى</span></h1><p class="hsub">يا أجمل حاجة في حياتي، الموقع ده مخصص ليكي انتي بس 🌸</p><div class="ctr"><div class="ci"><span class="cn" id="cd">0</span><div class="cl">يوم</div></div><div class="ci"><span class="cn" id="ch">0</span><div class="cl">ساعة</div></div><div class="ci"><span class="cn" id="cm">0</span><div class="cl">دقيقة</div></div><div class="ci"><span class="cn" id="cs">0</span><div class="cl">ثانية</div></div></div><div class="beats"><span class="beat">🌸</span><span class="beat">❤️</span><span class="beat">🌸</span></div></section>
+  <!-- الصفحات -->
+  <div id="home" class="section home-section active">
+    <div class="big-title">أنتي <span style="color:var(--rose)">سلمى</span></div>
+    <p style="font-size:18px; margin-top:8px">يا أجمل قصة حب في حياتي</p>
+    <div class="counter-box">
+      <div class="counter-card"><div class="counter-number" id="days">0</div><div>يوم</div></div>
+      <div class="counter-card"><div class="counter-number" id="hours">0</div><div>ساعة</div></div>
+      <div class="counter-card"><div class="counter-number" id="minutes">0</div><div>دقيقة</div></div>
+      <div class="counter-card"><div class="counter-number" id="seconds">0</div><div>ثانية</div></div>
+    </div>
+    <div class="love-meter"><div class="meter-fill"></div></div>
+    <p>❤️ حبي ليكي دايماً في ازدياد ❤️</p>
+    <div style="margin-top:20px; font-size:30px">🌸 💕 🌸</div>
+  </div>
 
-<section id="sec-letter" class="sec"><div class="sh"><span class="stag">💌 كلام من القلب</span><h2 class="stitle">رسالتي إليكي</h2></div><div class="letter" id="letterContainer"><div class="ldate">📅 كتبتها بحب — من قلبي لقلبك</div><div class="ltxt" id="letterText"></div><div class="lsig"><div class="sh2">❤️</div><div><div class="sname">حبيبك دايماً</div><div style="font-size:12px;color:var(--muted)">بكتبها بحب كتير</div></div></div></div></section>
+  <div id="letter-section" class="section"><div class="card"><h2>💌 رسالة من القلب</h2><div id="letterContent"></div></div></div>
+  <div id="memories-section" class="section"><h2>🌟 ذكريات لا تنسى</h2><div id="memoriesGrid" class="grid-2"></div></div>
+  <div id="reasons-section" class="section"><h2>❤️ ليه بحبك؟</h2><div id="reasonsList" class="card"></div></div>
+  <div id="birthday-section" class="section"><div class="card"><h2>🎂 عيد ميلاد سلمى</h2><div id="bdayAge"></div><div id="bdayCountdown"></div><div id="bdayExtra" style="margin-top:12px"></div></div></div>
+  <div id="promises-section" class="section"><h2>🤝 وعودي ليكي</h2><div id="promisesGrid" class="grid-2"></div></div>
+  <div id="gallery-section" class="section"><h2>🖼️ ألبوم الصور</h2><div id="galleryGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div><div class="card" style="margin-top:12px;font-size:12px">💡 ضع صورك في مجلد photos باسم 1.jpg , 2.jpg ...</div></div>
+  <div id="extra-section" class="section"><div class="card"><h2>🎵 أغانينا المفضلة</h2><p id="playlistText"></p><hr style="margin:16px 0"><h2>📅 خططنا المستقبلية</h2><p id="futurePlansText"></p></div></div>
 
-<section id="sec-memories" class="sec"><div class="sh"><span class="stag">🌟 لحظات لا تُنسى</span><h2 class="stitle">ذكرياتنا</h2></div><div class="mgrid" id="memoriesGrid"></div></section>
-
-<section id="sec-reasons" class="sec"><div class="sh"><span class="stag">❤️ من القلب</span><h2 class="stitle">ليه بحبك</h2></div><div class="rlist" id="reasonsList"></div></section>
-
-<section id="sec-birthday" class="sec"><div class="sh"><span class="stag">🎂 يوم ميلادك</span><h2 class="stitle">عيد ميلاد سلمى</h2></div><div class="bc"><div class="bcard"><div class="cwrap" id="cwrap"></div><div class="bage" id="bageNum">16</div><p class="btxt" id="birthdayDesc">سنة ميلادك: <strong>٢٧ ديسمبر ٢٠٠٩</strong> 🌸<br>كل سنة وانتي أحلى وأجمل.</p></div><div class="cbd"><div class="cbdl">⏳ الوقت المتبقي لعيد ميلادك الجاي</div><div class="cbdn" id="bdc">---</div><div class="cbds" id="bdcs">يوم</div></div></div></section>
-
-<section id="sec-gallery" class="sec"><div class="sh"><span class="stag">🖼️ صورنا</span><h2 class="stitle">الألبوم الخاص</h2></div><div class="gwrap"><div class="ggrid" id="ggrid"></div><div class="ginfo" id="ginfo"><div class="gbig">📁</div><p>عشان تضيف صورك: فولدر photos بالصور 1.jpg,2.jpg ...</p></div></div></section>
-
-<div id="lb" onclick="closeLb()"><button id="lbc" onclick="closeLb()">✕</button><img id="lbi" src=""></div>
-
-<section id="sec-promise" class="sec"><div class="sh"><span class="stag">🤝 وعد من القلب</span><h2 class="stitle">وعودي ليكي</h2></div><div class="pcent"><div class="pcard"><div class="pbig">وعود لا هتتكسر</div><p class="psub">سلمى، الوعود دي مش كلام في الهوا — دي التزامات حقيقية 🌸</p></div><div class="pgrid" id="promisesGrid"></div></div></section>
-<footer><p>صُنع بـ ❤️ من أجل <span class="fn">سلمى</span></p><p style="margin-top:6px;font-size:11px">✨ كل كلمة هنا حقيقية ✨</p></footer>
+  <footer>✨ كل كلمة في هذا الموقع حقيقية وبحبك يا سلمى ✨</footer>
 </div>
-<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- Admin Panel -->
-<div id="adminPanel" class="admin-panel"><h4>🔐 تحكم كامل (مدير)</h4><label>📅 تاريخ بداية العلاقة</label><input type="date" id="adminStartDate"><label>🎂 تاريخ ميلادها (سنة-شهر-يوم)</label><input type="date" id="adminBirthDate"><label>💌 نص الرسالة</label><textarea id="adminLetterText" rows="4"></textarea><label>📝 ذكريات (JSON)</label><textarea id="adminMemoriesJson" rows="2" placeholder='[{"emoji":"💬","title":"...","desc":"...","tag":"..."}]'></textarea><label>❤️ أسباب الحب (نص لكل سبب)</label><textarea id="adminReasonsJson" rows="2" placeholder='["سبب1","سبب2"]'></textarea><label>🤝 وعود (emoji,text)</label><textarea id="adminPromisesJson" rows="2" placeholder='[{"emoji":"💪","text":"..."}]'></textarea><label>🖼️ عدد الصور</label><input type="number" id="adminPhotoCount" min="1" max="30"><button id="saveAdminBtn">💾 حفظ التغييرات</button><button id="resetAdminBtn" style="background:#555;">↺ إعادة ضبط</button><button id="closeAdminBtn">إغلاق</button></div>
+<div id="adminGear" class="admin-gear">⚙️</div>
+<div id="adminModal" class="admin-modal">
+  <div class="admin-content">
+    <h3>🛠️ لوحة التحكم الكاملة (أدمن)</h3>
+    <label>📅 تاريخ بداية العلاقة</label><input type="date" id="editStartDate">
+    <label>💬 نص الرسالة</label><textarea id="editLetter" rows="4"></textarea>
+    <label>🎂 تاريخ ميلاد سلمى</label><input type="date" id="editBirthDate">
+    <label>🖼️ عدد الصور</label><input type="number" id="editPhotoCount" value="6">
+    <label>🌟 الذكريات (أيقونة|العنوان|الوصف|تذييل) كل سطر</label><textarea id="editMemories" rows="5"></textarea>
+    <label>❤️ أسباب الحب (كل سبب بسطر)</label><textarea id="editReasons" rows="5"></textarea>
+    <label>🤝 الوعود (أيقونة|النص)</label><textarea id="editPromises" rows="4"></textarea>
+    <label>🎵 قائمة الأغاني (اسم الأغنية - المغني) سطر سطر</label><textarea id="editPlaylist" rows="3"></textarea>
+    <label>📌 خططنا المستقبلية (نص طويل)</label><textarea id="editFuture" rows="3"></textarea>
+    <button id="saveAdminBtn" style="background:var(--rose);color:white;padding:12px;border-radius:40px;margin-top:16px;width:100%">💾 حفظ كل التغييرات</button>
+    <button id="closeAdminBtn" style="margin-top:12px">إغلاق</button>
+  </div>
+</div>
 
 <script>
-// -------- EDITABLE DATA DEFAULTS ----------
-let appData = {
-  startDate: "2024-01-01", // relationship start
-  birthDate: "2009-12-27",
-  letterHtml: "<p>سلمى الغالية،</p><p>مش عارف أبدأ منين، لأن كل الكلام بيبقى صغير لما بحاول أوصف اللي بحس بيه جنبك. من أول يوم شفتك فيه، حسيت إن في حاجة مختلفة — في طريقتك في الكلام، في ضحكتك، في كل تفصيلة فيكي.</p><p>انتي مش بس بنت بحبها — انتي الشخص اللي بيخليني أحاول أبقى أحسن نسخة من نفسي كل يوم. لما بشوفك بشوش، يومي بيبقى مليان. ولما تيجي مضايقة، كل اللي بفكر فيه إزاي أرجعلك ابتسامتك.</p><p>عملت الموقع ده عشان أقولك: في مكان على الإنترنت كله مكتوب فيه اسمك، ومخصص ليكي انتي بس. عشان انتي تستاهلي كل حاجة حلوة في الدنيا.</p><p>بحبك يا سلمى، بكل ما في الكلمة من معنى. 🌸</p>",
-  memories: [
-    { emoji:"💬", title:"أول كلام بيننا", desc:"اللحظة دي هي بداية كل حاجة جميلة. مش ناسي كل كلمة قلتيها وأنا مبتسم.", tag:"✨ البداية" },
-    { emoji:"😂", title:"الضحكة اللي ما بتخلصش", desc:"في مرات بنضحك على حاجة صغيرة جداً وما نقدرش نوقف.", tag:"✨ لحظة خاصة" },
-    { emoji:"🌙", title:"محادثة نص الليل", desc:"لما بنبقى بنتكلم وعيوننا تقيل من النوم بس ما حد منا يقدر يقول تصبحي على خير.", tag:"✨ كل ليلة" },
-    { emoji:"🎵", title:"أغنيتنا", desc:"في أغنية لما بتشتغل بفكر فيكي في التو. عارفاها انتي كمان؟", tag:"✨ دايماً" },
-    { emoji:"🤗", title:"لما قلتيلي كلمة حلوة", desc:"في كلمة قالتهالي سلمى وضلت في دماغي أيام. كلامك بيأثر فيا.", tag:"✨ حفظتها" },
-    { emoji:"💭", title:"كل يوم جديد معاكي", desc:"كل يوم بيجي هيكون ذكرى. وأنا متشوق لكل اللي جاي وانتي جنبي.", tag:"✨ المستقبل" }
-  ],
-  reasons: [
-    "لأن ضحكتك بتنور أي مكان تيجي فيه — حتى لو كنتي بس بتبعتيلي ستيكر 😂",
-    "لأنك بتفهميني من غير ما أكمل الجملة. دي موهبة نادرة وانتي عندها.",
-    "لأن قلبك كبير — بتحبي الناس وبتهتمي بيهم بجد، وده بيخليكي شخص نادر.",
-    "لأنك صادقة — ما بتعرفيش تكدبي ووجهك بيقول كل حاجة، وده من أجمل حاجة فيكي.",
-    "لأنك بتخليني أحس إن الدنيا أحسن لما انتي فيها. جنبك كل حاجة بتبقى أجمل.",
-    "لأن في حاجة في عينيكي بتقول إن في قصة كتير — وأنا عايز أعرف كل تفصيلة فيها.",
-    "لأن اسمك 'سلمى' لما بقوله بيطلع بنبرة مختلفة — حتى في دماغي لما بفكر فيكي.",
-    "لأنك انتي — مش لسبب واحد محدد، لكن لأن مجموع كل حاجة فيكي بيعملوا شخص أنا بحبه جداً. 🌸"
-  ],
-  promises: [
-    { emoji:"💪", text:"هكون جنبك في كل وقت — في الفرح وفي الصعب." },
-    { emoji:"🎧", text:"هسمعك دايماً — مش بس أسمع، هفهم وأحس بيكي." },
-    { emoji:"🛡️", text:"مش هحكي حاجة انتي وثقتي فيا بيها لأي حد." },
-    { emoji:"😊", text:"هحاول دايماً أرجعلك ابتسامتك لو حسيتك مضايقة." },
-    { emoji:"🌱", text:"هدعمك في أحلامك وهفرح بنجاحاتك أكتر من نجاحاتي." },
-    { emoji:"❤️", text:"هحبك بصدق — من غير مسرحية ومن غير كدب." }
-  ],
-  photosCount: 6
-};
-// Load from localStorage if exists
-function loadAppData() {
-  const saved = localStorage.getItem("salma_love_admin");
-  if(saved) { try { let d = JSON.parse(saved); appData = { ...appData, ...d }; } catch(e){} }
-  renderAllSections();
-}
-function saveAppDataToLocal() { localStorage.setItem("salma_love_admin", JSON.stringify(appData)); renderAllSections(); showToast("تم حفظ جميع التغييرات بنجاح ✨"); }
+  // --------------------------------------------------------------
+  // كلمات السر
+  const USER_PASS = "27122009";
+  const ADMIN_PASS = "13854672";
+  let isAdminLogged = false;
 
-// Render functions
-function renderLetter() { document.getElementById("letterText").innerHTML = appData.letterHtml; }
-function renderMemories() { let html = appData.memories.map(m => `<div class="mc"><span class="me">${m.emoji}</span><div class="mt">${m.title}</div><p class="mm">${m.desc}</p><div class="md">${m.tag}</div></div>`).join(''); document.getElementById("memoriesGrid").innerHTML = html; }
-function renderReasons() { let html = appData.reasons.map((r,i) => `<div class="ri"><div class="rn">${i+1}</div><p class="rtxt">${r}</p></div>`).join(''); document.getElementById("reasonsList").innerHTML = html; }
-function renderPromises() { let html = appData.promises.map(p => `<div class="pitem"><span class="pico">${p.emoji}</span><p class="ptxt">${p.text}</p></div>`).join(''); document.getElementById("promisesGrid").innerHTML = html; }
-function updateCounterFromDate() {
-  const start = new Date(appData.startDate);
-  if(isNaN(start)) return;
-  function update(){
-    const d = Date.now() - start.getTime();
-    if(d<0) return;
-    document.getElementById("cd").textContent = Math.floor(d/86400000).toLocaleString('ar-EG');
-    document.getElementById("ch").textContent = Math.floor((d%86400000)/3600000);
-    document.getElementById("cm").textContent = Math.floor((d%3600000)/60000);
-    document.getElementById("cs").textContent = Math.floor((d%60000)/1000);
+  // الداتا الافتراضية الكبيرة
+  let siteData = {
+    startDate: "2024-01-01",
+    letterHtml: "<p>سلمى حبيبتي، أنتِ نور حياتي وسبب سعادتي. كل يوم بحس إن حبنا أكبر من الكلام، ولهذا خلقت هذا العالم الصغير لأجلك وحدك. ❤️</p>",
+    birthDate: "2009-12-27",
+    photoCount: 6,
+    memories: [
+      { icon: "💬", title: "أول رسالة", desc: "كانت رسالة غيرت حياتي للأبد", meta: "✨ 2024" },
+      { icon: "😂", title: "ضحكتك التي لا تُنسى", desc: "بضحكتك بتغيري مود الدنيا", meta: "💕 يوميًا" },
+      { icon: "🌙", title: "أحلى سهرة", desc: "تكلمنا لساعات بدون ملل", meta: "⭐ ذكرى خاصة" },
+      { icon: "🎁", title: "أول هدية", desc: "هدية بسيطة لكنها بحب كبير", meta: "🎀 لا تنسى" }
+    ],
+    reasons: [
+      "لأن ضحكتك بتدخل السعادة لقلبي",
+      "لأنك صادقة وطيبة القلب",
+      "لأنك بتفهميني حتى بدون كلام",
+      "لأن وجودك يخليني شخص أحسن",
+      "لأنك أنتي سلمى بدون أي سبب آخر"
+    ],
+    promises: [
+      { icon: "💪", text: "هكون سندك في كل الظروف" },
+      { icon: "🎧", text: "هسمعك وأحس بمشاعرك دايماً" },
+      { icon: "❤️", text: "حب حقيقي من القلب" }
+    ],
+    playlist: ["أنتي الحياة - تامر حسني", "بنت الجيران - وائل جسار", "بحبك و أنا كمان - فضل شاكر"],
+    futurePlans: "إن شاء الله نسافر سوا، نبني بيت صغير، ونحقق كل أحلامك اللي قلتِها لي."
+  };
+
+  function loadFromStorage() {
+    let saved = localStorage.getItem("fullLoveSite");
+    if (saved) {
+      try {
+        let parsed = JSON.parse(saved);
+        siteData = { ...siteData, ...parsed };
+      } catch(e) {}
+    }
+    renderEverything();
   }
-  update(); setInterval(update,1000);
-}
-function updateBirthdayInfo() {
-  const birth = new Date(appData.birthDate);
-  if(isNaN(birth)) return;
-  const now = new Date();
-  let age = now.getFullYear() - birth.getFullYear();
-  let thisBirthday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
-  if(now < thisBirthday) age--;
-  document.getElementById("bageNum").textContent = age;
-  let nextBirthday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
-  if(now >= nextBirthday) nextBirthday = new Date(now.getFullYear()+1, birth.getMonth(), birth.getDate());
-  const days = Math.ceil((nextBirthday - now)/86400000);
-  const bdDesc = `سنة ميلادك: <strong>${birth.toLocaleDateString('ar-EG')}</strong> 🌸<br>كل سنة وانتي أحلى وأجمل.`;
-  document.getElementById("birthdayDesc").innerHTML = bdDesc;
-  if(days===0){ document.getElementById("bdc").textContent="🎉 اليوم!"; document.getElementById("bdcs").textContent="عيد ميلاد سعيد يا سلمى 🎂"; }
-  else { document.getElementById("bdc").textContent=days.toLocaleString('ar-EG'); document.getElementById("bdcs").textContent="يوم متبقي على عيد ميلادك يا قمر 🎂"; }
-}
-function loadGalleryWithCount() { 
-  const grid = document.getElementById('ggrid'); 
-  grid.innerHTML = '';
-  let found=0;
-  for(let i=1;i<=appData.photosCount;i++){
-    const div=document.createElement('div'); div.className='gi';
-    const img=new Image(); img.alt=`صورة ${i}`; const src=`photos/${i}.jpg`;
-    img.onload=()=>{ img.style.display='block'; div.appendChild(img); found++; if(found>0) document.getElementById('ginfo').style.display='none'; };
-    img.onerror=()=>{ div.classList.add('empty'); div.innerHTML=`<span>🌸</span><span>صورة ${i}</span>`; };
-    img.style.cssText='width:100%;height:100%;object-fit:cover;display:none';
-    img.onclick=()=>openLb(src); img.src=src;
-    if(!div.classList.contains('empty')) div.onclick=()=>openLb(src);
-    grid.appendChild(div);
+  function saveToStorage() {
+    localStorage.setItem("fullLoveSite", JSON.stringify(siteData));
   }
-}
-function renderAllSections(){ renderLetter(); renderMemories(); renderReasons(); renderPromises(); updateCounterFromDate(); updateBirthdayInfo(); loadGalleryWithCount(); }
-// Admin panel logic
-let adminPassword = "13854672";
-let adminPanelOpen = false;
-document.getElementById("adminGearBtn").addEventListener("click",()=>{
-  const pwd = prompt("🔐 ادخل كلمة السر للمدير:");
-  if(pwd === adminPassword) { document.getElementById("adminPanel").classList.add("open"); adminPanelOpen=true; fillAdminForm(); }
-  else if(pwd !== null) alert("كلمة سر غلط ❌");
-});
-function fillAdminForm(){
-  document.getElementById("adminStartDate").value = appData.startDate;
-  document.getElementById("adminBirthDate").value = appData.birthDate;
-  document.getElementById("adminLetterText").value = appData.letterHtml;
-  document.getElementById("adminMemoriesJson").value = JSON.stringify(appData.memories, null, 2);
-  document.getElementById("adminReasonsJson").value = JSON.stringify(appData.reasons, null, 2);
-  document.getElementById("adminPromisesJson").value = JSON.stringify(appData.promises, null, 2);
-  document.getElementById("adminPhotoCount").value = appData.photosCount;
-}
-document.getElementById("saveAdminBtn").addEventListener("click",()=>{
-  try {
-    appData.startDate = document.getElementById("adminStartDate").value;
-    appData.birthDate = document.getElementById("adminBirthDate").value;
-    appData.letterHtml = document.getElementById("adminLetterText").value;
-    appData.memories = JSON.parse(document.getElementById("adminMemoriesJson").value);
-    appData.reasons = JSON.parse(document.getElementById("adminReasonsJson").value);
-    appData.promises = JSON.parse(document.getElementById("adminPromisesJson").value);
-    let newPhotos = parseInt(document.getElementById("adminPhotoCount").value);
-    if(!isNaN(newPhotos) && newPhotos>0) appData.photosCount = newPhotos;
-    saveAppDataToLocal();
-    document.getElementById("adminPanel").classList.remove("open");
-    showToast("تم تحديث الموقع بالكامل 🎉");
-  } catch(e) { alert("خطأ في البيانات: تأكد من صيغة JSON"); }
-});
-document.getElementById("resetAdminBtn").addEventListener("click",()=>{
-  localStorage.removeItem("salma_love_admin");
-  location.reload();
-});
-document.getElementById("closeAdminBtn").addEventListener("click",()=>{
-  document.getElementById("adminPanel").classList.remove("open");
-});
-function showToast(msg){ let t=document.createElement('div'); t.className='toast-msg'; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
-// --- lock Screen + original pass ---
-const USER_PASS="27122009";
-function tryPass(){ if(document.getElementById('pin').value.trim()===USER_PASS){ unlock(); } else { const b=document.getElementById('lbox'); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); document.getElementById('lerr').textContent='كلمة السر غلط، حاولي تاني 🙈'; document.getElementById('pin').value=''; setTimeout(()=>document.getElementById('lerr').textContent='',2500); } }
-function unlock(){ document.getElementById('lock').classList.add('out'); setTimeout(()=>{ document.getElementById('lock').style.display='none'; document.getElementById('main').classList.add('show'); loadAppData(); startExtraAnim(); confettiExplosion(); },1000); }
-function startExtraAnim(){ for(let i=0;i<30;i++){ let p=document.createElement('div'); p.className='cp'; p.style.cssText=`position:absolute; left:${Math.random()*100}%; top:0%; width:6px; height:6px; background:${['#e8547a','#f4c542','#ff99cc'][i%3]}; animation:confettiRain ${2+Math.random()*3}s linear forwards; pointer-events:none;`; document.body.appendChild(p); setTimeout(()=>p.remove(),3000);} }
-function confettiExplosion(){ const c=document.getElementById('cwrap'); if(c) for(let i=0;i<25;i++){ let p=document.createElement('div'); p.className='cp'; p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*30}%;background:${['#e8547a','#f4c542','#a855f7'][i%3]};animation-duration:${3+Math.random()*4}s;`; c.appendChild(p); } }
-// helpers
-function toggleTheme(){ let dark=document.documentElement.getAttribute('data-theme')==='dark'; dark=!dark; document.documentElement.setAttribute('data-theme',dark?'dark':''); document.getElementById('tbtn').textContent=dark?'☀️':'🌙'; }
-function toggleMenu(){ document.getElementById('nm').classList.toggle('open'); }
-document.addEventListener('click',e=>{ const nav=document.querySelector('nav'),nm=document.getElementById('nm'); if(!nav.contains(e.target)&&!nm.contains(e.target)) nm.classList.remove('open'); });
-function go(id){ document.getElementById('nm').classList.remove('open'); document.getElementById('home').classList.remove('on'); document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on')); if(id==='home') document.getElementById('home').classList.add('on'); else document.getElementById('sec-'+id).classList.add('on'); window.scrollTo({top:0,behavior:'smooth'}); }
-function openLb(s){ document.getElementById('lbi').src=s; document.getElementById('lb').classList.add('open'); }
-function closeLb(){ document.getElementById('lb').classList.remove('open'); }
-window.addEventListener('scroll',()=>{ document.getElementById('stb').classList.toggle('show',window.scrollY>250); });
-// petals
-(function(){ const c=document.getElementById('petals'),s=['🌸','❤️','🌺','💕','✨','🌹']; for(let i=0;i<22;i++){ let p=document.createElement('div'); p.className='petal'; p.textContent=s[i%s.length]; p.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*14}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;`; c.appendChild(p); } })();
-(function(){ const c=document.getElementById('lstars'); for(let i=0;i<90;i++){ let s=document.createElement('div'); s.className='st'; let z=1+Math.random()*3; s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*3}s;`; c.appendChild(s); } })();
+
+  function renderEverything() {
+    // تحديث العداد
+    updateMainCounter();
+    setInterval(updateMainCounter, 1000);
+    document.getElementById("letterContent").innerHTML = siteData.letterHtml;
+    // الذكريات
+    let memHtml = siteData.memories.map(m => `<div class="card"><div style="font-size:32px">${m.icon}</div><h3>${m.title}</h3><p>${m.desc}</p><small>${m.meta}</small></div>`).join("");
+    document.getElementById("memoriesGrid").innerHTML = memHtml;
+    // أسباب الحب
+    let reasonsHtml = `<ul style="list-style:none; padding-right:0">` + siteData.reasons.map(r => `<li style="margin-bottom:12px">❤️ ${r}</li>`).join("") + `</ul>`;
+    document.getElementById("reasonsList").innerHTML = reasonsHtml;
+    // الوعود
+    let promHtml = siteData.promises.map(p => `<div class="card"><span style="font-size:28px">${p.icon}</span><p>${p.text}</p></div>`).join("");
+    document.getElementById("promisesGrid").innerHTML = promHtml;
+    // عيد الميلاد
+    let birthObj = new Date(siteData.birthDate);
+    let today = new Date();
+    let age = today.getFullYear() - birthObj.getFullYear();
+    if (today < new Date(today.getFullYear(), birthObj.getMonth(), birthObj.getDate())) age--;
+    document.getElementById("bdayAge").innerHTML = `🎂 عمرك الآن ${age} سنة 🎂`;
+    let nextB = new Date(today.getFullYear(), birthObj.getMonth(), birthObj.getDate());
+    if (today >= nextB) nextB.setFullYear(today.getFullYear() + 1);
+    let daysLeft = Math.ceil((nextB - today) / 86400000);
+    document.getElementById("bdayCountdown").innerHTML = daysLeft === 0 ? "🎉 اليوم عيد ميلادك يا أحلى حاجة 🎉" : `⏳ متبقي ${daysLeft} يوم على ميلادك الجاي`;
+    document.getElementById("bdayExtra").innerHTML = `🌟 كل سنة وانتي بخير يا سلمى 🌟`;
+    // جاليري
+    loadGallery();
+    // صفحة extra
+    document.getElementById("playlistText").innerHTML = siteData.playlist.map(song => `🎵 ${song}`).join("<br>");
+    document.getElementById("futurePlansText").innerHTML = siteData.futurePlans;
+  }
+
+  function updateMainCounter() {
+    let start = new Date(siteData.startDate);
+    let now = new Date();
+    let diff = now - start;
+    if (diff > 0) {
+      document.getElementById("days").innerText = Math.floor(diff / 86400000);
+      document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
+      document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000);
+      document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
+    }
+  }
+
+  function loadGallery() {
+    let container = document.getElementById("galleryGrid");
+    container.innerHTML = "";
+    for (let i = 1; i <= siteData.photoCount; i++) {
+      let div = document.createElement("div");
+      div.className = "card";
+      div.style.padding = "6px";
+      let img = document.createElement("img");
+      img.src = `photos/${i}.jpg`;
+      img.style.width = "100%";
+      img.style.aspectRatio = "1/1";
+      img.style.objectFit = "cover";
+      img.style.borderRadius = "24px";
+      img.onerror = () => { div.innerHTML = `<div style="text-align:center">🌸 صورة ${i}<br><span style="font-size:10px">ضع الصورة</span></div>`; };
+      div.appendChild(img);
+      container.appendChild(div);
+    }
+  }
+
+  // فتح القفل
+  function unlock(adminMode) {
+    isAdminLogged = adminMode;
+    let lock = document.getElementById("lock");
+    lock.classList.add("out");
+    setTimeout(() => {
+      lock.style.display = "none";
+      document.getElementById("main").classList.add("show");
+      if (isAdminLogged) {
+        document.getElementById("adminGear").style.display = "flex";
+        fillAdminForm();
+      } else {
+        document.getElementById("adminGear").style.display = "none";
+      }
+      loadFromStorage();
+      startFloatingHearts();
+    }, 900);
+  }
+
+  function fillAdminForm() {
+    document.getElementById("editStartDate").value = siteData.startDate;
+    document.getElementById("editLetter").value = siteData.letterHtml;
+    document.getElementById("editBirthDate").value = siteData.birthDate;
+    document.getElementById("editPhotoCount").value = siteData.photoCount;
+    document.getElementById("editMemories").value = siteData.memories.map(m => `${m.icon}|${m.title}|${m.desc}|${m.meta}`).join("\n");
+    document.getElementById("editReasons").value = siteData.reasons.join("\n");
+    document.getElementById("editPromises").value = siteData.promises.map(p => `${p.icon}|${p.text}`).join("\n");
+    document.getElementById("editPlaylist").value = siteData.playlist.join("\n");
+    document.getElementById("editFuture").value = siteData.futurePlans;
+  }
+
+  function saveAdminChanges() {
+    siteData.startDate = document.getElementById("editStartDate").value;
+    siteData.letterHtml = document.getElementById("editLetter").value;
+    siteData.birthDate = document.getElementById("editBirthDate").value;
+    siteData.photoCount = parseInt(document.getElementById("editPhotoCount").value);
+    let memRaw = document.getElementById("editMemories").value.split("\n").filter(l => l.trim());
+    siteData.memories = memRaw.map(line => {
+      let parts = line.split("|");
+      return { icon: parts[0] || "🌸", title: parts[1] || "ذكرى", desc: parts[2] || "وصف", meta: parts[3] || "✨" };
+    });
+    siteData.reasons = document.getElementById("editReasons").value.split("\n").filter(l => l.trim());
+    let promRaw = document.getElementById("editPromises").value.split("\n").filter(l => l.trim());
+    siteData.promises = promRaw.map(line => {
+      let parts = line.split("|");
+      return { icon: parts[0] || "❤️", text: parts[1] || "وعد" };
+    });
+    siteData.playlist = document.getElementById("editPlaylist").value.split("\n").filter(l => l.trim());
+    siteData.futurePlans = document.getElementById("editFuture").value;
+    saveToStorage();
+    renderEverything();
+    document.getElementById("adminModal").classList.remove("open");
+    alert("✅ تم حفظ جميع التغييرات بنجاح!");
+  }
+
+  // أنيميشن عائم
+  function startFloatingHearts() {
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.innerHTML = ["❤️", "🌸", "💕", "✨", "💖"][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 90 + "%";
+      heart.style.bottom = "0px";
+      heart.style.fontSize = 18 + Math.random() * 24 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 1200);
+  }
+
+  // بتلات متساقطة
+  function createPetals() {
+    let container = document.getElementById("petals");
+    let arr = ["🌸", "❤️", "🌺", "💮", "🌼", "✨"];
+    for (let i = 0; i < 45; i++) {
+      let p = document.createElement("div");
+      p.className = "petal";
+      p.textContent = arr[Math.floor(Math.random() * arr.length)];
+      p.style.left = Math.random() * 100 + "%";
+      p.style.fontSize = 12 + Math.random() * 24 + "px";
+      p.style.animationDuration = 4 + Math.random() * 12 + "s";
+      p.style.animationDelay = Math.random() * 10 + "s";
+      container.appendChild(p);
+    }
+  }
+  createPetals();
+
+  // التنقل بين الأقسام
+  window.navigateTo = function(sectionId) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+    if (sectionId === "home") document.getElementById("home").classList.add("active");
+    else if (sectionId === "letter") document.getElementById("letter-section").classList.add("active");
+    else if (sectionId === "memories") document.getElementById("memories-section").classList.add("active");
+    else if (sectionId === "reasons") document.getElementById("reasons-section").classList.add("active");
+    else if (sectionId === "birthday") document.getElementById("birthday-section").classList.add("active");
+    else if (sectionId === "promises") document.getElementById("promises-section").classList.add("active");
+    else if (sectionId === "gallery") document.getElementById("gallery-section").classList.add("active");
+    else if (sectionId === "extra") document.getElementById("extra-section").classList.add("active");
+    document.getElementById("menuPanel").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // الأحداث
+  document.getElementById("unlockBtn").onclick = () => {
+    let pwd = document.getElementById("passInput").value.trim();
+    if (pwd === ADMIN_PASS) unlock(true);
+    else if (pwd === USER_PASS) unlock(false);
+    else {
+      document.getElementById("errMsg").innerText = "كلمة سر خطأ يا جميلة 🌸";
+      setTimeout(() => document.getElementById("errMsg").innerText = "", 1600);
+    }
+  };
+  document.getElementById("passInput").addEventListener("keypress", (e) => { if (e.key === "Enter") document.getElementById("unlockBtn").click(); });
+  document.getElementById("themeToggle").onclick = () => {
+    let dark = document.documentElement.getAttribute("data-theme") === "dark";
+    document.documentElement.setAttribute("data-theme", dark ? "" : "dark");
+    document.getElementById("themeToggle").innerText = dark ? "🌙" : "☀️";
+  };
+  document.getElementById("menuToggle").onclick = () => {
+    let panel = document.getElementById("menuPanel");
+    panel.style.display = panel.style.display === "none" ? "flex" : "none";
+  };
+  document.getElementById("adminGear").onclick = () => document.getElementById("adminModal").classList.add("open");
+  document.getElementById("saveAdminBtn").onclick = saveAdminChanges;
+  document.getElementById("closeAdminBtn").onclick = () => document.getElementById("adminModal").classList.remove("open");
+
+  // بداية أولية (لن يتم عرض المحتوى قبل القفل)
+  console.log("جاهز للحب 💖");
 </script>
 </body>
 </html>
